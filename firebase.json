@@ -1,0 +1,21 @@
+{
+    "firestore": {
+        "rules": "firestore.rules",
+        "indexes": "firestore.indexes.json"
+    },
+    "storage": [
+        {
+            "bucket": "aera-scale-documents",
+            "rules": "storage.rules"
+        },
+        {
+            "bucket": "aera-scale.firebasestorage.app",
+            "rules": "storage.rules"
+        }
+    ],
+    "functions": {
+        "source": "functions",
+        "runtime": "nodejs22"
+    },
+    "indexes": "firestore.indexes.json"
+}

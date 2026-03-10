@@ -1,0 +1,9 @@
+# Only exclude heavy directories we don't need in the Docker build context
+node_modules
+.git
+.env.local
+*.log
+.vscode
+.idea
+.DS_Store
+# NOTE: do NOT exclude dist/ — we need it for the pre-built deploy

@@ -1,0 +1,105 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  PROJECT_ID: aera-scale
+  REGION: europe-west1
+  SERVICE_NAME: aera-scale
+
+jobs:
+  # ── Lint & Test ──
+  test:
+    name: Lint & Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check
+        run: npx tsc --noEmit --skipLibCheck
+
+      - name: Run tests
+        run: npx vitest run --reporter=verbose
+
+      - name: Build
+        run: npx vite build
+
+  # ── Deploy (only on main) ──
+  deploy:
+    name: Deploy to Cloud Run
+    needs: test
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install & Build
+        run: |
+          npm ci
+          npx vite build
+          echo "Built: $(date -u +%Y-%m-%dT%H:%M:%SZ)" > dist/_build_version.txt
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
+          service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
+
+      - name: Setup Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Build & Push Container
+        run: |
+          TAG="v$(date +%Y%m%d%H%M%S)"
+          gcloud builds submit --tag gcr.io/$PROJECT_ID/area-scale:$TAG .
+          echo "TAG=$TAG" >> $GITHUB_ENV
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy $SERVICE_NAME \
+            --image gcr.io/$PROJECT_ID/area-scale:${{ env.TAG }} \
+            --platform managed \
+            --region $REGION \
+            --allow-unauthenticated \
+            --port 8080
+
+      - name: Deploy Firestore Rules & Indexes
+        run: |
+          npm install -g firebase-tools
+          firebase deploy --only firestore --project $PROJECT_ID --token ${{ secrets.FIREBASE_TOKEN }}
+
+      - name: Deploy Storage Rules
+        run: |
+          firebase deploy --only storage --project $PROJECT_ID --token ${{ secrets.FIREBASE_TOKEN }}
+
+      - name: Verify Deployment
+        run: |
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://$SERVICE_NAME-983360724436.$REGION.run.app/)
+          if [ "$HTTP_STATUS" -ne 200 ]; then
+            echo "Deployment verification failed: HTTP $HTTP_STATUS"
+            exit 1
+          fi
+          echo "✅ Deployment verified: HTTP $HTTP_STATUS"

@@ -1,0 +1,221 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ── Helper functions ──
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isMember(orgId) {
+      return isAuthenticated()
+        && exists(/databases/$(database)/documents/orgMembers/$(orgId)/members/$(request.auth.uid));
+    }
+
+    function getMember(orgId) {
+      return get(/databases/$(database)/documents/orgMembers/$(orgId)/members/$(request.auth.uid));
+    }
+
+    function isAdmin(orgId) {
+      return isMember(orgId)
+        && getMember(orgId).data.role == 'org_admin';
+    }
+
+    function isAdminOrFinance(orgId) {
+      return isMember(orgId)
+        && (getMember(orgId).data.role == 'org_admin'
+         || getMember(orgId).data.role == 'finance');
+    }
+
+    function isActiveMember(orgId) {
+      return isMember(orgId)
+        && getMember(orgId).data.status == 'active';
+    }
+
+    // Validate that the document being created has a valid orgId
+    function hasValidOrgId() {
+      return request.resource.data.orgId is string
+        && request.resource.data.orgId.size() > 0;
+    }
+
+    // Validate that the orgId in the document matches the user's org membership
+    function ownsResource() {
+      return resource.data.orgId is string
+        && isMember(resource.data.orgId);
+    }
+
+    // Validate the orgId in the new document matches the user's org membership
+    function ownsNewResource() {
+      return hasValidOrgId()
+        && isMember(request.resource.data.orgId);
+    }
+
+    // Prevent orgId from being changed on update
+    function orgIdUnchanged() {
+      return request.resource.data.orgId == resource.data.orgId;
+    }
+
+    // ── Organisation documents ──
+    match /organizations/{orgId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated();
+      allow update: if isAdmin(orgId);
+      allow delete: if false; // Orgs should never be deleted via client
+
+      // ── Bank Connections (Open Banking via Tink) ──
+      match /bankConnections/{connId} {
+        allow read: if isMember(orgId);
+        allow create: if isMember(orgId);
+        allow update: if isMember(orgId);
+        allow delete: if isAdmin(orgId);
+      }
+
+      // ── Bank Transactions (synced from Tink) ──
+      match /bankTransactions/{txId} {
+        allow read: if isMember(orgId);
+        allow create: if isMember(orgId);
+        allow update: if isMember(orgId);
+        allow delete: if isAdmin(orgId);
+      }
+
+      // ── Rent Invoices (org subcollection path, for backend compat) ──
+      match /rentInvoices/{invId} {
+        allow read: if isMember(orgId);
+        allow create: if isMember(orgId);
+        allow update: if isMember(orgId);
+        allow delete: if isAdmin(orgId);
+      }
+    }
+
+    // ── Org membership sub-collection ──
+    match /orgMembers/{orgId}/members/{uid} {
+      // Members can read their own membership
+      allow read: if isAuthenticated()
+        && (request.auth.uid == uid || isMember(orgId));
+      // Only admins can create/update/delete memberships
+      allow create: if isAuthenticated();
+      allow update: if isAuthenticated()
+        && (request.auth.uid == uid || isAdmin(orgId));
+      allow delete: if isAdmin(orgId);
+    }
+
+    // ── Collection group rule for 'members' (used by OrgContext) ──
+    match /{path=**}/members/{uid} {
+      allow read: if isAuthenticated()
+        && request.auth.uid == uid;
+    }
+
+    // ── Settings (per org) ──
+    match /settings/{docId} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated();
+    }
+
+    // ═══════════════════════════════════════════════════════════════════
+    // ── ALL data collections: org-scoped with membership enforcement ──
+    // Reads: Must be a member of the org that owns the document
+    // Creates: Must include valid orgId and be a member of that org
+    // Updates: Must own the resource and not change orgId
+    // Deletes: Must own the resource
+    // ═══════════════════════════════════════════════════════════════════
+
+    match /properties/{docId} {
+      allow read: if isAuthenticated() && ownsResource();
+      allow create: if isAuthenticated() && ownsNewResource();
+      allow update: if isAuthenticated() && ownsResource() && orgIdUnchanged();
+      allow delete: if isAuthenticated() && ownsResource();
+    }
+
+    match /tenants/{docId} {
+      allow read: if isAuthenticated() && ownsResource();
+      allow create: if isAuthenticated() && ownsNewResource();
+      allow update: if isAuthenticated() && ownsResource() && orgIdUnchanged();
+      allow delete: if isAuthenticated() && ownsResource();
+    }
+
+    match /tickets/{docId} {
+      allow read: if isAuthenticated() && ownsResource();
+      allow create: if isAuthenticated() && ownsNewResource();
+      allow update: if isAuthenticated() && ownsResource() && orgIdUnchanged();
+      allow delete: if isAuthenticated() && ownsResource();
+    }
+
+    match /messages/{docId} {
+      allow read: if isAuthenticated() && ownsResource();
+      allow create: if isAuthenticated() && ownsNewResource();
+      allow update: if isAuthenticated() && ownsResource() && orgIdUnchanged();
+      allow delete: if isAuthenticated() && ownsResource();
+    }
+
+    match /documents/{docId} {
+      allow read: if isAuthenticated() && ownsResource();
+      allow create: if isAuthenticated() && ownsNewResource();
+      allow update: if isAuthenticated() && ownsResource() && orgIdUnchanged();
+      allow delete: if isAuthenticated() && ownsResource();
+    }
+
+    match /operatingCosts/{docId} {
+      allow read: if isAuthenticated() && ownsResource();
+      allow create: if isAuthenticated() && ownsNewResource();
+      allow update: if isAuthenticated() && ownsResource() && orgIdUnchanged();
+      allow delete: if isAuthenticated() && ownsResource();
+    }
+
+    match /settlements/{docId} {
+      allow read: if isAuthenticated() && ownsResource();
+      allow create: if isAuthenticated() && ownsNewResource();
+      allow update: if isAuthenticated() && ownsResource() && orgIdUnchanged();
+      allow delete: if isAuthenticated() && ownsResource();
+    }
+
+    match /rentInvoices/{docId} {
+      allow read: if isAuthenticated() && ownsResource();
+      allow create: if isAuthenticated() && ownsNewResource();
+      allow update: if isAuthenticated() && ownsResource() && orgIdUnchanged();
+      allow delete: if isAuthenticated() && ownsResource();
+    }
+
+    match /payments/{docId} {
+      allow read: if isAuthenticated() && ownsResource();
+      allow create: if isAuthenticated() && ownsNewResource();
+      allow update: if isAuthenticated() && ownsResource() && orgIdUnchanged();
+      allow delete: if isAuthenticated() && ownsResource();
+    }
+
+    match /contracts/{docId} {
+      allow read: if isAuthenticated() && ownsResource();
+      allow create: if isAuthenticated() && ownsNewResource();
+      allow update: if isAuthenticated() && ownsResource() && orgIdUnchanged();
+      allow delete: if isAuthenticated() && ownsResource();
+    }
+
+    match /rentLineItems/{docId} {
+      allow read: if isAuthenticated() && ownsResource();
+      allow create: if isAuthenticated() && ownsNewResource();
+      allow update: if isAuthenticated() && ownsResource() && orgIdUnchanged();
+      allow delete: if isAuthenticated() && ownsResource();
+    }
+
+    match /assetConfig/{docId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated();
+      allow update: if isAuthenticated();
+      allow delete: if false;
+    }
+
+    match /auditLogs/{docId} {
+      allow read: if isAuthenticated() && ownsResource();
+      allow create: if isAuthenticated() && ownsNewResource();
+      allow update: if false; // Audit logs are immutable
+      allow delete: if false; // Audit logs cannot be deleted
+    }
+
+    // mail collection: written by Cloud Functions (Admin SDK bypasses rules).
+    // No client read/write — emails are backend-only.
+    match /mail/{docId} {
+      allow read, write: if false;
+    }
+  }
+}

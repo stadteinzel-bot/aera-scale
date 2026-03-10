@@ -1,0 +1,10 @@
+# Custom gcloudignore — DO NOT inherit from .gitignore blindly
+# We need 'dist/' to be uploaded so Docker can copy pre-built assets
+
+node_modules/
+.git/
+.env.local
+*.log
+.vscode/
+.idea/
+.DS_Store
