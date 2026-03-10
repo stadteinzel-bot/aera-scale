@@ -482,7 +482,129 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(15,58,40,.08); }
 .feature-text {
   font-size: 13px;
   color: var(--text-mid);
+  line-height: 1.75;
+  margin-bottom: 20px;
+}
+
+.feature-details {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.feature-details li {
+  font-size: 12px;
+  color: var(--text-mid);
+  padding: 7px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  line-height: 1.5;
+}
+
+.feature-details li:last-child { border-bottom: none; }
+
+.feature-details li::before {
+  content: '→';
+  color: var(--gold);
+  font-size: 11px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  font-weight: 500;
+}
+
+/* ── KI ZAHLUNGSABGLEICH DEEP DIVE ── */
+.flow-section {
+  background: var(--green-deep);
+  padding: 100px 64px;
+}
+
+.flow-section .section-title { color: var(--cream); }
+.flow-section .section-lead { color: rgba(246,243,238,.6); }
+.flow-section .section-label { color: var(--gold); }
+.flow-section .label-row-line { background: var(--gold); }
+
+.flow-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 80px;
+  margin-top: 64px;
+  align-items: start;
+}
+
+.flow-left { }
+
+.flow-tagline {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-style: italic;
+  color: var(--gold-light);
+  line-height: 1.5;
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255,255,255,.1);
+}
+
+.flow-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.flow-step {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 24px;
+  padding: 28px 0;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  position: relative;
+}
+
+.flow-step:last-child { border-bottom: none; }
+
+.flow-step-num {
+  width: 40px; height: 40px;
+  border: 1px solid var(--gold-border);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  color: var(--gold);
+  background: rgba(201,162,77,.05);
+}
+
+.flow-step-body { }
+
+.flow-step-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--cream);
+  margin-bottom: 8px;
+  letter-spacing: 0.04em;
+}
+
+.flow-step-text {
+  font-size: 13px;
+  color: rgba(246,243,238,.55);
   line-height: 1.7;
+}
+
+.flow-step-tag {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--gold-border);
+  padding: 3px 10px;
+}
+
+@media (max-width: 1024px) {
+  .flow-layout { grid-template-columns: 1fr; gap: 48px; }
 }
 
 /* ── PRICING ── */
@@ -943,45 +1065,184 @@ footer {
     </div>
     <p class="section-lead">
       Von der ersten Immobilie bis zum professionellen Portfolio — AERA SCALE 
-      wächst mit Ihren Anforderungen und automatisiert Ihre tägliche Arbeit.
+      automatisiert Ihre tägliche Arbeit: Mieterfassung, Zahlungsabgleich, 
+      Nebenkostenabrechnung und Dokumentenverwaltung aus einer Hand.
     </p>
   </div>
 
   <div class="features-grid">
     <div class="feature-card reveal" data-num="01">
       <div class="feature-icon">🏠</div>
-      <div class="feature-title">Immobilien & Einheiten</div>
-      <p class="feature-text">Verwalten Sie beliebig viele Objekte und Einheiten mit vollständigem Mieter-, Vertrags- und Dokumentenmanagement.</p>
+      <div class="feature-title">Immobilien &amp; Einheiten</div>
+      <p class="feature-text">Legen Sie Immobilien mit beliebig vielen Wohn- und Gewerbeeinheiten an. Mieter, Verträge, Dokumente und Abrechnungen sind strukturiert verwaltet und sofort abrufbar.</p>
+      <ul class="feature-details">
+        <li>Alle Einheitentypen (Wohnung, Gewerbe, Garage)</li>
+        <li>Vollständige Mieterstammdaten mit IBAN-Hinterlegung</li>
+        <li>Digitale Vertragsablage mit automatischen Ablaufdaten</li>
+        <li>KPI-Dashboard pro Objekt (Rendite, Leerstand, Cashflow)</li>
+      </ul>
     </div>
+
     <div class="feature-card reveal" data-num="02">
       <div class="feature-icon">⚡</div>
       <div class="feature-title">KI-Vertragsanalyse</div>
-      <p class="feature-text">Laden Sie Mietverträge hoch — die KI extrahiert Laufzeiten, Konditionen und Risiken automatisch und überwacht Fristen.</p>
+      <p class="feature-text">Laden Sie einen Mietvertrag als PDF hoch — die integrierte KI (Google Gemini) liest Laufzeiten, Miethöhe, Indexierungsklauseln und Sonderkündigungsrechte automatisch aus.</p>
+      <ul class="feature-details">
+        <li>Automatische Extraktion aller Kernklauseln</li>
+        <li>Erkennung von Risiken und kritischen Fristen</li>
+        <li>Vergleich von Ist-Miete vs. Vertrags-Miete</li>
+        <li>KI-Zusammenfassung in verständlichem Deutsch</li>
+      </ul>
     </div>
+
     <div class="feature-card reveal" data-num="03">
       <div class="feature-icon">🏦</div>
-      <div class="feature-title">Open Banking</div>
-      <p class="feature-text">Verbinden Sie Ihr Bankkonto via Tink und gleichen Sie Zahlungseingänge automatisch mit offenen Rechnungen ab.</p>
+      <div class="feature-title">Open Banking &amp; KI-Zahlungsabgleich</div>
+      <p class="feature-text">Verbinden Sie Ihr Geschäftskonto via Tink (PSD2-lizenziert). Eingehende Zahlungen werden automatisch dem richtigen Mieter zugeordnet — ohne manuellen Abgleich.</p>
+      <ul class="feature-details">
+        <li>Konto verbinden in unter 2 Minuten (OAuth, keine Passwörter)</li>
+        <li>KI erkennt Zahlungen anhand Verwendungszweck &amp; IBAN</li>
+        <li>Sofortige Markierung: bezahlt / teilbezahlt / offen</li>
+        <li>Automatische Mahnungserstellung bei Zahlungsverzug</li>
+      </ul>
     </div>
+
     <div class="feature-card reveal" data-num="04">
       <div class="feature-icon">📄</div>
-      <div class="feature-title">Auto-Mietrechnungen</div>
-      <p class="feature-text">Rechnungen werden am 1. jeden Monats automatisch generiert — inklusive Nebenkosten-Vorauszahlung und Indexierung.</p>
+      <div class="feature-title">Automatische Mietrechnungen</div>
+      <p class="feature-text">Am 1. jeden Monats generiert AERA SCALE alle Mietrechnungen vollautomatisch — für all Ihre Mieter gleichzeitig, inklusive Nebenkosten-Vorauszahlung und gesetzlicher Umsatzsteuer.</p>
+      <ul class="feature-details">
+        <li>Automatischer E-Mail-Versand an alle Mieter</li>
+        <li>Indexbasierte Mietanpassung nach Vertragsklausel</li>
+        <li>Gesplittete Darstellung: Kaltmiete + NK-Vorauszahlung</li>
+        <li>PDF-Export für Steuerberater und Buchführung</li>
+      </ul>
     </div>
+
     <div class="feature-card reveal" data-num="05">
       <div class="feature-icon">📊</div>
       <div class="feature-title">Betriebskostenabrechnung</div>
-      <p class="feature-text">Buchen Sie Betriebskosten, verteilen Sie sie nach Schlüssel und erstellen Sie rechtskonforme NK-Abrechnungen auf Knopfdruck.</p>
+      <p class="feature-text">Erfassen Sie Betriebskosten (Wasser, Heizung, Gebäudereinigung etc.), weisen Sie sie nach Verteilerschlüssel zu und erstellen Sie rechtskonforme NK-Abrechnungen auf Knopfdruck.</p>
+      <ul class="feature-details">
+        <li>Flexible Kostenpositionen nach §2 BetrKV</li>
+        <li>Verteilung nach qm, Personenzahl oder individuell</li>
+        <li>Automatische Berechnung von Nachzahlung und Guthaben</li>
+        <li>DSGVO-konforme Archivierung für 10 Jahre</li>
+      </ul>
     </div>
+
     <div class="feature-card reveal" data-num="06">
       <div class="feature-icon">🔔</div>
-      <div class="feature-title">Smarte Erinnerungen</div>
-      <p class="feature-text">Automatische E-Mail-Benachrichtigungen bei ablaufenden Verträgen, fälligen Wartungen und offenen Zahlungen.</p>
+      <div class="feature-title">Smarte Erinnerungen &amp; Fristen</div>
+      <p class="feature-text">AERA SCALE überwacht alle relevanten Vertragsfristen und Zahlungstermine. Sie werden rechtzeitig per E-Mail benachrichtigt — konfigurierbar in den Einstellungen.</p>
+      <ul class="feature-details">
+        <li>Erinnerung bei Vertragsablauf (30 / 60 / 90 Tage vorher)</li>
+        <li>Benachrichtigung bei ausbleibender Mietzahlung</li>
+        <li>Wartungserinnerungen für Technikanlagen</li>
+        <li>Versand an Eigentümer und Mieter konfigurierbar</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- KI ZAHLUNGSABGLEICH DEEP DIVE -->
+<section class="flow-section" id="flow">
+  <div class="reveal">
+    <div class="label-row">
+      <div class="label-row-line"></div>
+      <span class="section-label">Automatisierung</span>
+    </div>
+    <h2 class="section-title">Vom Kontoeingang zur <em>zugeordneten</em> Mietzahlung</h2>
+    <p class="section-lead">So funktioniert der vollautomatische KI-Zahlungsabgleich — von der Bankbuchung bis zur bestätigten Mietzahlung, ohne dass Sie einen Finger rühren müssen.</p>
+  </div>
+
+  <div class="flow-layout reveal">
+    <div class="flow-left">
+      <div class="label-row">
+        <div class="label-row-line"></div>
+        <span class="section-label">Warum es wichtig ist</span>
+      </div>
+      <p class="section-lead">
+        Das manuelle Abgleichen von Kontoauszügen mit Mietzahlungen kostet Eigentümer 
+        im Durchschnitt mehrere Stunden pro Monat. Falsche Verwendungszwecke, ähnliche 
+        Beträge und Teilzahlungen machen es fehleranfällig.
+      </p>
+      <div class="flow-tagline">
+        &ldquo;AERA SCALE weiß,<br>wer bezahlt hat —<br><em>bevor Sie schauen.</em>&rdquo;
+      </div>
+    </div>
+
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="flow-step-num">1</div>
+        <div class="flow-step-body">
+          <div class="flow-step-title">Konto verbinden via Tink (PSD2)</div>
+          <p class="flow-step-text">
+            Sie verbinden Ihr Geschäftskonto einmalig über die sichere Open-Banking-Schnittstelle 
+            (Tink, EU-zugelassener PSD2-Dienstleister). Keine Anmeldedaten hinterlegen — 
+            nur eine sichere OAuth-Autorisierung bei Ihrer Bank.
+          </p>
+          <span class="flow-step-tag">Tink PSD2 · Bank-Auth · Einmalig</span>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-step-num">2</div>
+        <div class="flow-step-body">
+          <div class="flow-step-title">Automatischer Transaktions-Import</div>
+          <p class="flow-step-text">
+            AERA SCALE ruft täglich alle neuen Kontobewegungen ab und speichert sie 
+            revisionssicher in Ihrer verschlüsselten Datenbasis. Jede Buchung enthält: 
+            Betrag, Datum, IBAN des Absenders und Verwendungszweck.
+          </p>
+          <span class="flow-step-tag">Cloud Functions · Verschlüsselt · DSGVO</span>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-step-num">3</div>
+        <div class="flow-step-body">
+          <div class="flow-step-title">KI analysiert und ordnet zu</div>
+          <p class="flow-step-text">
+            Die KI matcht jede Transaktion gegen Ihre Mieterdaten: Vergleich von IBAN, 
+            Betrag und Verwendungszweck. Auch bei falschem oder fehlendem Verwendungszweck 
+            erkennt die KI den Mieter anhand der Absender-IBAN zuverlässig.
+          </p>
+          <span class="flow-step-tag">Google Gemini KI · IBAN-Matching · Fuzzy-Suche</span>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-step-num">4</div>
+        <div class="flow-step-body">
+          <div class="flow-step-title">Rechnung automatisch als „bezahlt" markiert</div>
+          <p class="flow-step-text">
+            Sobald eine Zahlung klar zugeordnet ist, wird die Mietzahlung in AERA SCALE 
+            automatisch als „bezahlt" markiert. Bei Teilzahlungen verbleibt der Restbetrag 
+            als „offen". Sie sehen den Status aller Mieter auf einen Blick im Dashboard.
+          </p>
+          <span class="flow-step-tag">Auto-Status · Teilzahlung · Vollzahlung</span>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-step-num">5</div>
+        <div class="flow-step-body">
+          <div class="flow-step-title">Automatische Zahlungserinnerung bei Ausfall</div>
+          <p class="flow-step-text">
+            Ist bis zum konfigurierbaren Fälligkeitstag keine Zahlung eingegangen, 
+            versendet AERA SCALE automatisch eine höfliche Zahlungserinnerung per E-Mail 
+            an den Mieter — und benachrichtigt Sie als Eigentümer gleichzeitig.
+          </p>
+          <span class="flow-step-tag">Auto-Mahnung · E-Mail · Konfigurierbar</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- PRICING -->
+
 <section class="pricing-section" id="pricing">
   <div class="reveal">
     <div class="label-row">
