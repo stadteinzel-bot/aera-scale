@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Datenschutz | AERA SCALE</title>
+<meta name="description" content="Datenschutzerklärung der AERA SCALE GmbH — DSGVO-konform.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--green-deep:#0f3a28;--green-mid:#1a4a32;--gold:#c9a24d;--gold-border:rgba(201,162,77,0.28);--cream:#f6f3ee;--cream-dark:#ede9e1;--text-dark:#222222;--text-mid:#555550;--text-light:#888880;--border:rgba(15,58,40,0.12)}
+body{font-family:'Jost',sans-serif;font-weight:300;color:var(--text-dark);background:var(--cream)}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:20px 64px;background:rgba(246,243,238,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.nav-logo-mark{width:36px;height:36px;background:var(--green-deep);clip-path:polygon(50% 0%,85% 15%,100% 50%,85% 85%,50% 100%,15% 85%,0% 50%,15% 15%);display:flex;align-items:center;justify-content:center}
+.nav-logo-mark::after{content:'A';color:var(--gold);font-family:'Playfair Display',serif;font-size:16px;font-weight:700}
+.nav-wordmark{display:flex;flex-direction:column;line-height:1}
+.nav-wordmark span:first-child{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--green-deep);letter-spacing:0.08em}
+.nav-wordmark span:last-child{font-size:8px;letter-spacing:0.3em;text-transform:uppercase;color:var(--text-light)}
+.nav-links{display:flex;align-items:center;gap:40px;list-style:none}
+.nav-links a{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-mid);text-decoration:none}
+.nav-actions{display:flex;gap:12px}
+.nav-login{font-size:11px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--green-deep);text-decoration:none;padding:11px 24px;border:1px solid var(--border)}
+.nav-cta{background:var(--green-deep);color:var(--gold);font-size:11px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;padding:11px 28px;text-decoration:none}
+main{max-width:860px;margin:0 auto;padding:160px 64px 120px}
+.page-label{display:inline-flex;align-items:center;gap:12px;margin-bottom:24px}
+.page-label-line{width:40px;height:1px;background:var(--gold)}
+.page-label span{font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold);font-weight:500}
+.update-note{font-size:.8rem;color:var(--text-light);margin-bottom:56px}
+h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,3.6rem);color:var(--green-deep);margin-bottom:12px}
+h2{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--green-deep);margin:48px 0 16px;padding-bottom:10px;border-bottom:1px solid var(--gold-border)}
+h3{font-size:1rem;font-weight:500;color:var(--text-dark);margin:28px 0 10px}
+p{font-size:1rem;line-height:1.9;color:var(--text-mid);margin-bottom:18px}
+ul{padding-left:24px;margin-bottom:18px}
+li{font-size:1rem;line-height:1.9;color:var(--text-mid);margin-bottom:8px}
+strong{color:var(--text-dark);font-weight:500}
+a{color:var(--green-deep);text-decoration:underline;text-underline-offset:3px}
+.info-box{background:rgba(15,58,40,0.05);border-left:3px solid var(--gold);padding:20px 24px;margin:24px 0}
+.info-box p{margin:0;font-size:.9rem}
+footer{background:var(--green-deep);padding:80px 64px 40px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:32px}
+.footer-brand-logo{width:32px;height:32px;background:rgba(246,243,238,0.2);clip-path:polygon(50% 0%,85% 15%,100% 50%,85% 85%,50% 100%,15% 85%,0% 50%,15% 15%);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.footer-brand-logo::after{content:'A';color:var(--gold);font-family:'Playfair Display',serif;font-size:14px;font-weight:700}
+.footer-brand p{font-size:12px;color:rgba(246,243,238,0.4);line-height:1.8}
+.footer-col-title{font-size:9px;letter-spacing:0.26em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.footer-col ul{list-style:none;padding:0}
+.footer-col ul li{margin-bottom:10px}
+.footer-col ul li a{font-size:13px;color:rgba(246,243,238,0.45);text-decoration:none}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:rgba(246,243,238,0.25)}
+.footer-bottom-links{display:flex;gap:28px}
+.footer-bottom-links a{color:inherit;text-decoration:none}
+@media(max-width:900px){nav{padding:16px 24px}.nav-links,.nav-login{display:none}main{padding:120px 24px 80px}footer{padding:60px 24px 32px}.footer-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="./index.html" class="nav-brand">
+    <div class="nav-logo-mark"></div>
+    <div class="nav-wordmark"><span>AERA SCALE</span><span>Immobilienverwaltung</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="./index.html#features">Funktionen</a></li>
+    <li><a href="./index.html#pricing">Preise</a></li>
+    <li><a href="./index.html#process">So funktioniert's</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="https://aera-scale-983360724436.europe-west1.run.app/?mode=login" class="nav-login">Anmelden</a>
+    <a href="https://aera-scale-983360724436.europe-west1.run.app/?mode=register" class="nav-cta">Kostenlos starten</a>
+  </div>
+</nav>
+<main>
+  <div class="page-label"><div class="page-label-line"></div><span>Rechtliches</span></div>
+  <h1>Datenschutzerklärung</h1>
+  <p class="update-note">Zuletzt aktualisiert: März 2026</p>
+  <p>Der Schutz Ihrer persönlichen Daten ist uns ein besonderes Anliegen. Wir behandeln Ihre Daten vertraulich und entsprechend der DSGVO sowie dieser Datenschutzerklärung.</p>
+
+  <h2>1. Verantwortlicher</h2>
+  <p><strong>AERA SCALE GmbH</strong><br>Musterstraße 1, 10115 Berlin<br>E-Mail: <a href="mailto:legal@aera-scale.de">legal@aera-scale.de</a></p>
+
+  <h2>2. Datenerfassung auf unserer Website</h2>
+  <h3>Server-Log-Files</h3>
+  <p>Der Hosting-Provider erhebt automatisch Log-Daten: IP-Adresse, Browsertyp, Betriebssystem und Uhrzeit der Anfrage. Diese Daten können keiner bestimmten Person zugeordnet werden.</p>
+  <h3>Cookies</h3>
+  <p>Wir verwenden ausschließlich technisch notwendige Session-Cookies. Kein Tracking, kein Profiling, keine Werbecookies.</p>
+
+  <h2>3. Welche Daten wir verarbeiten</h2>
+  <ul>
+    <li><strong>Registrierungsdaten:</strong> Name und E-Mail via Firebase Authentication (Google LLC).</li>
+    <li><strong>Immobilien- und Mieterdaten:</strong> Ihre Eingaben verbleiben in Ihrer Kontrolle, gespeichert in Google Cloud Frankfurt (eu-central1).</li>
+    <li><strong>Bankverbindungsdaten:</strong> Kontoanbindung erfolgt via Tink AB (Schweden, PSD2-lizenziert) per OAuth. Wir speichern keine Bankzugangsdaten.</li>
+    <li><strong>Transaktionsdaten:</strong> Kontobewegungen werden verschlüsselt gespeichert und ausschließlich für den KI-Zahlungsabgleich genutzt.</li>
+  </ul>
+  <div class="info-box">
+    <p>💡 <strong>Ihre Daten gehören Ihnen.</strong> AERA SCALE verkauft keine Daten, nutzt sie nicht für Werbung, und kann Ihre Immobilien- und Mieterdaten nicht einsehen.</p>
+  </div>
+
+  <h2>4. Rechtsgrundlage</h2>
+  <p>Verarbeitung zur Vertragserfüllung (Art. 6 Abs. 1 lit. b DSGVO).</p>
+
+  <h2>5. Speicherdauer</h2>
+  <p>Daten werden bei aktivem Konto gespeichert. Nach Kündigung Löschung innerhalb von 30 Tagen, soweit keine gesetzlichen Aufbewahrungsfristen entgegenstehen (HGB, AO).</p>
+
+  <h2>6. Ihre Rechte (DSGVO)</h2>
+  <ul>
+    <li><strong>Auskunft</strong> (Art. 15) über Ihre gespeicherten Daten</li>
+    <li><strong>Berichtigung</strong> (Art. 16) unrichtiger Daten</li>
+    <li><strong>Löschung</strong> (Art. 17) Ihrer Daten („Recht auf Vergessenwerden")</li>
+    <li><strong>Einschränkung</strong> (Art. 18) der Verarbeitung</li>
+    <li><strong>Datenübertragbarkeit</strong> (Art. 20)</li>
+    <li><strong>Widerspruch</strong> (Art. 21) gegen die Verarbeitung</li>
+    <li><strong>Beschwerde</strong> bei der zuständigen Datenschutzbehörde</li>
+  </ul>
+
+  <h2>7. Datenweitergabe</h2>
+  <ul>
+    <li><strong>Google Cloud / Firebase:</strong> Infrastruktur &amp; Authentifizierung (Serverstandort: Frankfurt, eu-central1)</li>
+    <li><strong>Tink AB:</strong> Open-Banking-Schnittstelle (EU-reguliert, PSD2)</li>
+  </ul>
+  <p>Keine Weitergabe zu Werbezwecken oder an sonstige Dritte.</p>
+
+  <h2>8. Internationale Datenübertragung</h2>
+  <p>Primäre Speicherung in der EU (Frankfurt). Tink AB ist als EU-Unternehmen vollständig DSGVO-konform.</p>
+
+  <h2>9. Kontakt Datenschutz</h2>
+  <p>E-Mail: <a href="mailto:datenschutz@aera-scale.de">datenschutz@aera-scale.de</a></p>
+</main>
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-brand-logo"></div>
+      <p>AERA SCALE — KI-gestützte Immobilienverwaltung für professionelle Eigentümer und Verwalter.</p>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Plattform</div>
+      <ul>
+        <li><a href="./index.html#features">Funktionen</a></li>
+        <li><a href="./index.html#pricing">Preise</a></li>
+        <li><a href="./index.html#process">So funktioniert's</a></li>
+        <li><a href="https://aera-scale-983360724436.europe-west1.run.app/?mode=login">App öffnen</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Rechtliches</div>
+      <ul>
+        <li><a href="./impressum.html">Impressum</a></li>
+        <li><a href="./datenschutz.html">Datenschutz</a></li>
+        <li><a href="./agb.html">AGB</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Konto</div>
+      <ul>
+        <li><a href="https://aera-scale-983360724436.europe-west1.run.app/?mode=login">Anmelden</a></li>
+        <li><a href="https://aera-scale-983360724436.europe-west1.run.app/?mode=register">Registrieren</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 AERA SCALE GmbH. Alle Rechte vorbehalten.</p>
+    <div class="footer-bottom-links">
+      <a href="./impressum.html">Impressum</a>
+      <a href="./datenschutz.html">Datenschutz</a>
+      <a href="./agb.html">AGB</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

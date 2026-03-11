@@ -30,3 +30,13 @@ dist-ssr
 .env.*
 functions/.env
 functions/.env.*
+
+# GCP Service Account Keys — NEVER COMMIT
+*.key.json
+*-sa-key.json
+service-account*.json
+.github/ci-sa-key.json
+
+# User data — sensitive
+users.json
+

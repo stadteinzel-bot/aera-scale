@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impressum | AERA SCALE</title>
+    <meta name="description" content="Impressum der AERA SCALE GmbH — Angaben gemäß § 5 TMG.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,300;0,400;0,500;1,300&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --green-deep: #0f3a28; --green-mid: #1a4a32;
+            --gold: #c9a24d; --gold-border: rgba(201,162,77,0.28);
+            --cream: #f6f3ee; --cream-dark: #ede9e1;
+            --text-dark: #222222; --text-mid: #555550; --text-light: #888880;
+            --border: rgba(15,58,40,0.12);
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Jost', sans-serif; font-weight: 300; color: var(--text-dark); background: var(--cream); }
+        body::after { content:''; position:fixed; inset:0; pointer-events:none; z-index:999; opacity:.025;
+            background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+        /* NAV */
+        nav { position:fixed; top:0; left:0; right:0; z-index:200; display:flex; align-items:center; justify-content:space-between; padding:20px 64px; background:rgba(246,243,238,0.92); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); }
+        .nav-brand { display:flex; align-items:center; gap:12px; text-decoration:none; }
+        .nav-logo-mark { width:36px; height:36px; background:var(--green-deep); clip-path:polygon(50% 0%,85% 15%,100% 50%,85% 85%,50% 100%,15% 85%,0% 50%,15% 15%); display:flex; align-items:center; justify-content:center; }
+        .nav-logo-mark::after { content:'A'; color:var(--gold); font-family:'Playfair Display',serif; font-size:16px; font-weight:700; }
+        .nav-wordmark { display:flex; flex-direction:column; line-height:1; }
+        .nav-wordmark span:first-child { font-family:'Playfair Display',serif; font-size:17px; font-weight:700; color:var(--green-deep); letter-spacing:0.08em; }
+        .nav-wordmark span:last-child { font-size:8px; letter-spacing:0.3em; text-transform:uppercase; color:var(--text-light); }
+        .nav-links { display:flex; align-items:center; gap:40px; list-style:none; }
+        .nav-links a { font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--text-mid); text-decoration:none; transition:color .2s; }
+        .nav-links a:hover { color:var(--green-deep); }
+        .nav-actions { display:flex; gap:12px; }
+        .nav-login { font-size:11px; font-weight:500; letter-spacing:0.16em; text-transform:uppercase; color:var(--green-deep); text-decoration:none; padding:11px 24px; border:1px solid var(--border); transition:background .2s; }
+        .nav-login:hover { background:var(--cream-dark); }
+        .nav-cta { background:var(--green-deep); color:var(--gold); font-size:11px; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; padding:11px 28px; text-decoration:none; transition:background .2s; }
+        .nav-cta:hover { background:var(--green-mid); }
+
+        /* MAIN CONTENT */
+        main { max-width: 860px; margin: 0 auto; padding: 160px 64px 120px; }
+        .page-label { display:inline-flex; align-items:center; gap:12px; margin-bottom:24px; }
+        .page-label-line { width:40px; height:1px; background:var(--gold); }
+        .page-label span { font-size:9px; letter-spacing:0.28em; text-transform:uppercase; color:var(--gold); font-weight:500; }
+        h1 { font-family:'Playfair Display',serif; font-size:clamp(2.4rem,5vw,3.6rem); color:var(--green-deep); margin-bottom:56px; line-height:1.15; }
+        h2 { font-family:'Playfair Display',serif; font-size:1.3rem; color:var(--green-deep); margin:48px 0 16px; padding-bottom:10px; border-bottom:1px solid var(--gold-border); }
+        p, address { font-size:1rem; line-height:1.9; color:var(--text-mid); font-style:normal; margin-bottom:18px; }
+        strong { color:var(--text-dark); font-weight:500; }
+        a { color:var(--green-deep); text-decoration:underline; text-underline-offset:3px; }
+        a:hover { color:var(--gold); }
+
+        /* FOOTER */
+        footer { background:var(--green-deep); padding:80px 64px 40px; }
+        .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:48px; padding-bottom:48px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:32px; }
+        .footer-brand-logo { width:32px; height:32px; background:rgba(246,243,238,0.2); clip-path:polygon(50% 0%,85% 15%,100% 50%,85% 85%,50% 100%,15% 85%,0% 50%,15% 15%); display:flex; align-items:center; justify-content:center; margin-bottom:16px; }
+        .footer-brand-logo::after { content:'A'; color:var(--gold); font-family:'Playfair Display',serif; font-size:14px; font-weight:700; }
+        .footer-brand p { font-size:12px; color:rgba(246,243,238,0.4); line-height:1.8; }
+        .footer-col-title { font-size:9px; letter-spacing:0.26em; text-transform:uppercase; color:var(--gold); margin-bottom:20px; }
+        .footer-col ul { list-style:none; }
+        .footer-col ul li { margin-bottom:10px; }
+        .footer-col ul li a { font-size:13px; color:rgba(246,243,238,0.45); text-decoration:none; transition:color .2s; }
+        .footer-col ul li a:hover { color:rgba(246,243,238,0.9); }
+        .footer-bottom { display:flex; justify-content:space-between; align-items:center; font-size:11px; color:rgba(246,243,238,0.25); }
+        .footer-bottom-links { display:flex; gap:28px; }
+        .footer-bottom-links a { color:inherit; text-decoration:none; transition:color .2s; }
+        .footer-bottom-links a:hover { color:rgba(246,243,238,0.6); }
+
+        @media (max-width:900px) {
+            nav { padding:16px 24px; }
+            .nav-links, .nav-login { display:none; }
+            main { padding:120px 24px 80px; }
+            footer { padding:60px 24px 32px; }
+            .footer-grid { grid-template-columns:1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <a href="./index.html" class="nav-brand">
+        <div class="nav-logo-mark"></div>
+        <div class="nav-wordmark"><span>AERA SCALE</span><span>Immobilienverwaltung</span></div>
+    </a>
+    <ul class="nav-links">
+        <li><a href="./index.html#features">Funktionen</a></li>
+        <li><a href="./index.html#pricing">Preise</a></li>
+        <li><a href="./index.html#process">So funktioniert's</a></li>
+    </ul>
+    <div class="nav-actions">
+        <a href="https://aera-scale-983360724436.europe-west1.run.app/?mode=login" class="nav-login">Anmelden</a>
+        <a href="https://aera-scale-983360724436.europe-west1.run.app/?mode=register" class="nav-cta">Kostenlos starten</a>
+    </div>
+</nav>
+
+<main>
+    <div class="page-label"><div class="page-label-line"></div><span>Rechtliches</span></div>
+    <h1>Impressum</h1>
+
+    <h2>Angaben gemäß § 5 TMG</h2>
+    <address>
+        <strong>AERA SCALE GmbH</strong><br>
+        Musterstraße 1<br>
+        10115 Berlin<br>
+        Deutschland
+    </address>
+
+    <h2>Vertreten durch</h2>
+    <p>Geschäftsführer: <strong>Salih Kerey</strong></p>
+
+    <h2>Kontakt</h2>
+    <p>
+        Telefon: <a href="tel:+4930123456789">+49 30 12345678</a><br>
+        E-Mail: <a href="mailto:legal@aera-scale.de">legal@aera-scale.de</a>
+    </p>
+
+    <h2>Registereintrag</h2>
+    <p>
+        Eintragung im Handelsregister.<br>
+        Registergericht: Amtsgericht Berlin-Charlottenburg<br>
+        Registernummer: <strong>HRB 123456 B</strong>
+    </p>
+
+    <h2>Umsatzsteuer-Identifikationsnummer</h2>
+    <p>
+        Umsatzsteuer-Identifikationsnummer gemäß § 27a Umsatzsteuergesetz:<br>
+        <strong>DE 123456789</strong>
+    </p>
+
+    <h2>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h2>
+    <address>
+        Salih Kerey<br>
+        Musterstraße 1<br>
+        10115 Berlin
+    </address>
+
+    <h2>EU-Streitschlichtung</h2>
+    <p>
+        Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:<br>
+        <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">https://ec.europa.eu/consumers/odr/</a>
+    </p>
+    <p>Unsere E-Mail-Adresse finden Sie oben im Impressum.</p>
+
+    <h2>Verbraucherstreitbeilegung / Universalschlichtungsstelle</h2>
+    <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+
+    <h2>Haftung für Inhalte</h2>
+    <p>Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.</p>
+
+    <h2>Haftung für Links</h2>
+    <p>Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.</p>
+</main>
+
+<footer>
+    <div class="footer-grid">
+        <div class="footer-brand">
+            <div class="footer-brand-logo"></div>
+            <p>AERA SCALE — KI-gestützte Immobilienverwaltung für professionelle Eigentümer und Verwalter.</p>
+        </div>
+        <div class="footer-col">
+            <div class="footer-col-title">Plattform</div>
+            <ul>
+                <li><a href="./index.html#features">Funktionen</a></li>
+                <li><a href="./index.html#pricing">Preise</a></li>
+                <li><a href="./index.html#process">So funktioniert's</a></li>
+                <li><a href="https://aera-scale-983360724436.europe-west1.run.app/?mode=login">App öffnen</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <div class="footer-col-title">Rechtliches</div>
+            <ul>
+                <li><a href="./impressum.html">Impressum</a></li>
+                <li><a href="./datenschutz.html">Datenschutz</a></li>
+                <li><a href="./agb.html">AGB</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <div class="footer-col-title">Konto</div>
+            <ul>
+                <li><a href="https://aera-scale-983360724436.europe-west1.run.app/?mode=login">Anmelden</a></li>
+                <li><a href="https://aera-scale-983360724436.europe-west1.run.app/?mode=register">Registrieren</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2026 AERA SCALE GmbH. Alle Rechte vorbehalten.</p>
+        <div class="footer-bottom-links">
+            <a href="./impressum.html">Impressum</a>
+            <a href="./datenschutz.html">Datenschutz</a>
+            <a href="./agb.html">AGB</a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
