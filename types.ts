@@ -40,11 +40,14 @@ export interface Organization {
   createdAt: string;
   createdBy: string;
   onboardingComplete: boolean;
+  /** Subscription plan — controls feature access. Default: 'basic' */
+  plan?: 'basic' | 'pro' | 'enterprise';
   /** Storage plan tier — determines upload quota. Default: 'basic' */
   storagePlan?: 'basic' | 'pro' | 'enterprise';
   /** Running total of uploaded bytes tracked by storageQuota service */
   storageUsedBytes?: number;
 }
+
 
 export interface OrgMember {
   uid: string;
