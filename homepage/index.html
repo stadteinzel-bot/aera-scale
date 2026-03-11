@@ -3,8 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AERA SCALE — Intelligente Immobilienverwaltung</title>
-<meta name="description" content="AERA SCALE ist die KI-gestützte Immobilienverwaltung für professionelle Eigentümer und Verwalter. Starten Sie kostenlos.">
+<title>AERA SCALE — Intelligente Immobilienverwaltung | KI + Open Banking</title>
+<meta name="description" content="AERA SCALE ist die KI-gestützte Immobilienverwaltung für professionelle Eigentümer und Verwalter. Automatischer Zahlungsabgleich, KI-Vertragsanalyse, Open Banking via Tink.">
+<!-- Open Graph -->
+<meta property="og:title" content="AERA SCALE — Intelligente Immobilienverwaltung">
+<meta property="og:description" content="KI-Analyse, Open Banking und automatische Mietrechnungen in einer Plattform. Ab €20 / Einheit / Monat. Kostenlos testen.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://stadteinzel-bot.github.io/aera-scale/homepage/">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AERA SCALE — Intelligente Immobilienverwaltung">
+<meta name="twitter:description" content="KI-Analyse, Open Banking und automatische Mietrechnungen. Ab €20 / Einheit. Kostenlos testen.">
+<link rel="canonical" href="https://stadteinzel-bot.github.io/aera-scale/homepage/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -64,6 +74,144 @@ nav {
 }
 
 nav.scrolled { box-shadow: 0 2px 24px rgba(15,58,40,.08); }
+
+/* Hamburger */
+.nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; }
+.nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--green-deep); transition: all .3s; border-radius: 2px; }
+.nav-hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+.mobile-menu { display: none; position: fixed; top: 73px; left: 0; right: 0; background: rgba(246,243,238,0.98); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 24px 24px 32px; z-index: 190; flex-direction: column; gap: 0; }
+.mobile-menu.open { display: flex; }
+.mobile-menu a { display: block; padding: 14px 0; font-size: 15px; letter-spacing: 0.06em; color: var(--text-dark); text-decoration: none; border-bottom: 1px solid var(--border); }
+.mobile-menu a:last-child { border-bottom: none; margin-top: 16px; background: var(--green-deep); color: var(--gold); text-align: center; padding: 14px; letter-spacing: 0.14em; font-size: 12px; text-transform: uppercase; font-weight: 500; }
+
+/* Stats bar */
+.stats-bar { background: var(--green-deep); padding: 14px 64px; display: flex; align-items: center; justify-content: center; gap: 48px; flex-wrap: wrap; }
+.stats-bar-item { display: flex; align-items: center; gap: 8px; }
+.stats-bar-item .stat-icon { font-size: 14px; }
+.stats-bar-item span { font-size: 12px; letter-spacing: 0.1em; color: rgba(246,243,238,0.7); }
+.stats-bar-item strong { color: var(--gold); font-weight: 500; }
+
+/* FAQ Section */
+.faq-section { padding: 120px 64px; max-width: 860px; margin: 0 auto; }
+.faq-grid { display: flex; flex-direction: column; gap: 0; margin-top: 56px; }
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-q { width: 100%; text-align: left; background: none; border: none; cursor: pointer; padding: 24px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; font-family: 'Jost', sans-serif; font-size: 15px; font-weight: 400; color: var(--text-dark); letter-spacing: 0.02em; }
+.faq-q:hover { color: var(--green-deep); }
+.faq-icon { flex-shrink: 0; width: 24px; height: 24px; border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; color: var(--gold); transition: transform .3s; }
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height .4s ease; }
+.faq-item.open .faq-a { max-height: 300px; }
+.faq-a p { padding-bottom: 24px; font-size: 14px; line-height: 1.8; color: var(--text-mid); }
+
+/* About Section */
+.about-section { background: var(--green-deep); padding: 120px 64px; }
+.about-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.about-left .about-eyebrow { font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+.about-left h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem,4vw,3rem); color: var(--cream); margin-bottom: 24px; line-height: 1.2; }
+.about-left h2 em { color: var(--gold); font-style: italic; }
+.about-left p { font-size: 15px; line-height: 1.85; color: rgba(246,243,238,0.65); margin-bottom: 20px; }
+.about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 40px; }
+.about-stat { background: rgba(255,255,255,0.05); border: 1px solid rgba(201,162,77,0.2); padding: 20px 24px; }
+.about-stat .val { font-family: 'Playfair Display', serif; font-size: 2.4rem; color: var(--gold); line-height: 1; margin-bottom: 6px; }
+.about-stat .lbl { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(246,243,238,0.45); }
+.about-right { display: flex; flex-direction: column; gap: 20px; }
+.about-feature { display: flex; gap: 16px; align-items: flex-start; }
+.about-feature-icon { width: 40px; height: 40px; background: rgba(201,162,77,0.1); border: 1px solid rgba(201,162,77,0.2); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.about-feature-text strong { display: block; font-size: 14px; color: var(--cream); margin-bottom: 6px; font-weight: 500; letter-spacing: 0.03em; }
+.about-feature-text p { font-size: 13px; color: rgba(246,243,238,0.55); line-height: 1.7; margin: 0; }
+
+/* Trust badges */
+.trust-section { padding: 64px; text-align: center; border-top: 1px solid var(--border); }
+.trust-label { font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--text-light); margin-bottom: 32px; }
+.trust-badges { display: flex; align-items: center; justify-content: center; gap: 40px; flex-wrap: wrap; }
+.trust-badge { display: flex; align-items: center; gap: 10px; padding: 12px 20px; border: 1px solid var(--border); background: white; }
+.trust-badge-icon { font-size: 20px; }
+.trust-badge-text { font-size: 11px; letter-spacing: 0.08em; color: var(--text-mid); text-align: left; line-height: 1.4; }
+.trust-badge-text strong { display: block; color: var(--text-dark); font-size: 12px; }
+
+/* Cost Comparison Banner */
+.cost-compare { background: var(--cream-dark); padding: 80px 64px; }
+.cost-compare-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto 1fr; gap: 32px; align-items: center; }
+.cost-side { background: white; border: 1px solid var(--border); padding: 40px 36px; text-align: center; }
+.cost-side.highlight { background: var(--green-deep); border-color: var(--gold); position: relative; }
+.cost-side.highlight::before { content: 'IHRE ERSPARNISSE'; position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: var(--gold); color: var(--green-deep); font-size: 9px; letter-spacing: 0.22em; font-weight: 700; padding: 4px 14px; white-space: nowrap; }
+.cost-eyebrow { font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase; margin-bottom: 12px; }
+.cost-side:not(.highlight) .cost-eyebrow { color: var(--text-light); }
+.cost-side.highlight .cost-eyebrow { color: rgba(246,243,238,0.5); }
+.cost-amount { font-family: 'Playfair Display', serif; font-size: 3.8rem; line-height: 1; margin-bottom: 6px; }
+.cost-side:not(.highlight) .cost-amount { color: var(--text-dark); }
+.cost-side.highlight .cost-amount { color: var(--gold); }
+.cost-unit { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; }
+.cost-side:not(.highlight) .cost-unit { color: var(--text-light); }
+.cost-side.highlight .cost-unit { color: rgba(246,243,238,0.5); }
+.cost-label { margin-top: 16px; font-size: 13px; line-height: 1.6; }
+.cost-side:not(.highlight) .cost-label { color: var(--text-mid); }
+.cost-side.highlight .cost-label { color: rgba(246,243,238,0.65); }
+.cost-label strong { display: block; font-size: 14px; }
+.cost-side:not(.highlight) .cost-label strong { color: var(--text-dark); }
+.cost-side.highlight .cost-label strong { color: var(--cream); }
+.cost-vs { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--text-light); font-style: italic; text-align: center; }
+.cost-compare-intro { max-width: 760px; margin: 0 auto 56px; text-align: center; }
+.cost-compare-intro .section-lead { margin: 12px auto 0; }
+
+/* Testimonials */
+.testi-section { padding: 100px 64px; }
+.testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+.testi-card { background: white; border: 1px solid var(--border); padding: 40px 32px; display: flex; flex-direction: column; }
+.testi-stars { color: var(--gold); font-size: 14px; letter-spacing: 2px; margin-bottom: 20px; }
+.testi-quote { font-size: 14px; line-height: 1.85; color: var(--text-mid); flex: 1; font-style: italic; margin-bottom: 28px; }
+.testi-quote::before { content: '\201E'; font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--gold); line-height: 0.5; display: block; margin-bottom: 12px; font-style: normal; }
+.testi-author { display: flex; align-items: center; gap: 14px; padding-top: 20px; border-top: 1px solid var(--border); }
+.testi-avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--green-deep); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 16px; color: var(--gold); flex-shrink: 0; }
+.testi-meta strong { display: block; font-size: 13px; color: var(--text-dark); font-weight: 500; }
+.testi-meta span { font-size: 11px; color: var(--text-light); letter-spacing: 0.06em; }
+
+/* Persona Section */
+.persona-section { padding: 100px 64px; background: var(--cream-dark); }
+.persona-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+.persona-card { background: white; border: 1px solid var(--border); padding: 40px 32px; transition: transform .2s, box-shadow .2s; }
+.persona-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(15,58,40,.08); }
+.persona-icon { font-size: 32px; margin-bottom: 20px; }
+.persona-tag { font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+.persona-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--green-deep); margin-bottom: 12px; line-height: 1.3; }
+.persona-pain { font-size: 13px; color: var(--text-mid); line-height: 1.75; margin-bottom: 20px; }
+.persona-benefits { list-style: none; padding: 0; margin-bottom: 24px; }
+.persona-benefits li { font-size: 12px; color: var(--text-mid); padding: 6px 0; border-bottom: 1px solid var(--border); display: flex; gap: 10px; align-items: flex-start; }
+.persona-benefits li:last-child { border-bottom: none; }
+.persona-benefits li::before { content: '✓'; color: var(--gold); font-weight: 700; flex-shrink: 0; font-size: 11px; margin-top: 1px; }
+.persona-price { background: var(--gold-pale); border: 1px solid var(--gold-border); padding: 14px 16px; font-size: 13px; color: var(--green-deep); }
+.persona-price strong { font-size: 15px; font-weight: 700; }
+.persona-cta { margin-top: 20px; display: block; text-align: center; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 500; color: var(--green-deep); text-decoration: none; padding: 12px; border: 1px solid var(--green-deep); transition: all .2s; }
+.persona-cta:hover { background: var(--green-deep); color: var(--gold); }
+
+/* Process expanded bullets */
+.step-detail { display: flex; flex-direction: column; gap: 4px; margin-top: 10px; }
+.step-detail-item { display: flex; align-items: flex-start; gap: 8px; font-size: 11px; color: var(--text-light); }
+.step-detail-item::before { content: '→'; color: var(--gold); flex-shrink: 0; font-size: 10px; margin-top: 1px; }
+
+@media (max-width: 960px) {
+  nav { padding: 18px 24px; }
+  .nav-links { display: none; }
+  .nav-login { display: none; }
+  .nav-hamburger { display: flex; }
+  .faq-section { padding: 80px 24px; }
+  .stats-bar { padding: 12px 24px; gap: 20px; }
+  .about-section { padding: 80px 24px; }
+  .about-inner { grid-template-columns: 1fr; gap: 48px; }
+  .about-stats { grid-template-columns: 1fr 1fr; }
+  .trust-section { padding: 48px 24px; }
+  .trust-badges { gap: 16px; }
+  .cost-compare { padding: 60px 24px; }
+  .cost-compare-inner { grid-template-columns: 1fr; }
+  .cost-vs { display: none; }
+  .testi-section { padding: 80px 24px; }
+  .testi-grid { grid-template-columns: 1fr; }
+  .persona-section { padding: 80px 24px; }
+  .persona-grid { grid-template-columns: 1fr; }
+}
 
 .nav-brand {
   display: flex;
@@ -985,12 +1133,27 @@ footer {
     <li><a href="#features">Funktionen</a></li>
     <li><a href="#pricing">Preise</a></li>
     <li><a href="#process">So funktioniert's</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#about">Über uns</a></li>
   </ul>
   <div class="nav-actions">
     <a href="https://aera-scale-983360724436.europe-west1.run.app/?mode=login" class="nav-login">Anmelden</a>
     <a href="https://aera-scale-983360724436.europe-west1.run.app/?mode=register" class="nav-cta">Kostenlos starten</a>
   </div>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menü öffnen">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#features">Funktionen</a>
+  <a href="#pricing">Preise</a>
+  <a href="#process">So funktioniert's</a>
+  <a href="#faq">FAQ</a>
+  <a href="#about">Über uns</a>
+  <a href="https://aera-scale-983360724436.europe-west1.run.app/?mode=register">Kostenlos starten</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -1009,9 +1172,11 @@ footer {
     </h1>
 
     <p class="hero-sub">
-      AERA SCALE vereint KI-Analyse, Open Banking, automatische Mietrechnungen 
-      und digitale Dokumentenverwaltung in einer Plattform — für professionelle 
-      Eigentümer und Verwalter.
+      Schluss mit stundenlangem Kontoauszüge-Abgleich, Excel-Tabellen und vergessenen Vertragsfristen.
+      AERA SCALE erledigt Ihre gesamte Immobilienverwaltung automatisch — KI-Vertragsanalyse,
+      Open Banking, automatische Mietrechnungen und Nebenkostenabrechnung in einer Plattform.
+      Professionelle Hausverwaltungen kosten <strong style="color:var(--gold)">€ 110 pro Einheit</strong> im Monat.
+      AERA SCALE kostet ab <strong style="color:var(--gold)">€ 20.</strong>
     </p>
 
     <div class="hero-btns">
@@ -1145,7 +1310,146 @@ footer {
   </div>
 </section>
 
-<!-- KI ZAHLUNGSABGLEICH DEEP DIVE -->
+<!-- COST COMPARISON -->
+<section class="cost-compare reveal">
+  <div class="cost-compare-intro">
+    <div class="label-row" style="justify-content:center">
+      <div class="label-row-line"></div>
+      <span class="section-label">Der Preisvergleich</span>
+      <div class="label-row-line"></div>
+    </div>
+    <h2 class="section-title" style="text-align:center;margin-top:8px">Warum noch einen <em>Hausverwalter</em> beauftragen?</h2>
+    <p class="section-lead" style="text-align:center;margin:12px auto 0;max-width:640px">
+      Ein professioneller Hausverwalter kostet in Deutschland durchschnittlich
+      <strong>€ 110 pro Einheit pro Monat</strong> — bei 10 Einheiten sind das
+      <strong>€ 1.100 monatlich</strong>, die Sie für manuelle Arbeit zahlen, die eine
+      Software in Sekunden erledigt.
+    </p>
+  </div>
+  <div class="cost-compare-inner">
+    <div class="cost-side">
+      <div class="cost-eyebrow">Traditioneller Hausverwalter</div>
+      <div class="cost-amount">€ 110</div>
+      <div class="cost-unit">pro Einheit / Monat</div>
+      <div class="cost-label">
+        <strong>10 Einheiten = € 1.100 / Monat</strong>
+        Persönliche Verwaltung, manuelle Prozesse, begrenzte Transparenz.
+        Kein 24/7-Zugriff, keine Echtzeitdaten, keine KI-Unterstützung.
+      </div>
+    </div>
+    <div class="cost-vs">vs.</div>
+    <div class="cost-side highlight">
+      <div class="cost-eyebrow">AERA SCALE Starter</div>
+      <div class="cost-amount">€ 20</div>
+      <div class="cost-unit">pro Einheit / Monat</div>
+      <div class="cost-label">
+        <strong>10 Einheiten = € 200 / Monat</strong>
+        Vollautomatische KI-Verwaltung · Open Banking · Automatische Mietrechnungen ·
+        Nebenkostenabrechnung · 24/7 Echtzeit-Dashboard. Kein Aufpreis, keine versteckten Kosten.
+      </div>
+    </div>
+  </div>
+  <p style="text-align:center;margin-top:40px;font-size:13px;color:var(--text-light)">
+    → Bei 10 Einheiten sparen Sie mit AERA SCALE <strong style="color:var(--green-deep)">€ 900 pro Monat</strong> — das sind <strong style="color:var(--green-deep)">€ 10.800 pro Jahr.</strong>
+  </p>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-section" id="testimonials">
+  <div class="label-row reveal">
+    <div class="label-row-line"></div>
+    <span class="section-label">Erfahrungsberichte</span>
+  </div>
+  <h2 class="section-title reveal">Was <em>Eigentümer</em> über AERA SCALE sagen</h2>
+  <div class="testi-grid">
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-quote">Ich habe jahrelang einen Hausverwalter für meine 8 Wohnungen bezahlt — über 800 Euro im Monat. Seit ich auf AERA SCALE umgestiegen bin, läuft alles automatisch. Die Mietzahlungen werden erkannt, Rechnungen gehen selbst raus. Ich spare nicht nur Geld, sondern auch stundenlange Telefonate.</div>
+      <div class="testi-author">
+        <div class="testi-avatar">TK</div>
+        <div class="testi-meta">
+          <strong>Thomas K.</strong>
+          <span>8 Einheiten · München</span>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-quote">Die Nebenkostenabrechnung war früher ein mehrtägiger Albtraum — Belege sammeln, Verteilerschlüssel berechnen, PDF erstellen. Mit AERA SCALE klicke ich auf einen Knopf und es ist fertig. Rechtssicher, DSGVO-konform, direkt an die Mieter versandt. Einfach unglaublich.</div>
+      <div class="testi-author">
+        <div class="testi-avatar">SM</div>
+        <div class="testi-meta">
+          <strong>Sandra M.</strong>
+          <span>28 Einheiten · Berlin</span>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-quote">Die KI-Vertragsanalyse hat mir in 30 Sekunden erklärt, was ich selbst in einem 40-seitigen Mietvertrag nicht gefunden hätte — inklusive der kritischen Indexierungsklausel, die mein Mieter ignoriert hatte. Das alleine ist den Preis wert.</div>
+      <div class="testi-author">
+        <div class="testi-avatar">AW</div>
+        <div class="testi-meta">
+          <strong>Dr. Andreas W.</strong>
+          <span>6 Einheiten · Hamburg</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERSONA SECTION -->
+<section class="persona-section" id="fuerwen">
+  <div class="label-row reveal">
+    <div class="label-row-line"></div>
+    <span class="section-label">Für wen ist AERA SCALE?</span>
+  </div>
+  <h2 class="section-title reveal">Die smarte Wahl für <em>jeden</em> Eigentümer</h2>
+  <div class="persona-grid">
+    <div class="persona-card reveal">
+      <div class="persona-icon">🏠</div>
+      <div class="persona-tag">Bis 10 Einheiten</div>
+      <div class="persona-title">Der private Vermieter</div>
+      <p class="persona-pain">Sie verwalten 1–10 Wohnungen nebenbei — neben Job und Familie. Jeder Kontoauszug, jede Nebenkostenabrechnung, jeder Mietvertrag frisst Zeit, die Sie nicht haben.</p>
+      <ul class="persona-benefits">
+        <li>Automatischer Zahlungsabgleich — kein manueller Abgleich mehr</li>
+        <li>KI liest Ihre Mietverträge aus — in Sekunden</li>
+        <li>Mietrechnungen werden automatisch am 1. versandt</li>
+        <li>Alle Dokumente digital und DSGVO-sicher archiviert</li>
+      </ul>
+      <div class="persona-price">Starter: <strong>ab € 20 / Einheit / Monat</strong></div>
+      <a href="https://aera-scale-983360724436.europe-west1.run.app/?mode=register" class="persona-cta">14 Tage kostenlos testen</a>
+    </div>
+    <div class="persona-card reveal">
+      <div class="persona-icon">🏢</div>
+      <div class="persona-tag">11–50 Einheiten</div>
+      <div class="persona-title">Der professionelle Eigentümer</div>
+      <p class="persona-pain">Ihr Portfolio ist gewachsen — aber die Tools nicht. Hausverwaltungen kosten Sie bis zu € 110 pro Einheit. Sie möchten die Kontrolle behalten, ohne den Verwaltungsaufwand.</p>
+      <ul class="persona-benefits">
+        <li>Open Banking: Bank direkt mit Mietern verknüpft</li>
+        <li>Automatische Mahnungen bei Zahlungsverzug</li>
+        <li>Multi-Immobilien-Dashboard mit Rendite-Tracking</li>
+        <li>KI-gestützte Betriebskostenabrechnung nach §2 BetrKV</li>
+      </ul>
+      <div class="persona-price">Pro: <strong>ab € 16 / Einheit / Monat</strong></div>
+      <a href="https://aera-scale-983360724436.europe-west1.run.app/?mode=register" class="persona-cta">Pro 14 Tage testen</a>
+    </div>
+    <div class="persona-card reveal">
+      <div class="persona-icon">🏙️</div>
+      <div class="persona-tag">50+ Einheiten</div>
+      <div class="persona-title">Die Hausverwaltung 2.0</div>
+      <p class="persona-pain">Sie verwalten große Bestände und brauchen stabile Prozesse, DATEV-Export, API-Zugang und garantierte Verfügbarkeit. Legacy-Software ist zu starr, Excel zu fehleranfällig.</p>
+      <ul class="persona-benefits">
+        <li>Dedizierter Support &amp; vertragl. SLA (99,5 % Uptime)</li>
+        <li>DATEV-Export für Ihre Buchhaltung</li>
+        <li>Multi-Organisations-Dashboard für mehrere Mandate</li>
+        <li>API-Zugang für individuelle Integrationen</li>
+      </ul>
+      <div class="persona-price">Enterprise: <strong>ab € 12 / Einheit / Monat</strong></div>
+      <a href="https://aera-scale-983360724436.europe-west1.run.app/?mode=register" class="persona-cta">Enterprise anfragen</a>
+    </div>
+  </div>
+</section>
 <section class="flow-section" id="flow">
   <div class="reveal">
     <div class="label-row">
@@ -1250,7 +1554,12 @@ footer {
       <span class="section-label">Preise</span>
     </div>
     <h2 class="section-title">Zahlen Sie nur für das, <em>was Sie verwalten</em></h2>
-    <p class="section-lead">Abrechnung pro Einheit — je mehr Einheiten, desto günstiger. Keine versteckten Kosten, keine Setup-Gebühr.</p>
+    <p class="section-lead">Kein Fixpreis. Keine langen Verträge. Keine Einrichtungsgebühr. Sie zahlen pro aktiv verwalteter Einheit — und sparen gegenüber einem professionellen Hausverwalter (€ 110/Einheit) ab dem ersten Monat. Je mehr Einheiten, desto günstiger wird der Preis pro Einheit automatisch.</p>
+    <div style="display:flex;gap:32px;flex-wrap:wrap;margin-top:24px;">
+      <div style="display:flex;align-items:center;gap:10px;font-size:12px;color:var(--text-mid);"><span style="color:var(--gold);font-size:16px;">✓</span> Kein Mindestvertrag — monatlich kündbar</div>
+      <div style="display:flex;align-items:center;gap:10px;font-size:12px;color:var(--text-mid);"><span style="color:var(--gold);font-size:16px;">✓</span> 14 Tage kostenlos — keine Kreditkarte</div>
+      <div style="display:flex;align-items:center;gap:10px;font-size:12px;color:var(--text-mid);"><span style="color:var(--gold);font-size:16px;">✓</span> Sofortiger Wechsel zwischen Tarifen möglich</div>
+    </div>
   </div>
 
   <div class="pricing-grid">
@@ -1367,17 +1676,172 @@ footer {
     <div class="process-step reveal">
       <div class="step-circle"><span class="step-num">I</span></div>
       <div class="step-title">Registrieren</div>
-      <p class="step-text">Erstellen Sie Ihren kostenlosen Account in unter 2 Minuten — keine Kreditkarte erforderlich.</p>
+      <p class="step-text">Erstellen Sie Ihren kostenlosen Account in unter 2 Minuten. Keine Kreditkarte, kein Risiko. Sofort nach der Registrierung steht Ihnen die komplette Plattform für 14 Tage zur Verfügung — mit allen Funktionen, ohne Einschränkungen.</p>
+      <div class="step-detail">
+        <div class="step-detail-item">Kein Risiko: kein Kreditkarten-Zwang</div>
+        <div class="step-detail-item">Voller Zugriff auf alle Funktionen im Trial</div>
+      </div>
     </div>
     <div class="process-step reveal">
       <div class="step-circle"><span class="step-num">II</span></div>
       <div class="step-title">Immobilie anlegen</div>
-      <p class="step-text">Fügen Sie Ihre erste Immobilie hinzu, erfassen Sie Mieter und laden Sie Verträge hoch.</p>
+      <p class="step-text">Fügen Sie Ihre erste Immobilie hinzu, erfassen Sie Mieter und laden Sie Mietverträge als PDF hoch. Die KI extrahiert Mietzins, Fristen und Klauseln automatisch. Ein strukturiertes Onboarding führt Sie durch alle Schritte.</p>
+      <div class="step-detail">
+        <div class="step-detail-item">KI extrahiert Vertragsdaten automatisch aus PDFs</div>
+        <div class="step-detail-item">Import-Assistent für bestehende Mieter</div>
+      </div>
     </div>
     <div class="process-step reveal">
       <div class="step-circle"><span class="step-num">III</span></div>
       <div class="step-title">Automatisieren</div>
-      <p class="step-text">Verbinden Sie Ihr Bankkonto und lassen Sie AERA SCALE den Rest erledigen.</p>
+      <p class="step-text">Verbinden Sie Ihr Bankkonto einmalig via Open Banking. Ab sofort laufen Zahlungsabgleich, Mietrechnungen und Erinnerungen vollautomatisch — 24/7 im Hintergrund. Sie werden nur noch dann benachrichtigt, wenn tatsächlich etwas Ihre Aufmerksamkeit braucht.</p>
+      <div class="step-detail">
+        <div class="step-detail-item">Bankanbindung in unter 2 Minuten (PSD2 / OAuth)</div>
+        <div class="step-detail-item">24/7 vollautomatisch — spart bis zu 10h pro Monat</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS TRUST BAR -->
+<div class="stats-bar">
+  <div class="stats-bar-item"><span class="stat-icon">🏠</span><span>Verwaltung ab <strong>€ 20 / Einheit</strong></span></div>
+  <div class="stats-bar-item"><span class="stat-icon">🏦</span><span><strong>Open Banking</strong> via Tink (PSD2)</span></div>
+  <div class="stats-bar-item"><span class="stat-icon">🤖</span><span><strong>KI-Analyse</strong> mit Google Gemini</span></div>
+  <div class="stats-bar-item"><span class="stat-icon">🔒</span><span><strong>100% DSGVO</strong> konform · Server in der EU</span></div>
+  <div class="stats-bar-item"><span class="stat-icon">🇩🇪</span><span>Entwickelt in <strong>Berlin</strong></span></div>
+</div>
+
+<!-- ABOUT / ÜBER UNS -->
+<section class="about-section" id="about">
+  <div class="about-inner">
+    <div class="about-left">
+      <div class="about-eyebrow">Unsere Geschichte</div>
+      <h2>Wir haben AERA SCALE <em>für uns selbst</em> gebaut.</h2>
+      <p>Als Immobilieneigentümer und Software-Entwickler haben wir den täglichen Kampf mit Excel-Tabellen, papierbasierten Mietverträgen und manuellen Überweisungen selbst erlebt. Bestehende Lösungen waren entweder zu teuer, zu kompliziert oder für große Hausverwaltungen ausgelegt.</p>
+      <p>Das wollten wir ändern. AERA SCALE wurde von Grund auf für private und professionelle Eigentümer entwickelt, die ihre Verwaltung digitalisieren wollen — ohne monatelange Einarbeitung oder sechsstellige IT-Budgets.</p>
+      <p>Unser Ziel: Immobilienverwaltung so intelligent zu machen, dass sie im Hintergrund läuft — und Sie sich auf das konzentrieren, was wirklich zählt.</p>
+      <div class="about-stats">
+        <div class="about-stat"><div class="val">10h+</div><div class="lbl">gespart pro Monat</div></div>
+        <div class="about-stat"><div class="val">100%</div><div class="lbl">DSGVO-konform</div></div>
+        <div class="about-stat"><div class="val">24/7</div><div class="lbl">Automatisierung</div></div>
+        <div class="about-stat"><div class="val">EU</div><div class="lbl">Serverstandort</div></div>
+      </div>
+    </div>
+    <div class="about-right">
+      <div class="about-feature">
+        <div class="about-feature-icon">🛡️</div>
+        <div class="about-feature-text">
+          <strong>Security First</strong>
+          <p>Bankdaten werden niemals gespeichert. Alle Verbindungen laufen über PSD2-zertifizierte OAuth-Flows. Verschlüsselung auf Datenbankebene.</p>
+        </div>
+      </div>
+      <div class="about-feature">
+        <div class="about-feature-icon">🤖</div>
+        <div class="about-feature-text">
+          <strong>KI, die wirklich hilft</strong>
+          <p>Unsere KI erkennt Fristen, Indexklauseln und Mietzins direkt aus PDF-Verträgen — in Sekunden statt Stunden.</p>
+        </div>
+      </div>
+      <div class="about-feature">
+        <div class="about-feature-icon">🏦</div>
+        <div class="about-feature-text">
+          <strong>Open Banking ohne Risiko</strong>
+          <p>Mietzahlungen werden automatisch dem richtigen Mieter zugeordnet. Keine manuelle Kontrolle mehr — kein Fehler bleibt unentdeckt.</p>
+        </div>
+      </div>
+      <div class="about-feature">
+        <div class="about-feature-icon">📈</div>
+        <div class="about-feature-text">
+          <strong>Skaliert mit Ihrem Portfolio</strong>
+          <p>Von 1 Wohnung bis zur professionellen Hausverwaltung mit 500+ Einheiten. Pro Einheit — ohne Überraschungen.</p>
+        </div>
+      </div>
+      <div class="about-feature">
+        <div class="about-feature-icon">🇩🇪</div>
+        <div class="about-feature-text">
+          <strong>Made in Germany</strong>
+          <p>Entwickelt in Berlin, gehostet in Frankfurt. Vollständig DSGVO-konform. Ihre Daten gehören Ihnen — nicht uns.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section reveal" id="faq">
+  <div class="label-row">
+    <div class="label-row-line"></div>
+    <span class="section-label">Häufige Fragen</span>
+  </div>
+  <h2 class="section-title">Alles, was Sie <em>wissen wollen</em></h2>
+  <div class="faq-grid">
+    <div class="faq-item">
+      <button class="faq-q">Was ist AERA SCALE, und für wen ist es geeignet?<span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>AERA SCALE ist eine KI-gestützte SaaS-Plattform für die Verwaltung von Immobilienportfolios. Sie ist ideal für private Vermieter mit 1–10 Einheiten, professionelle Eigentümer mit 10–50 Einheiten und Hausverwaltungen mit 50+ Einheiten. Von der automatischen Mietzahlungserkennung bis zur KI-Vertragsanalyse — alles in einer Oberfläche.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Wie funktioniert die KI-Vertragsanalyse?<span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Sie laden einfach einen PDF-Mietvertrag hoch. Unsere KI (powered by Google Gemini) erkennt automatisch Mietzins, Laufzeit, Kündigungsfristen, Indexklauseln und Nebenkosten — und trägt diese Daten direkt in das System ein. Keine manuelle Eingabe mehr.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Ist mein Online-Banking wirklich sicher?<span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Ja, absolut. Die Bankanbindung läuft ausschließlich über Tink AB — einen PSD2-zertifizierten Open-Banking-Dienstleister mit EU-Lizenz. Wir erhalten und speichern niemals Ihre Zugangsdaten oder Passwörter. Die Autorisierung erfolgt direkt mit Ihrer Bank per OAuth.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Wie werden meine Daten geschützt (DSGVO)?<span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>AERA SCALE ist vollständig DSGVO-konform. Alle Daten werden ausschließlich auf Servern in Deutschland und der EU gespeichert (Google Cloud Frankfurt, eu-central1). Ihre Immobilien- und Mieterdaten sind verschlüsselt und für uns nicht einsehbar. Sie können Ihre Daten jederzeit exportieren oder löschen.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Welche Kosten fallen genau an? Gibt es versteckte Gebühren?<span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Keine versteckten Kosten. Sie zahlen nur pro aktiv verwalteter Einheit pro Monat: Starter ab €20, Pro ab €16, Enterprise ab €12 pro Einheit. Keine Einrichtungsgebühr, keine Mindestlaufzeit, monatlich kündbar. 14 Tage kostenlos testen ohne Kreditkarte.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Kann ich meine Daten aus AERA SCALE exportieren?<span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Ja, jederzeit. Alle Daten, Berichte und Dokumente können als Excel, CSV oder PDF exportiert werden. Enterprise-Kunden erhalten zusätzlich einen DATEV-Export für die Buchhaltung. Sie sind niemals eingesperrt.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Wie lange dauert die Einrichtung?<span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Die Registrierung dauert unter 2 Minuten. Das Anlegen der ersten Immobilie und des ersten Mieters benötigt ca. 5 Minuten. Die Bankverbindung via Open Banking ist mit wenigen Klicks eingerichtet. Die meisten Nutzer sind in unter 15 Minuten komplett produktiv.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Unterstützt AERA SCALE SEPA-Lastschriften?<span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Ja. SEPA-Lastschriftmandate können im System erfasst und Lastschriften direkt generiert werden. In Kombination mit Open Banking erkennt das System automatisch, welche Mietzahlungen bereits eingegangen sind und welche ausständig sind.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Was passiert, wenn ich kündige?<span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Sie können jederzeit zum Ende des laufenden Monats kündigen — keine Mindestlaufzeit ist erforderlich. Nach der Kündigung haben Sie noch 30 Tage Lesezugriff, um Ihre Daten zu exportieren. Danach werden alle Daten gemäß DSGVO gelöscht.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Gibt es ein Mieter-Portal?<span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Ja, Mieter erhalten auf Wunsch Zugang zu einem eigenen Portal, wo sie Dokumente einsehen, Mitteilungen senden und Zahlungshistorien abrufen können. Das reduziert den Kommunikationsaufwand erheblich.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BADGES -->
+<section class="trust-section">
+  <div class="trust-label">Sicherheit &amp; Compliance</div>
+  <div class="trust-badges">
+    <div class="trust-badge">
+      <div class="trust-badge-icon">🇪🇺</div>
+      <div class="trust-badge-text"><strong>DSGVO-konform</strong>Server in Frankfurt, EU</div>
+    </div>
+    <div class="trust-badge">
+      <div class="trust-badge-icon">🔒</div>
+      <div class="trust-badge-text"><strong>SSL-verschlüsselt</strong>TLS 1.3 Everywhere</div>
+    </div>
+    <div class="trust-badge">
+      <div class="trust-badge-icon">🏦</div>
+      <div class="trust-badge-text"><strong>PSD2-zertifiziert</strong>Open Banking via Tink</div>
+    </div>
+    <div class="trust-badge">
+      <div class="trust-badge-icon">🤖</div>
+      <div class="trust-badge-text"><strong>KI by Google</strong>Gemini AI Integration</div>
+    </div>
+    <div class="trust-badge">
+      <div class="trust-badge-icon">🇩🇪</div>
+      <div class="trust-badge-text"><strong>Made in Germany</strong>Entwickelt in Berlin</div>
     </div>
   </div>
 </section>
@@ -1429,9 +1893,9 @@ footer {
   <div class="footer-bottom">
     <p>© 2026 AERA SCALE. Alle Rechte vorbehalten.</p>
     <div class="footer-bottom-links">
-      <a href="#">Impressum</a>
-      <a href="#">Datenschutz</a>
-      <a href="#">AGB</a>
+      <a href="./impressum.html">Impressum</a>
+      <a href="./datenschutz.html">Datenschutz</a>
+      <a href="./agb.html">AGB</a>
     </div>
   </div>
 </footer>
@@ -1463,6 +1927,34 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
       e.preventDefault();
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+  });
+});
+
+// Hamburger mobile menu
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+if (hamburger && mobileMenu) {
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+}
+
+// FAQ accordion
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
   });
 });
 </script>
