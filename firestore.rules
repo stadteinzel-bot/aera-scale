@@ -109,8 +109,10 @@ service cloud.firestore {
 
     // ── Settings (per org) ──
     match /settings/{docId} {
-      allow read: if isAuthenticated();
-      allow write: if isAuthenticated();
+      allow read: if isAuthenticated() && ownsResource();
+      allow create: if isAuthenticated() && ownsNewResource();
+      allow update: if isAuthenticated() && ownsResource() && orgIdUnchanged();
+      allow delete: if isAuthenticated() && ownsResource();
     }
 
     // ═══════════════════════════════════════════════════════════════════
@@ -199,9 +201,9 @@ service cloud.firestore {
     }
 
     match /assetConfig/{docId} {
-      allow read: if isAuthenticated();
-      allow create: if isAuthenticated();
-      allow update: if isAuthenticated();
+      allow read: if isAuthenticated() && ownsResource();
+      allow create: if isAuthenticated() && ownsNewResource();
+      allow update: if isAuthenticated() && ownsResource() && orgIdUnchanged();
       allow delete: if false;
     }
 

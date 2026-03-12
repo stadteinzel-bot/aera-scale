@@ -327,7 +327,7 @@ export const dataService = {
     async saveSettings(settings: NotificationSettings): Promise<void> {
         if (!db) return;
         const settingsDocId = _orgId || 'notifications';
-        await setDoc(doc(db, COLL_SETTINGS, settingsDocId), settings);
+        await setDoc(doc(db, COLL_SETTINGS, settingsDocId), stripUndefined(this._withOrg(settings)));
     },
 
     async getBankSettings(): Promise<BankSettings | null> {
@@ -348,7 +348,7 @@ export const dataService = {
     async saveBankSettings(bank: BankSettings): Promise<void> {
         if (!db) return;
         const bankDocId = (_orgId || 'default') + '_bank';
-        await setDoc(doc(db, COLL_SETTINGS, bankDocId), stripUndefined(bank));
+        await setDoc(doc(db, COLL_SETTINGS, bankDocId), stripUndefined(this._withOrg(bank)));
     },
 
     // --- SEEDING ---
