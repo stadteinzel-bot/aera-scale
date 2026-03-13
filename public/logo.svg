@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" fill="none">
+  <!-- Icon Mark: geometric "A" building shape -->
+  <g transform="translate(0, 8)">
+    <!-- Left column -->
+    <rect x="8" y="24" width="6" height="40" fill="#C9A84C"/>
+    <!-- Right column -->
+    <rect x="50" y="24" width="6" height="40" fill="#C9A84C"/>
+    <!-- Roof apex lines: left slope -->
+    <polygon points="11,24 32,4 35,4 35,10 14,28" fill="#C9A84C"/>
+    <!-- Roof apex lines: right slope -->
+    <polygon points="53,24 32,4 29,4 29,10 50,28" fill="#C9A84C"/>
+    <!-- Crossbar -->
+    <rect x="17" y="36" width="30" height="5" fill="#C9A84C"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text
+    x="76"
+    y="40"
+    font-family="'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif"
+    font-size="22"
+    font-weight="700"
+    letter-spacing="3"
+    fill="#0D2818"
+  >AERA SCALE</text>
+
+  <!-- Sub-label -->
+  <text
+    x="78"
+    y="58"
+    font-family="'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif"
+    font-size="8"
+    font-weight="400"
+    letter-spacing="2.5"
+    fill="#C9A84C"
+  >PROPERTY OPERATING SYSTEM</text>
+</svg>

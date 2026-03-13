@@ -186,7 +186,7 @@ const AppInner: React.FC = () => {
   };
 
   return (
-    <div className="flex h-screen bg-aera-50 font-sans text-slate-900 overflow-hidden">
+    <div className="flex h-screen bg-cream-100 font-sans text-slate-900 overflow-hidden">
       {/* Session Timeout Warning */}
       {showWarning && (
         <SessionTimeoutModal

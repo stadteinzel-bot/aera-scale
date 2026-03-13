@@ -1,8 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../services/AuthContext';
-import { Building2, Mail, Lock, Eye, EyeOff, Loader2, ArrowRight, Sparkles, AlertCircle, ChevronLeft, Zap } from 'lucide-react';
+import { Mail, Lock, Eye, EyeOff, Loader2, ArrowRight, AlertCircle, CheckCircle2 } from 'lucide-react';
 
 const HOMEPAGE_URL = 'https://stadteinzel-bot.github.io/aera-scale/homepage/';
+
+const LogoMark: React.FC<{ size?: number }> = ({ size = 40 }) => (
+  <svg width={size} height={size} viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="64" height="64" rx="10" fill="rgba(255,255,255,0.12)"/>
+    <g transform="translate(4,4)">
+      <rect x="10" y="28" width="7" height="24" fill="#C9A84C"/>
+      <rect x="39" y="28" width="7" height="24" fill="#C9A84C"/>
+      <polygon points="13,28 28,8 31,8 31,14 16,32" fill="#C9A84C"/>
+      <polygon points="43,28 28,8 25,8 25,14 40,32" fill="#C9A84C"/>
+      <rect x="18" y="36" width="20" height="5" fill="#C9A84C"/>
+    </g>
+  </svg>
+);
+
+const FEATURES = [
+  { label: 'KI-Vertragsanalyse & Lease AI' },
+  { label: 'Open Banking — PSD2 Integration' },
+  { label: 'Ab € 20 / Einheit · Skalierbar bis 500+' },
+];
 
 const LoginPage: React.FC = () => {
     const { login, register } = useAuth();
@@ -16,7 +35,6 @@ const LoginPage: React.FC = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    // Read URL parameters on mount
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
         const mode = params.get('mode');
@@ -30,7 +48,6 @@ const LoginPage: React.FC = () => {
     const switchTab = (toRegister: boolean) => {
         setIsRegister(toRegister);
         setError(null);
-        // Keep URL in sync silently
         const params = new URLSearchParams(window.location.search);
         params.set('mode', toRegister ? 'register' : 'login');
         window.history.replaceState({}, '', `?${params.toString()}`);
@@ -39,22 +56,9 @@ const LoginPage: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError(null);
-
-        if (!email.trim() || !password.trim()) {
-            setError('Bitte E-Mail und Passwort eingeben.');
-            return;
-        }
-
-        if (isRegister && password !== confirmPassword) {
-            setError('Passwörter stimmen nicht überein.');
-            return;
-        }
-
-        if (password.length < 6) {
-            setError('Passwort muss mindestens 6 Zeichen lang sein.');
-            return;
-        }
-
+        if (!email.trim() || !password.trim()) { setError('Bitte E-Mail und Passwort eingeben.'); return; }
+        if (isRegister && password !== confirmPassword) { setError('Passwörter stimmen nicht überein.'); return; }
+        if (password.length < 6) { setError('Passwort muss mindestens 6 Zeichen lang sein.'); return; }
         setIsLoading(true);
         try {
             if (isRegister) {
@@ -83,197 +87,157 @@ const LoginPage: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center relative overflow-hidden">
-            {/* Animated Gradient Background */}
-            <div className="absolute inset-0 bg-gradient-to-br from-aera-950 via-aera-900 to-aera-800" />
+        <div className="min-h-screen flex">
 
-            {/* Animated Mesh / Grain Overlay */}
-            <div className="absolute inset-0 opacity-30">
-                <div className="absolute top-0 -left-1/4 w-[600px] h-[600px] bg-aera-500/20 rounded-full blur-[120px] animate-pulse" style={{ animationDuration: '8s' }} />
-                <div className="absolute bottom-0 -right-1/4 w-[500px] h-[500px] bg-emerald-400/15 rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '6s', animationDelay: '2s' }} />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-teal-300/10 rounded-full blur-[80px] animate-pulse" style={{ animationDuration: '10s', animationDelay: '4s' }} />
-            </div>
-
-            {/* Subtle Grid Pattern */}
-            <div
-                className="absolute inset-0 opacity-[0.04]"
-                style={{
-                    backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-                }}
-            />
-
-            {/* Login Card */}
-            <div className="relative z-10 w-full max-w-md mx-4">
-
-                {/* Back to homepage */}
-                <a
-                    href={HOMEPAGE_URL}
-                    className="inline-flex items-center gap-1.5 text-xs text-white/40 hover:text-white/70 transition-colors mb-6 group"
-                >
-                    <ChevronLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
-                    Zurück zur Startseite
-                </a>
-
-                {/* Logo & Branding */}
-                <div className="text-center mb-8">
-                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl mb-6">
-                        <Building2 className="w-8 h-8 text-white" />
+            {/* ── LEFT: Brand Panel ── */}
+            <div className="hidden lg:flex lg:w-1/2 bg-aera-900 flex-col justify-between p-12">
+                <div className="flex items-center gap-3">
+                    <LogoMark size={40} />
+                    <div>
+                        <div className="text-white font-bold text-lg tracking-widest leading-none">AERA SCALE</div>
+                        <div className="text-gold-500 text-[10px] tracking-[0.25em] font-medium uppercase mt-0.5">Property Operating System</div>
                     </div>
-                    <h1 className="text-3xl font-bold text-white tracking-tight">
-                        AERA SCALE
-                    </h1>
-                    <p className="text-aera-200/70 mt-2 text-sm font-medium tracking-wide uppercase">
-                        Property Intelligence Platform
-                    </p>
-                    {/* Pro plan highlight badge */}
-                    {proPlan && (
-                        <div className="inline-flex items-center gap-1.5 mt-3 px-3 py-1 bg-aera-600/20 border border-aera-500/30 rounded-full">
-                            <Zap className="w-3 h-3 text-aera-400" />
-                            <span className="text-xs font-semibold text-aera-300">Pro-Plan ausgewählt</span>
-                        </div>
-                    )}
                 </div>
 
-                {/* Glass Card */}
-                <div className="bg-white/[0.08] backdrop-blur-xl border border-white/[0.15] rounded-2xl shadow-2xl p-8">
+                <div>
+                    <h2 className="text-white text-4xl font-semibold leading-tight mb-8">
+                        Jede Einheit.<br />
+                        Intelligent<br />
+                        verwaltet.
+                    </h2>
+                    <div className="space-y-4">
+                        {FEATURES.map((f) => (
+                            <div key={f.label} className="flex items-center gap-3">
+                                <CheckCircle2 className="w-4 h-4 text-gold-500 shrink-0" />
+                                <span className="text-aera-200/80 text-sm font-medium">{f.label}</span>
+                            </div>
+                        ))}
+                        {proPlan && (
+                            <div className="mt-4 inline-flex items-center gap-2 px-3 py-1.5 bg-gold-500/10 border border-gold-500/30 rounded-lg">
+                                <span className="w-2 h-2 rounded-full bg-gold-500" />
+                                <span className="text-gold-400 text-xs font-semibold">Pro-Plan ausgewählt</span>
+                            </div>
+                        )}
+                    </div>
 
-                    {/* Auth-required context message */}
+                    <div className="mt-12 grid grid-cols-3 gap-4">
+                        {[
+                            { value: '500+', label: 'Einheiten' },
+                            { value: '€ 20', label: 'ab / Einheit' },
+                            { value: '99.9%', label: 'Verfügbarkeit' },
+                        ].map((k) => (
+                            <div key={k.label} className="bg-aera-800/60 border border-aera-700/60 rounded-xl p-3 text-center">
+                                <div className="text-gold-400 font-bold text-lg leading-none">{k.value}</div>
+                                <div className="text-aera-400/70 text-[10px] mt-1 uppercase tracking-wider">{k.label}</div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                <a href={HOMEPAGE_URL} className="text-aera-500 text-xs hover:text-aera-300 transition-colors">
+                    ← Zurück zur Website
+                </a>
+            </div>
+
+            {/* ── RIGHT: Auth Panel ── */}
+            <div className="w-full lg:w-1/2 flex items-center justify-center bg-white px-6 py-12">
+                <div className="w-full max-w-sm">
+
+                    {/* Mobile logo */}
+                    <div className="lg:hidden flex items-center gap-2 mb-8">
+                        <LogoMark size={32} />
+                        <span className="text-aera-900 font-bold text-base tracking-widest">AERA SCALE</span>
+                    </div>
+
                     {fromProtected && (
-                        <div className="mb-5 flex items-start gap-3 bg-aera-600/10 border border-aera-500/20 rounded-xl p-3.5 animate-in fade-in slide-in-from-top-2 duration-300">
-                            <AlertCircle className="w-4 h-4 text-aera-400 shrink-0 mt-0.5" />
-                            <p className="text-sm text-aera-200/80">
-                                Bitte melden Sie sich an, um auf AERA SCALE zuzugreifen.
-                            </p>
+                        <div className="mb-6 flex items-start gap-2 bg-aera-50 border border-aera-200 rounded-xl p-3.5">
+                            <AlertCircle className="w-4 h-4 text-aera-600 shrink-0 mt-0.5" />
+                            <p className="text-sm text-aera-700">Bitte melden Sie sich an, um fortzufahren.</p>
                         </div>
                     )}
 
-                    {/* Toggle: Login / Register */}
-                    <div className="flex bg-white/[0.06] rounded-xl p-1 mb-8">
-                        <button
-                            type="button"
-                            onClick={() => switchTab(false)}
-                            className={`flex-1 py-2.5 text-sm font-semibold rounded-lg transition-all duration-300 ${!isRegister
-                                    ? 'bg-white text-aera-900 shadow-md'
-                                    : 'text-white/60 hover:text-white/90'
-                                }`}
-                        >
+                    <h1 className="text-2xl font-semibold text-aera-900 mb-1">
+                        {isRegister ? 'Konto erstellen' : 'Willkommen zurück'}
+                    </h1>
+                    <p className="text-slate-500 text-sm mb-8">
+                        {isRegister
+                            ? 'Erstellen Sie Ihr AERA SCALE Konto.'
+                            : 'Melden Sie sich bei Ihrem Konto an.'}
+                    </p>
+
+                    {/* Tab switcher */}
+                    <div className="flex border border-slate-200 rounded-xl p-1 mb-7 bg-slate-50">
+                        <button type="button" onClick={() => switchTab(false)}
+                            className={`flex-1 py-2 text-sm font-semibold rounded-lg transition-all ${!isRegister
+                                ? 'bg-white text-aera-900 shadow-sm border border-slate-200'
+                                : 'text-slate-400 hover:text-slate-600'}`}>
                             Anmelden
                         </button>
-                        <button
-                            type="button"
-                            onClick={() => switchTab(true)}
-                            className={`flex-1 py-2.5 text-sm font-semibold rounded-lg transition-all duration-300 ${isRegister
-                                    ? 'bg-white text-aera-900 shadow-md'
-                                    : 'text-white/60 hover:text-white/90'
-                                }`}
-                        >
+                        <button type="button" onClick={() => switchTab(true)}
+                            className={`flex-1 py-2 text-sm font-semibold rounded-lg transition-all ${isRegister
+                                ? 'bg-white text-aera-900 shadow-sm border border-slate-200'
+                                : 'text-slate-400 hover:text-slate-600'}`}>
                             Registrieren
                         </button>
                     </div>
 
-                    {/* Error Alert */}
                     {error && (
-                        <div className="mb-6 flex items-start gap-3 bg-red-500/10 border border-red-500/20 rounded-xl p-4 animate-in fade-in slide-in-from-top-2 duration-300">
-                            <AlertCircle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
-                            <p className="text-sm text-red-300">{error}</p>
+                        <div className="mb-5 flex items-start gap-2.5 bg-red-50 border border-red-200 rounded-xl p-3.5">
+                            <AlertCircle className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
+                            <p className="text-sm text-red-600">{error}</p>
                         </div>
                     )}
 
-                    {/* Form */}
-                    <form onSubmit={handleSubmit} className="space-y-5">
-                        {/* Email */}
+                    <form onSubmit={handleSubmit} className="space-y-4">
                         <div>
-                            <label className="block text-xs font-semibold text-white/50 uppercase tracking-wider mb-2">
-                                E-Mail
-                            </label>
+                            <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5">E-Mail</label>
                             <div className="relative">
-                                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
-                                <input
-                                    type="email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
+                                <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}
                                     placeholder="name@unternehmen.de"
-                                    className="w-full pl-11 pr-4 py-3.5 bg-white/[0.06] border border-white/[0.1] rounded-xl text-white placeholder-white/30 text-sm focus:outline-none focus:ring-2 focus:ring-aera-400/40 focus:border-aera-400/40 transition-all"
-                                    autoComplete="email"
-                                    required
-                                />
+                                    className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl text-sm text-aera-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-gold-500/30 focus:border-gold-500 transition-all bg-white"
+                                    autoComplete="email" required />
                             </div>
                         </div>
 
-                        {/* Password */}
                         <div>
-                            <label className="block text-xs font-semibold text-white/50 uppercase tracking-wider mb-2">
-                                Passwort
-                            </label>
+                            <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5">Passwort</label>
                             <div className="relative">
-                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
-                                <input
-                                    type={showPassword ? 'text' : 'password'}
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    placeholder="••••••••"
-                                    className="w-full pl-11 pr-12 py-3.5 bg-white/[0.06] border border-white/[0.1] rounded-xl text-white placeholder-white/30 text-sm focus:outline-none focus:ring-2 focus:ring-aera-400/40 focus:border-aera-400/40 transition-all"
-                                    autoComplete={isRegister ? 'new-password' : 'current-password'}
-                                    required
-                                />
-                                <button
-                                    type="button"
-                                    onClick={() => setShowPassword(!showPassword)}
-                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-white/30 hover:text-white/60 transition-colors"
-                                >
+                                <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                                <input type={showPassword ? 'text' : 'password'} value={password}
+                                    onChange={(e) => setPassword(e.target.value)} placeholder="••••••••"
+                                    className="w-full pl-10 pr-11 py-3 border border-slate-200 rounded-xl text-sm text-aera-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-gold-500/30 focus:border-gold-500 transition-all bg-white"
+                                    autoComplete={isRegister ? 'new-password' : 'current-password'} required />
+                                <button type="button" onClick={() => setShowPassword(!showPassword)}
+                                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors">
                                     {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                                 </button>
                             </div>
                         </div>
 
-                        {/* Confirm Password (Register only) */}
                         {isRegister && (
-                            <div className="animate-in fade-in slide-in-from-top-2 duration-300">
-                                <label className="block text-xs font-semibold text-white/50 uppercase tracking-wider mb-2">
-                                    Passwort bestätigen
-                                </label>
+                            <div>
+                                <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5">Passwort bestätigen</label>
                                 <div className="relative">
-                                    <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
-                                    <input
-                                        type={showPassword ? 'text' : 'password'}
-                                        value={confirmPassword}
-                                        onChange={(e) => setConfirmPassword(e.target.value)}
-                                        placeholder="••••••••"
-                                        className="w-full pl-11 pr-4 py-3.5 bg-white/[0.06] border border-white/[0.1] rounded-xl text-white placeholder-white/30 text-sm focus:outline-none focus:ring-2 focus:ring-aera-400/40 focus:border-aera-400/40 transition-all"
-                                        autoComplete="new-password"
-                                        required
-                                    />
+                                    <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                                    <input type={showPassword ? 'text' : 'password'} value={confirmPassword}
+                                        onChange={(e) => setConfirmPassword(e.target.value)} placeholder="••••••••"
+                                        className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl text-sm text-aera-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-gold-500/30 focus:border-gold-500 transition-all bg-white"
+                                        autoComplete="new-password" required />
                                 </div>
                             </div>
                         )}
 
-                        {/* Submit Button */}
-                        <button
-                            type="submit"
-                            disabled={isLoading}
-                            className="w-full py-3.5 bg-white text-aera-900 font-bold rounded-xl shadow-lg shadow-black/20 hover:bg-aera-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center gap-2 group text-sm"
-                        >
-                            {isLoading ? (
-                                <>
-                                    <Loader2 className="w-4 h-4 animate-spin" />
-                                    <span>{isRegister ? 'Konto wird erstellt...' : 'Anmeldung...'}</span>
-                                </>
-                            ) : (
-                                <>
-                                    <span>{isRegister ? 'Konto erstellen' : 'Anmelden'}</span>
-                                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                                </>
-                            )}
+                        <button type="submit" disabled={isLoading}
+                            className="w-full py-3 bg-aera-900 text-white font-semibold rounded-xl hover:bg-aera-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2 group mt-2">
+                            {isLoading
+                                ? (<><Loader2 className="w-4 h-4 animate-spin" /><span>{isRegister ? 'Konto wird erstellt…' : 'Anmeldung…'}</span></>)
+                                : (<><span>{isRegister ? 'Konto erstellen' : 'Anmelden'}</span><ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" /></>)
+                            }
                         </button>
                     </form>
-                </div>
 
-                {/* Footer */}
-                <div className="text-center mt-8">
-                    <div className="flex items-center justify-center gap-2 text-white/30 text-xs">
-                        <Sparkles className="w-3 h-3" />
-                        <span>Powered by Firebase & Vertex AI</span>
-                    </div>
+                    <p className="text-center text-slate-400 text-xs mt-8">Powered by Firebase &amp; Vertex AI</p>
                 </div>
             </div>
         </div>

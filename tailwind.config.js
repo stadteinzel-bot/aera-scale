@@ -3,37 +3,50 @@ export default {
     content: [
         "./index.html",
         "./src/**/*.{js,ts,jsx,tsx}",
-        "./*.{js,ts,jsx,tsx}", // For files in root like App.tsx
-        "./components/**/*.{js,ts,jsx,tsx}" // For components in root/components
+        "./*.{js,ts,jsx,tsx}",
+        "./components/**/*.{js,ts,jsx,tsx}"
     ],
     theme: {
         extend: {
             colors: {
+                // ── AERA SCALE Design System ──
+                // Forest Green (sidebar, buttons, primary)
                 aera: {
-                    50: '#ecfdf5',
-                    100: '#d1fae5',
-                    200: '#a7f3d0',
-                    300: '#6ee7b7',
-                    400: '#34d399',
-                    500: '#10b981',
-                    600: '#059669',
-                    700: '#047857',
-                    800: '#065f46',
-                    900: '#064e3b',
-                    950: '#022c22',
+                    50:  '#eef7f2',
+                    100: '#d4ecdd',
+                    200: '#a9d9bb',
+                    300: '#73bf93',
+                    400: '#4CAF7D',
+                    500: '#2d8a5e',
+                    600: '#1d6644',
+                    700: '#1A4A2E',
+                    800: '#133820',
+                    900: '#0D2818',  // PRIMARY: sidebar bg, buttons
+                    950: '#071610',
                 },
-                primary: {
-                    DEFAULT: '#064e3b', // Emerald 900
-                    light: '#047857',
-                    dark: '#022c22'
+                // Gold (accent, active states, CTA borders)
+                gold: {
+                    300: '#F0D98A',
+                    400: '#E8C97A',
+                    500: '#C9A84C',  // PRIMARY GOLD
+                    600: '#A8882C',
+                    700: '#7D6320',
                 },
-                accent: {
-                    DEFAULT: '#f59e0b', // Amber 500 for a pop of color
-                    hover: '#d97706'
-                }
+                // Cream (main content background)
+                cream: {
+                    50:  '#FDFBF7',
+                    100: '#F5F0E8',  // PRIMARY BG
+                    200: '#EDE8DF',
+                    300: '#E0D8CC',
+                },
             },
             fontFamily: {
-                sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+                sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Helvetica Neue', 'Arial', 'sans-serif'],
+            },
+            boxShadow: {
+                'card':    '0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.04)',
+                'card-md': '0 4px 12px 0 rgb(0 0 0 / 0.08)',
+                'gold':    '0 0 0 3px rgb(201 168 76 / 0.2)',
             },
         },
     },

@@ -21,12 +21,12 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #C9A84C40;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #C9A84C80;
 }
 
 /* Glassmorphism utility */
