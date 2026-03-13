@@ -4,10 +4,13 @@ import {
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
     sendEmailVerification,
+    signInWithPopup,
+    GoogleAuthProvider,
+    OAuthProvider,
     signOut,
     User
 } from 'firebase/auth';
-import { doc, setDoc, collection, getDocs } from 'firebase/firestore';
+import { doc, setDoc, getDoc, getDocs } from 'firebase/firestore';
 import { auth, db } from './firebaseConfig';
 import type { Organization, OrgMember } from '../types';
 
@@ -16,6 +19,8 @@ interface AuthContextType {
     loading: boolean;
     login: (email: string, password: string) => Promise<void>;
     register: (email: string, password: string, orgName?: string) => Promise<void>;
+    loginWithGoogle: () => Promise<void>;
+    loginWithApple: () => Promise<void>;
     logout: () => Promise<void>;
     resendVerificationEmail: () => Promise<void>;
     refreshUser: () => Promise<void>;
@@ -51,6 +56,60 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const login = async (email: string, password: string) => {
         if (!auth) throw new Error('Firebase Auth is not initialized');
         await signInWithEmailAndPassword(auth, email, password);
+    };
+
+    // ── SSO helper: create org for new SSO users ─────────────────────
+    const ensureOrgForSSOUser = async (uid: string, email: string, displayName: string) => {
+        if (!db) return;
+        // Check if already in an org (collectionGroup query)
+        try {
+            const { collectionGroup, query, where } = await import('firebase/firestore');
+            const snap = await getDocs(
+                query(collectionGroup(db, 'members'), where('uid', '==', uid))
+            );
+            if (!snap.empty) return; // already has an org
+        } catch (_) { /* ignore — create org anyway */ }
+
+        const orgId = `org_${uid}_${Date.now()}`;
+        const orgData: Organization = {
+            id: orgId,
+            name: `Organisation ${displayName || email.split('@')[0]}`,
+            createdAt: new Date().toISOString(),
+            createdBy: uid,
+            onboardingComplete: false,
+        };
+        const memberData: OrgMember = {
+            uid,
+            email,
+            displayName: displayName || email.split('@')[0],
+            role: 'org_admin',
+            status: 'active',
+            invitedAt: new Date().toISOString(),
+            invitedBy: uid,
+            activatedAt: new Date().toISOString(),
+        };
+        await setDoc(doc(db, 'organizations', orgId), orgData);
+        await setDoc(doc(db, 'orgMembers', orgId, 'members', uid), memberData);
+    };
+
+    const loginWithGoogle = async () => {
+        if (!auth) throw new Error('Firebase Auth is not initialized');
+        const provider = new GoogleAuthProvider();
+        provider.addScope('email');
+        provider.addScope('profile');
+        const result = await signInWithPopup(auth, provider);
+        const { uid, email, displayName } = result.user;
+        await ensureOrgForSSOUser(uid, email ?? '', displayName ?? '');
+    };
+
+    const loginWithApple = async () => {
+        if (!auth) throw new Error('Firebase Auth is not initialized');
+        const provider = new OAuthProvider('apple.com');
+        provider.addScope('email');
+        provider.addScope('name');
+        const result = await signInWithPopup(auth, provider);
+        const { uid, email, displayName } = result.user;
+        await ensureOrgForSSOUser(uid, email ?? '', displayName ?? '');
     };
 
     const register = async (email: string, password: string, orgName?: string) => {
@@ -154,7 +213,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     };
 
     return (
-        <AuthContext.Provider value={{ user, loading, login, register, logout, resendVerificationEmail, refreshUser }}>
+        <AuthContext.Provider value={{ user, loading, login, register, loginWithGoogle, loginWithApple, logout, resendVerificationEmail, refreshUser }}>
             {children}
         </AuthContext.Provider>
     );
