@@ -246,58 +246,59 @@ const Tenants: React.FC<{ propertyId?: string }> = ({ propertyId }) => {
             {/* Header Actions */}
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
-                    <h1 className="text-2xl font-bold text-aera-900">{t('tenants.title')}</h1>
-                    <p className="text-slate-500 mt-1">{t('tenants.subtitle')}</p>
+                    <h1 style={{ fontFamily: '"Cormorant Garamond", serif' }} className="text-3xl font-bold text-[#1A2E25]">{t('tenants.title')}</h1>
+                    <p className="text-[#7A9589] mt-1 text-sm">{t('tenants.subtitle')}</p>
                 </div>
 
                 <div className="flex items-center gap-3 w-full md:w-auto">
                     <div className="relative flex-1 md:w-64">
-                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#7A9589]" />
                         <input
                             type="text"
-                            placeholder="Search tenants..."
+                            placeholder="Mieter suchen..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full pl-9 pr-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-aera-600/20 focus:border-aera-600 bg-white"
+                            className="w-full pl-9 pr-4 py-2 border border-cream-deeper rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-gold/20 focus:border-gold bg-white"
                         />
                     </div>
                     <button
                         onClick={openAddModal}
-                        className="bg-aera-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-aera-800 shadow-sm border border-transparent hover:border-aera-600 transition-colors flex items-center whitespace-nowrap"
+                        className="btn-gold px-4 py-2 text-sm font-semibold flex items-center gap-2 whitespace-nowrap shadow-soft"
+                        style={{ width: 'auto', borderRadius: '10px' }}
                     >
-                        <Plus className="w-4 h-4 mr-2" />
-                        Add Tenant
+                        <Plus className="w-4 h-4" />
+                        Mieter hinzufügen
                     </button>
                 </div>
             </div>
 
             {/* AI Suggestion Banner */}
             {showSuggestion && filteredTenants.length > 0 && (
-                <div className="bg-gradient-to-r from-indigo-50 to-white border border-indigo-100 rounded-xl p-4 shadow-sm flex items-start justify-between animate-in slide-in-from-top-2 fade-in duration-500">
+                <div className="bg-gradient-to-r from-cream to-white border border-gold/20 rounded-2xl p-4 shadow-soft flex items-start justify-between animate-in slide-in-from-top-2 fade-in duration-500">
                     <div className="flex gap-4">
-                        <div className="p-2.5 bg-indigo-100 rounded-lg shrink-0">
-                            <Sparkles className="w-5 h-5 text-indigo-600" />
+                        <div className="p-2.5 bg-cream-dark rounded-xl shrink-0">
+                            <Sparkles className="w-5 h-5 text-gold" />
                         </div>
                         <div>
-                            <h3 className="text-sm font-bold text-indigo-900 flex items-center">
-                                AI Portfolio Insight
-                                <span className="ml-2 text-[10px] bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full font-medium">Auto-Generated</span>
+                            <h3 className="text-sm font-bold text-[#1A2E25] flex items-center gap-2">
+                                KI Portfolio Insight
+                                <span className="text-[10px] bg-gold/10 text-gold-dark px-2 py-0.5 rounded-full font-semibold border border-gold/20">Auto-Generated</span>
                             </h3>
-                            <p className="text-sm text-indigo-700/80 mt-1 max-w-xl leading-relaxed">
-                                Based on recent activity, we suggest reviewing <strong>{filteredTenants[0].name}</strong>. Their profile has pending lease optimization opportunities.
+                            <p className="text-sm text-[#4A6358] mt-1 max-w-xl leading-relaxed">
+                                Basierend auf aktueller Aktivität empfehlen wir, <strong>{filteredTenants[0].name}</strong> zu überprüfen. Ihr Profil hat offene Mietoptimierungspotenziale.
                             </p>
                             <button
                                 onClick={() => openDetailModal(filteredTenants[0])}
-                                className="mt-3 flex items-center text-xs font-semibold text-indigo-700 hover:text-indigo-900 bg-white border border-indigo-200 hover:border-indigo-300 px-3 py-1.5 rounded-lg transition-all shadow-sm group"
+                                className="mt-3 flex items-center gap-1 text-xs font-semibold text-forest hover:text-forest-dark bg-white border border-cream-deeper hover:border-gold/30 px-3 py-1.5 rounded-lg transition-all shadow-soft group"
                             >
-                                View Details
-                                <ArrowUpRight className="w-3 h-3 ml-1 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                                Details ansehen
+                                <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                             </button>
                         </div>
                     </div>
                     <button
                         onClick={() => setShowSuggestion(false)}
-                        className="text-indigo-300 hover:text-indigo-500 transition-colors p-1"
+                        className="text-[#7A9589] hover:text-[#4A6358] transition-colors p-1"
                     >
                         <X className="w-4 h-4" />
                     </button>
@@ -305,19 +306,19 @@ const Tenants: React.FC<{ propertyId?: string }> = ({ propertyId }) => {
             )}
 
             {/* Tenant Table */}
-            <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+            <div className="bg-white rounded-2xl border border-cream-deeper shadow-soft overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-left">
                         <thead>
-                            <tr className="bg-aera-50 border-b border-slate-200">
-                                <th className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Tenant</th>
-                                <th className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Location (Property & Unit)</th>
-                                <th className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Contact</th>
-                                <th className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Lease Status</th>
-                                <th className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider text-right">Actions</th>
+                            <tr className="bg-cream border-b border-cream-deeper">
+                                <th className="px-6 py-4 text-xs font-semibold text-[#7A9589] uppercase tracking-wider">Mieter</th>
+                                <th className="px-6 py-4 text-xs font-semibold text-[#7A9589] uppercase tracking-wider">Objekt &amp; Einheit</th>
+                                <th className="px-6 py-4 text-xs font-semibold text-[#7A9589] uppercase tracking-wider">Kontakt</th>
+                                <th className="px-6 py-4 text-xs font-semibold text-[#7A9589] uppercase tracking-wider">Mietstatus</th>
+                                <th className="px-6 py-4 text-xs font-semibold text-[#7A9589] uppercase tracking-wider text-right">Aktionen</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-slate-100">
+                        <tbody className="divide-y divide-cream">
                             {filteredTenants.length === 0 ? (
                                 <tr>
                                     <td colSpan={5} className="px-6 py-12 text-center text-slate-400">
@@ -329,40 +330,40 @@ const Tenants: React.FC<{ propertyId?: string }> = ({ propertyId }) => {
                                     const unitNum = getUnitNumber(tenant.propertyId, tenant.unitId);
 
                                     return (
-                                        <tr key={tenant.id} className="hover:bg-aera-50/30 transition-colors group">
+                                        <tr key={tenant.id} className="hover:bg-cream/50 transition-colors group">
                                             <td className="px-6 py-4">
                                                 <div className="flex items-center">
-                                                    <div className="w-8 h-8 rounded bg-aera-100 flex items-center justify-center text-aera-900 font-bold mr-3 text-xs">
+                                                    <div className="w-9 h-9 rounded-xl bg-cream-dark flex items-center justify-center text-forest font-bold mr-3 text-xs border border-cream-deeper" style={{ fontFamily: '"JetBrains Mono", monospace' }}>
                                                         {tenant.name.substring(0, 2).toUpperCase()}
                                                     </div>
                                                     <div>
-                                                        <div className="font-semibold text-aera-900">{tenant.name}</div>
-                                                        <div className="text-xs text-slate-500 mt-0.5 font-mono">Rent: €{tenant.monthlyRent.toLocaleString()}/mo</div>
+                                                        <div className="font-semibold text-[#1A2E25]">{tenant.name}</div>
+                                                        <div className="text-xs text-[#7A9589] mt-0.5" style={{ fontFamily: '"JetBrains Mono", monospace' }}>€{tenant.monthlyRent.toLocaleString()}/mo</div>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td className="px-6 py-4 text-sm text-slate-600">
+                                            <td className="px-6 py-4 text-sm text-[#4A6358]">
                                                 <div className="flex flex-col justify-center">
-                                                    <div className="flex items-center font-medium text-slate-900">
-                                                        <Building2 className="w-3.5 h-3.5 mr-2 text-slate-400" />
+                                                    <div className="flex items-center font-semibold text-[#1A2E25]">
+                                                        <Building2 className="w-3.5 h-3.5 mr-2 text-[#7A9589]" />
                                                         {getPropertyName(tenant.propertyId)}
                                                     </div>
                                                     {unitNum && (
-                                                        <div className="flex items-center mt-1 ml-5.5 text-xs text-aera-600 bg-aera-50 w-fit px-2 py-0.5 rounded border border-aera-100">
+                                                        <div className="flex items-center mt-1 ml-5 text-xs text-forest bg-cream-dark w-fit px-2 py-0.5 rounded-lg border border-cream-deeper">
                                                             <DoorOpen className="w-3 h-3 mr-1" />
-                                                            Unit {unitNum}
+                                                            Einheit {unitNum}
                                                         </div>
                                                     )}
                                                 </div>
                                             </td>
                                             <td className="px-6 py-4">
                                                 <div className="flex flex-col space-y-1">
-                                                    <div className="flex items-center text-xs text-slate-600">
-                                                        <Mail className="w-3 h-3 mr-1.5 text-aera-600" />
+                                                    <div className="flex items-center text-xs text-[#4A6358]">
+                                                        <Mail className="w-3 h-3 mr-1.5 text-forest" />
                                                         {tenant.email}
                                                     </div>
-                                                    <div className="flex items-center text-xs text-slate-600">
-                                                        <Phone className="w-3 h-3 mr-1.5 text-aera-600" />
+                                                    <div className="flex items-center text-xs text-[#4A6358]">
+                                                        <Phone className="w-3 h-3 mr-1.5 text-forest" />
                                                         {tenant.phone}
                                                     </div>
                                                 </div>
@@ -372,17 +373,18 @@ const Tenants: React.FC<{ propertyId?: string }> = ({ propertyId }) => {
                                                     onClick={() => openDetailModal(tenant, 'lease')}
                                                     className="group/status relative focus:outline-none text-left"
                                                 >
-                                                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${tenant.status === 'Good Standing'
-                                                        ? 'bg-emerald-100 text-emerald-800'
+                                                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold ${
+                                                        tenant.status === 'Good Standing'
+                                                        ? 'bg-[#EAF4EE] text-[#2D7A4A]'
                                                         : tenant.status === 'Notice Given'
-                                                            ? 'bg-orange-100 text-orange-800'
-                                                            : 'bg-red-100 text-red-800'
-                                                        }`}>
+                                                            ? 'bg-amber-50 text-amber-700'
+                                                            : 'bg-red-50 text-red-700'
+                                                    }`}>
                                                         {tenant.status === 'Good Standing' ? <CheckCircle className="w-3 h-3 mr-1" /> : <AlertCircle className="w-3 h-3 mr-1" />}
                                                         {tenant.status}
                                                     </span>
-                                                    <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 hidden group-hover/status:block px-2 py-1 bg-slate-800 text-white text-[10px] rounded whitespace-nowrap z-10 shadow-lg">
-                                                        View Contract
+                                                    <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 hidden group-hover/status:block px-2 py-1 bg-forest text-white text-[10px] rounded-lg whitespace-nowrap z-10 shadow-soft">
+                                                        Vertrag ansehen
                                                     </span>
                                                 </button>
                                             </td>
@@ -390,17 +392,17 @@ const Tenants: React.FC<{ propertyId?: string }> = ({ propertyId }) => {
                                                 <div className="flex items-center justify-end space-x-2 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
                                                     <button
                                                         onClick={() => openDetailModal(tenant)}
-                                                        className="p-1.5 hover:bg-slate-100 rounded text-slate-400 hover:text-aera-600" title="View Details">
+                                                        className="p-1.5 hover:bg-cream-dark rounded-lg text-[#7A9589] hover:text-forest" title="Details">
                                                         <ExternalLink className="w-4 h-4" />
                                                     </button>
                                                     <button
                                                         onClick={() => openEditModal(tenant)}
-                                                        className="p-1.5 hover:bg-slate-100 rounded text-slate-400 hover:text-aera-600" title="Edit">
+                                                        className="p-1.5 hover:bg-cream-dark rounded-lg text-[#7A9589] hover:text-forest" title="Bearbeiten">
                                                         <Edit2 className="w-4 h-4" />
                                                     </button>
                                                     <button
                                                         onClick={() => handleDelete(tenant.id)}
-                                                        className="p-1.5 hover:bg-red-50 rounded text-slate-400 hover:text-red-500" title="Delete">
+                                                        className="p-1.5 hover:bg-red-50 rounded-lg text-[#7A9589] hover:text-red-500" title="Löschen">
                                                         <Trash2 className="w-4 h-4" />
                                                     </button>
                                                 </div>
@@ -417,10 +419,10 @@ const Tenants: React.FC<{ propertyId?: string }> = ({ propertyId }) => {
             {/* ADD / EDIT MODAL */}
             {isFormOpen && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-                    <div className="bg-white rounded-xl shadow-xl w-full max-w-2xl overflow-hidden animate-in zoom-in-95 duration-200 border border-aera-100 max-h-[90vh] flex flex-col">
-                        <div className="p-6 border-b border-slate-100 flex justify-between items-center bg-aera-50 shrink-0">
-                            <h2 className="text-xl font-bold text-aera-900">{isEditMode ? 'Edit Tenant' : 'Add New Tenant'}</h2>
-                            <button onClick={() => setIsFormOpen(false)} className="text-slate-400 hover:text-slate-600 transition-colors">
+                    <div className="bg-white rounded-2xl shadow-strong w-full max-w-2xl overflow-hidden animate-in zoom-in-95 duration-200 border border-cream-deeper max-h-[90vh] flex flex-col">
+                        <div className="p-6 border-b border-cream-deeper flex justify-between items-center geo-pattern shrink-0">
+                            <h2 style={{ fontFamily: '"Cormorant Garamond", serif' }} className="text-2xl font-bold text-white">{isEditMode ? 'Mieter bearbeiten' : 'Neuer Mieter'}</h2>
+                            <button onClick={() => setIsFormOpen(false)} className="text-white/60 hover:text-white transition-colors">
                                 <X className="w-6 h-6" />
                             </button>
                         </div>
@@ -532,12 +534,12 @@ const Tenants: React.FC<{ propertyId?: string }> = ({ propertyId }) => {
                                     </div>
                                 </div>
 
-                                <div className="pt-4 flex justify-end space-x-3 border-t border-slate-100 mt-4">
-                                    <button type="button" onClick={() => setIsFormOpen(false)} className="px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 rounded-lg transition-colors">
-                                        Cancel
+                                <div className="pt-4 flex justify-end space-x-3 border-t border-cream-deeper mt-4">
+                                    <button type="button" onClick={() => setIsFormOpen(false)} className="px-4 py-2 text-sm font-medium text-[#4A6358] hover:bg-cream-dark rounded-xl transition-colors">
+                                        Abbrechen
                                     </button>
-                                    <button type="submit" className="px-4 py-2 text-sm font-medium text-white bg-aera-900 hover:bg-aera-800 rounded-lg transition-colors shadow-sm border border-transparent hover:border-aera-600">
-                                        {isEditMode ? 'Save Changes' : 'Create Tenant'}
+                                    <button type="submit" className="btn-gold px-5 py-2 text-sm font-semibold shadow-soft" style={{ width: 'auto', borderRadius: '10px' }}>
+                                        {isEditMode ? 'Speichern' : 'Mieter anlegen'}
                                     </button>
                                 </div>
                             </form>
@@ -549,14 +551,14 @@ const Tenants: React.FC<{ propertyId?: string }> = ({ propertyId }) => {
             {/* DETAIL VIEW MODAL */}
             {isDetailOpen && selectedTenant && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-                    <div className="bg-white rounded-xl shadow-2xl w-full max-w-4xl overflow-hidden animate-in zoom-in-95 duration-200 flex flex-col max-h-[90vh]">
-                        <div className="h-24 bg-aera-900 relative shrink-0">
-                            <button onClick={() => setIsDetailOpen(false)} className="absolute top-4 right-4 text-white/70 hover:text-white transition-colors">
+                    <div className="bg-white rounded-2xl shadow-strong w-full max-w-4xl overflow-hidden animate-in zoom-in-95 duration-200 flex flex-col max-h-[90vh]">
+                        <div className="h-24 geo-pattern relative shrink-0">
+                            <button onClick={() => setIsDetailOpen(false)} className="absolute top-4 right-4 text-white/60 hover:text-white transition-colors">
                                 <X className="w-6 h-6" />
                             </button>
                             <div className="absolute -bottom-10 left-6">
-                                <div className="w-20 h-20 bg-white rounded-lg shadow-md flex items-center justify-center border-4 border-white">
-                                    <div className="w-full h-full bg-aera-50 rounded flex items-center justify-center text-aera-900 font-bold text-2xl">
+                                <div className="w-20 h-20 bg-white rounded-xl shadow-medium flex items-center justify-center border-4 border-white">
+                                    <div className="w-full h-full bg-cream-dark rounded-lg flex items-center justify-center text-forest font-bold text-2xl" style={{ fontFamily: '"JetBrains Mono", monospace' }}>
                                         {selectedTenant.name.substring(0, 2).toUpperCase()}
                                     </div>
                                 </div>
@@ -566,37 +568,36 @@ const Tenants: React.FC<{ propertyId?: string }> = ({ propertyId }) => {
                         <div className="pt-12 px-6 pb-2 shrink-0">
                             <div className="flex justify-between items-start mb-4">
                                 <div>
-                                    <h2 className="text-xl font-bold text-aera-900">{selectedTenant.name}</h2>
-                                    <p className="text-sm text-slate-500">{selectedTenant.contactName}</p>
+                                    <h2 style={{ fontFamily: '"Cormorant Garamond", serif' }} className="text-2xl font-bold text-[#1A2E25]">{selectedTenant.name}</h2>
+                                    <p className="text-sm text-[#7A9589]">{selectedTenant.contactName}</p>
                                 </div>
-                                <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold ${selectedTenant.status === 'Good Standing'
-                                    ? 'bg-emerald-100 text-emerald-800'
-                                    : 'bg-red-100 text-red-800'
-                                    }`}>
+                                <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-bold ${
+                                    selectedTenant.status === 'Good Standing'
+                                    ? 'bg-[#EAF4EE] text-[#2D7A4A]'
+                                    : 'bg-red-50 text-red-700'
+                                }`}>
                                     {selectedTenant.status}
                                 </span>
                             </div>
 
-                            {/* Tabs, reusing state */}
-                            <div className="flex border-b border-slate-200 space-x-6">
-                                <button onClick={() => setActiveTab('overview')} className={`pb-3 text-sm font-medium transition-colors ${activeTab === 'overview' ? 'text-aera-900 border-b-2 border-aera-900' : 'text-slate-500'}`}>Overview</button>
-                                <button onClick={() => setActiveTab('lease')} className={`pb-3 text-sm font-medium transition-colors ${activeTab === 'lease' ? 'text-aera-900 border-b-2 border-aera-900' : 'text-slate-500'}`}>Lease</button>
-                                {/* Simplified tabs for now to save space, assuming they worked before */}
+                            <div className="flex border-b border-cream-deeper space-x-6">
+                                <button onClick={() => setActiveTab('overview')} className={`pb-3 text-sm font-semibold transition-colors ${activeTab === 'overview' ? 'text-forest border-b-2 border-forest' : 'text-[#7A9589]'}`}>Overview</button>
+                                <button onClick={() => setActiveTab('lease')}    className={`pb-3 text-sm font-semibold transition-colors ${activeTab === 'lease'    ? 'text-forest border-b-2 border-forest' : 'text-[#7A9589]'}`}>Lease</button>
                             </div>
                         </div>
 
-                        <div className="flex-1 overflow-y-auto p-6 bg-slate-50/50">
+                        <div className="flex-1 overflow-y-auto p-6 bg-cream">
                             {activeTab === 'overview' && (
                                 <div className="space-y-6">
-                                    <div className="bg-white p-4 rounded-lg shadow-sm">
-                                        <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Property Assignment</h3>
+                                    <div className="bg-white p-4 rounded-xl shadow-soft border border-cream-deeper">
+                                        <h3 className="text-xs font-bold text-[#7A9589] uppercase tracking-wider mb-3">Objektzuweisung</h3>
                                         <div className="flex items-start space-x-3">
-                                            <div className="p-2 bg-aera-50 rounded border border-aera-100"><Building2 className="w-5 h-5 text-aera-600" /></div>
+                                            <div className="p-2 bg-cream-dark rounded-xl border border-cream-deeper"><Building2 className="w-5 h-5 text-forest" /></div>
                                             <div>
-                                                <div className="font-semibold text-slate-900">{getPropertyName(selectedTenant.propertyId)}</div>
-                                                <div className="text-xs text-slate-500 mt-1">
-                                                    {selectedTenant.unitId && <span className="font-bold text-aera-700 mr-1">Unit {getUnitNumber(selectedTenant.propertyId, selectedTenant.unitId)}</span>}
-                                                    €{selectedTenant.monthlyRent.toLocaleString()}/month
+                                                <div className="font-semibold text-[#1A2E25]">{getPropertyName(selectedTenant.propertyId)}</div>
+                                                <div className="text-xs text-[#7A9589] mt-1">
+                                                    {selectedTenant.unitId && <span className="font-bold text-forest mr-1">Einheit {getUnitNumber(selectedTenant.propertyId, selectedTenant.unitId)}</span>}
+                                                    €{selectedTenant.monthlyRent.toLocaleString()}/Monat
                                                 </div>
                                             </div>
                                         </div>
@@ -604,20 +605,20 @@ const Tenants: React.FC<{ propertyId?: string }> = ({ propertyId }) => {
                                 </div>
                             )}
                             {activeTab === 'lease' && (
-                                <div className="bg-white p-6 rounded-lg shadow-sm">
-                                    <h3 className="text-lg font-bold mb-4">Lease Agreement</h3>
+                                <div className="bg-white p-6 rounded-xl shadow-soft border border-cream-deeper">
+                                    <h3 className="text-lg font-bold text-[#1A2E25] mb-4" style={{ fontFamily: '"Cormorant Garamond", serif' }}>Mietvertrag</h3>
                                     <div className="prose prose-sm max-w-none">
-                                        <pre className="whitespace-pre-wrap font-sans text-sm text-slate-600">{selectedTenant.leaseContent || "No lease content available."}</pre>
+                                        <pre className="whitespace-pre-wrap font-sans text-sm text-[#4A6358]">{selectedTenant.leaseContent || 'Kein Vertragsinhalt vorhanden.'}</pre>
                                     </div>
                                 </div>
                             )}
                         </div>
 
-                        <div className="p-4 border-t border-slate-200 flex justify-between items-center bg-white shrink-0">
-                            <button onClick={() => { setIsDetailOpen(false); handleDelete(selectedTenant.id); }} className="text-red-600 hover:text-red-700 text-sm font-medium flex items-center"><Trash2 className="w-4 h-4 mr-1.5" /> Remove</button>
+                        <div className="p-4 border-t border-cream-deeper flex justify-between items-center bg-white shrink-0">
+                            <button onClick={() => { setIsDetailOpen(false); handleDelete(selectedTenant.id); }} className="text-red-600 hover:text-red-700 text-sm font-semibold flex items-center gap-1.5"><Trash2 className="w-4 h-4" /> Entfernen</button>
                             <div className="flex space-x-3">
-                                <button onClick={() => { setIsDetailOpen(false); openEditModal(selectedTenant); }} className="flex items-center px-4 py-2 border border-slate-300 rounded-lg text-sm font-medium hover:bg-slate-50 transition-colors text-slate-700">Edit</button>
-                                <button onClick={() => setIsDetailOpen(false)} className="flex items-center px-4 py-2 bg-aera-900 text-white rounded-lg text-sm font-medium hover:bg-aera-800 transition-colors">Close</button>
+                                <button onClick={() => { setIsDetailOpen(false); openEditModal(selectedTenant); }} className="flex items-center gap-1.5 px-4 py-2 border border-cream-deeper rounded-xl text-sm font-medium hover:bg-cream-dark transition-colors text-[#4A6358]">Bearbeiten</button>
+                                <button onClick={() => setIsDetailOpen(false)} className="btn-gold px-5 py-2 text-sm font-semibold shadow-soft" style={{ width: 'auto', borderRadius: '10px' }}>Schließen</button>
                             </div>
                         </div>
                     </div>

@@ -190,42 +190,43 @@ const Dashboard: React.FC<{ onSelectAsset?: (propertyId: string) => void }> = ({
 
       {/* VALIDATION WARNING BANNER */}
       {hasValidationErrors && (
-        <div className={`rounded-xl border p-4 flex items-start gap-3 ${validationReport!.errorCount > 0 ? 'bg-red-50 border-red-200' : 'bg-amber-50 border-amber-200'}`}>
+        <div className={`rounded-2xl border p-4 flex items-start gap-3 ${validationReport!.errorCount > 0 ? 'bg-red-50 border-red-200' : 'bg-amber-50 border-amber-200'}`}>
           <AlertTriangle className={`w-5 h-5 mt-0.5 shrink-0 ${validationReport!.errorCount > 0 ? 'text-red-600' : 'text-amber-600'}`} />
           <div className="flex-1">
             <p className={`font-semibold text-sm ${validationReport!.errorCount > 0 ? 'text-red-800' : 'text-amber-800'}`}>
               Berechnung geprüft: {validationReport!.totalIssues} Abweichung{validationReport!.totalIssues !== 1 ? 'en' : ''} erkannt
             </p>
-            <p className="text-xs mt-0.5 text-slate-600">
+            <p className="text-xs mt-0.5 text-[#4A6358]">
               {validationReport!.errorCount} Fehler, {validationReport!.warningCount} Warnungen — Monat: {currentMonth}
             </p>
           </div>
-          <a href="#" onClick={(e) => { e.preventDefault(); /* Navigate to reconciliation via parent if needed */ }}
-            className="text-xs font-medium text-aera-700 hover:text-aera-900 flex items-center gap-1 shrink-0">
+          <a href="#" onClick={(e) => { e.preventDefault(); }}
+            className="text-xs font-medium text-forest hover:text-forest-dark flex items-center gap-1 shrink-0">
             <Shield className="w-3.5 h-3.5" /> Reconciliation Report
           </a>
         </div>
       )}
       <div className="flex justify-between items-end">
         <div>
-          <h1 className="text-2xl font-bold text-aera-900">{tr('dashboard.title')}</h1>
-          <p className="text-slate-500 mt-1">{tr('dashboard.kpi')}</p>
+          <h1 style={{ fontFamily: '"Cormorant Garamond", serif' }} className="text-3xl font-bold text-[#1A2E25]">{tr('dashboard.title')}</h1>
+          <p className="text-[#7A9589] mt-1 text-sm">{tr('dashboard.kpi')}</p>
         </div>
         <div className="flex gap-3">
           {!isSimulating ? (
             <button
               onClick={() => setIsSimulating(true)}
-              className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium shadow-sm transition-all flex items-center"
+              className="btn-gold px-5 py-2 rounded-xl text-sm font-semibold shadow-medium transition-all flex items-center gap-2"
+              style={{ width: 'auto' }}
             >
-              <BrainCircuit className="w-4 h-4 mr-2" />
+              <BrainCircuit className="w-4 h-4" />
               Decision Intelligence
             </button>
           ) : (
             <button
               onClick={closeSimulation}
-              className="bg-slate-200 hover:bg-slate-300 text-slate-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center"
+              className="bg-cream-dark hover:bg-cream-deeper text-[#4A6358] px-4 py-2 rounded-xl text-sm font-medium transition-colors flex items-center gap-2 border border-cream-deeper"
             >
-              <X className="w-4 h-4 mr-2" />
+              <X className="w-4 h-4" />
               Exit Simulation
             </button>
           )}
@@ -233,69 +234,73 @@ const Dashboard: React.FC<{ onSelectAsset?: (propertyId: string) => void }> = ({
       </div>
 
       {/* KPI Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
         {kpiCards.map((kpi, idx) => (
-          <div key={idx} className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+          <div key={idx} className="bg-white p-5 rounded-2xl border border-cream-deeper shadow-soft hover:shadow-medium hover:-translate-y-0.5 transition-all duration-200 relative overflow-hidden">
+            {/* Gold top accent */}
+            <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-gold to-transparent" />
             <div className="flex justify-between items-start mb-4">
-              <div className={`p-2 rounded-lg ${kpi.title === 'Active Maintenance' ? 'bg-amber-50' : 'bg-aera-100'}`}>
-                <kpi.icon className={`w-6 h-6 ${kpi.title === 'Active Maintenance' ? 'text-amber-600' : 'text-aera-900'}`} />
+              <div className="p-2 rounded-xl bg-cream-dark">
+                <kpi.icon className="w-5 h-5 text-forest" />
               </div>
-              <div className={`flex items-center space-x-1 text-xs font-medium ${kpi.trend === 'up' && kpi.title !== 'Active Maintenance' ? 'text-emerald-600' :
-                kpi.trend === 'down' ? 'text-red-600' : 'text-slate-600'
-                }`}>
+              <div className={`flex items-center gap-1 text-xs font-semibold ${
+                kpi.trend === 'up' ? 'text-[#3D7A5A]' : 'text-[#C94A3A]'
+              }`}>
                 <span>{kpi.change}</span>
                 {kpi.trend === 'up' ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
               </div>
             </div>
-            <h3 className="text-slate-500 text-sm font-medium">{kpi.title}</h3>
-            <p className="text-2xl font-bold text-aera-900 mt-1">{kpi.value}</p>
+            <p className="text-[#7A9589] text-xs font-semibold uppercase tracking-wider mb-1">{kpi.title}</p>
+            <p className="text-2xl font-bold text-[#1A2E25] mt-1" style={{ fontFamily: '"JetBrains Mono", monospace', letterSpacing: '-0.02em' }}>{kpi.value}</p>
           </div>
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Main Chart Section - Enhanced with Simulation Layer */}
-        <div className={`lg:col-span-2 bg-white p-6 rounded-xl border shadow-sm transition-all duration-500 ${isSimulating ? 'border-indigo-200 shadow-indigo-100 ring-4 ring-indigo-50/50' : 'border-slate-200'}`}>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+        {/* Main Chart Section */}
+        <div className={`lg:col-span-2 bg-white p-6 rounded-2xl border shadow-soft transition-all duration-500 ${isSimulating ? 'border-gold/30 shadow-gold-focus ring-4 ring-gold/10' : 'border-cream-deeper'}`}>
           <div className="flex justify-between items-center mb-6">
-            <h3 className="text-lg font-bold text-aera-900">{tr('dashboard.revenueOverTime')}</h3>
+            <h3 className="text-lg font-bold text-[#1A2E25]" style={{ fontFamily: '"Cormorant Garamond", serif' }}>{tr('dashboard.revenueOverTime')}</h3>
             {isSimulating && (
-              <div className="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-xs font-bold animate-pulse">
-                "What-If" Mode Active
+              <div className="px-3 py-1 bg-gold/10 text-gold-dark rounded-full text-xs font-bold animate-pulse border border-gold/20">
+                What-If Mode
               </div>
             )}
           </div>
 
           {/* SIMULATION INPUT INTERFACE */}
           {isSimulating && (
-            <div className="mb-6 bg-slate-50 p-4 rounded-lg border border-indigo-100 animate-in slide-in-from-top-4">
-              <label className="text-xs font-bold text-indigo-900 uppercase tracking-wider mb-2 block">
-                AREA SCALE Decision Engine
+            <div className="mb-6 bg-cream p-4 rounded-xl border border-gold/20 animate-in slide-in-from-top-4">
+              <label className="text-xs font-bold text-forest uppercase tracking-wider mb-2 block">
+                AERA SCALE — Decision Engine
               </label>
               <div className="flex gap-2">
                 <input
                   type="text"
                   value={simulationPrompt}
                   onChange={(e) => setSimulationPrompt(e.target.value)}
-                  placeholder='Type a scenario... (e.g., "What if Acme Corp leaves in June?" or "Impact of 5% rent hike")'
-                  className="flex-1 px-4 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 outline-none"
+                  placeholder='Szenario eingeben… z.B. "Was wenn Mieter X auszieht?"'
+                  className="input-field flex-1 text-sm"
+                  style={{ padding: '10px 14px' }}
                   onKeyDown={(e) => e.key === 'Enter' && runSimulation()}
                 />
                 <button
                   onClick={runSimulation}
                   disabled={isProcessingSim || !simulationPrompt}
-                  className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium disabled:opacity-50 transition-colors"
+                  className="btn-gold text-sm px-4 py-2 disabled:opacity-50"
+                  style={{ width: 'auto', borderRadius: '10px' }}
                 >
-                  {isProcessingSim ? 'Simulating...' : 'Run Scenario'}
+                  {isProcessingSim ? 'Berechne…' : 'Simulieren'}
                 </button>
               </div>
               {simulationResult && (
-                <div className="mt-4 p-3 bg-white rounded border-l-4 border-indigo-500 text-sm text-slate-700 shadow-sm animate-in fade-in">
-                  <span className="font-bold text-indigo-900 block mb-1">AI Projection Analysis:</span>
+                <div className="mt-4 p-3 bg-white rounded-xl border-l-4 border-gold text-sm text-[#4A6358] shadow-soft animate-in fade-in">
+                  <span className="font-bold text-[#1A2E25] block mb-1">KI-Projektions-Analyse:</span>
                   {simulationResult.analysis}
                 </div>
               )}
               {simulationError && (
-                <div className="mt-4 p-3 bg-red-50 rounded border-l-4 border-red-500 text-sm text-red-700 shadow-sm animate-in fade-in flex items-center">
+                <div className="mt-4 p-3 bg-red-50 rounded-xl border-l-4 border-red-500 text-sm text-red-700 shadow-soft animate-in fade-in flex items-center">
                   <AlertCircle className="w-4 h-4 mr-2" />
                   {simulationError}
                 </div>
@@ -366,22 +371,22 @@ const Dashboard: React.FC<{ onSelectAsset?: (propertyId: string) => void }> = ({
         </div>
 
         {/* Intelligent Operations Feed */}
-        <div className="bg-white p-0 rounded-xl border border-slate-200 shadow-sm flex flex-col overflow-hidden">
-          <div className="p-5 border-b border-slate-100 bg-aera-900 text-white">
+        <div className="bg-white p-0 rounded-2xl border border-cream-deeper shadow-soft flex flex-col overflow-hidden">
+          <div className="p-5 border-b border-cream-deeper geo-pattern">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-lg font-bold">Automated Feed</h3>
-                <p className="text-xs text-aera-200 opacity-80 mt-1">AI-Curated Updates & Alerts</p>
+                <h3 className="text-lg font-bold text-white" style={{ fontFamily: '"Cormorant Garamond", serif' }}>Aktivitäten</h3>
+                <p className="text-xs text-white/50 mt-1">KI-gestützte Updates & Alerts</p>
               </div>
-              <BrainCircuit className="w-5 h-5 text-aera-200" />
+              <BrainCircuit className="w-5 h-5 text-gold" />
             </div>
           </div>
 
-          <div className="flex-1 overflow-y-auto bg-slate-50/50 p-4 space-y-3">
+          <div className="flex-1 overflow-y-auto bg-cream p-4 space-y-3">
             {feedItems.map((item) => (
               <div
                 key={item.id}
-                className={`bg-white rounded-lg border transition-all duration-300 overflow-hidden ${expandedId === item.id ? 'border-aera-600 shadow-md ring-1 ring-aera-600/20' : 'border-slate-200 hover:border-aera-300 shadow-sm'}`}
+                className={`bg-white rounded-xl border transition-all duration-300 overflow-hidden ${expandedId === item.id ? 'border-gold/40 shadow-medium ring-1 ring-gold/15' : 'border-cream-deeper hover:border-gold/30 shadow-soft'}`}
               >
                 {/* Card Header */}
                 <div
@@ -389,34 +394,34 @@ const Dashboard: React.FC<{ onSelectAsset?: (propertyId: string) => void }> = ({
                   className="p-4 cursor-pointer flex items-start gap-3"
                 >
                   <div className={`mt-0.5 w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${item.type === 'Maintenance'
-                    ? (item.priority === 'Emergency' ? 'bg-red-100 text-red-600' : 'bg-orange-100 text-orange-600')
-                    : 'bg-aera-100 text-aera-900'
+                    ? (item.priority === 'Emergency' ? 'bg-red-100 text-red-600' : 'bg-amber-50 text-amber-600')
+                    : 'bg-cream-dark text-forest'
                     }`}>
                     {item.type === 'Maintenance' ? <Wrench className="w-4 h-4" /> : <Megaphone className="w-4 h-4" />}
                   </div>
 
                   <div className="flex-1 min-w-0">
                     <div className="flex justify-between items-start">
-                      <h4 className={`text-sm font-semibold truncate pr-2 ${expandedId === item.id ? 'text-aera-900' : 'text-slate-800'}`}>
+                      <h4 className={`text-sm font-semibold truncate pr-2 ${expandedId === item.id ? 'text-[#1A2E25]' : 'text-[#1A2E25]'}`}>
                         {item.title}
                       </h4>
-                      <span className="text-[10px] text-slate-400 whitespace-nowrap">{item.date}</span>
+                      <span className="text-[10px] text-[#7A9589] whitespace-nowrap">{item.date}</span>
                     </div>
 
                     {expandedId !== item.id && (
-                      <p className="text-xs text-slate-500 line-clamp-1 mt-1">
+                      <p className="text-xs text-[#7A9589] line-clamp-1 mt-1">
                         {item.rawContent}
                       </p>
                     )}
 
                     <div className="flex items-center mt-2 space-x-2">
-                      <span className={`text-[10px] px-1.5 py-0.5 rounded uppercase font-bold tracking-wider ${item.type === 'Maintenance' ? 'bg-slate-100 text-slate-500' : 'bg-aera-50 text-aera-700'
-                        }`}>
+                      <span className={`text-[10px] px-2 py-0.5 rounded-full uppercase font-bold tracking-wider ${
+                        item.type === 'Maintenance' ? 'bg-cream-dark text-[#4A6358]' : 'bg-cream-dark text-forest'
+                      }`}>
                         {item.type}
                       </span>
                       {item.priority && (
-                        <span className={`text-[10px] px-1.5 py-0.5 rounded font-medium ${item.priority === 'Emergency' ? 'bg-red-50 text-red-600' : 'bg-orange-50 text-orange-600'
-                          }`}>
+                        <span className={`text-[10px] px-2 py-0.5 rounded-full font-semibold ${item.priority === 'Emergency' ? 'bg-red-50 text-red-600' : 'bg-amber-50 text-amber-600'}`}>
                           {item.priority}
                         </span>
                       )}
@@ -428,27 +433,27 @@ const Dashboard: React.FC<{ onSelectAsset?: (propertyId: string) => void }> = ({
 
                 {/* Expanded Content (AI Briefing) */}
                 {expandedId === item.id && (
-                  <div className="bg-aera-50/50 p-4 border-t border-slate-100 animate-in slide-in-from-top-2 duration-300">
+                  <div className="bg-cream p-4 border-t border-cream-deeper animate-in slide-in-from-top-2 duration-300">
                     <div className="flex items-center space-x-2 mb-2">
-                      <BrainCircuit className="w-3 h-3 text-aera-600" />
-                      <span className="text-[10px] font-bold text-aera-900 uppercase tracking-widest">Executive Briefing</span>
+                      <BrainCircuit className="w-3 h-3 text-gold" />
+                      <span className="text-[10px] font-bold text-[#1A2E25] uppercase tracking-widest">Executive Briefing</span>
                     </div>
 
                     {loadingId === item.id ? (
-                      <div className="flex items-center space-x-2 text-xs text-slate-500 py-2">
-                        <div className="w-2 h-2 bg-aera-600 rounded-full animate-bounce" />
-                        <div className="w-2 h-2 bg-aera-600 rounded-full animate-bounce delay-75" />
-                        <div className="w-2 h-2 bg-aera-600 rounded-full animate-bounce delay-150" />
-                        <span>Generating professional update...</span>
+                      <div className="flex items-center space-x-2 text-xs text-[#7A9589] py-2">
+                        <div className="w-2 h-2 bg-gold rounded-full animate-bounce" />
+                        <div className="w-2 h-2 bg-gold rounded-full animate-bounce delay-75" />
+                        <div className="w-2 h-2 bg-gold rounded-full animate-bounce delay-150" />
+                        <span>KI-Briefing wird erstellt…</span>
                       </div>
                     ) : (
                       <div className="relative">
-                        <p className="text-sm text-slate-700 leading-relaxed font-medium">
+                        <p className="text-sm text-[#4A6358] leading-relaxed">
                           {briefingCache[item.id]}
                         </p>
                         <div className="mt-3 flex justify-end">
-                          <button className="text-xs text-aera-600 hover:text-aera-900 font-medium underline decoration-dotted">
-                            View Full Details
+                          <button className="text-xs text-forest hover:text-forest-dark font-semibold underline decoration-dotted">
+                            Details ansehen
                           </button>
                         </div>
                       </div>
@@ -458,8 +463,8 @@ const Dashboard: React.FC<{ onSelectAsset?: (propertyId: string) => void }> = ({
               </div>
             ))}
 
-            <button className="w-full py-3 border border-dashed border-slate-300 rounded-lg text-xs text-slate-500 hover:bg-slate-50 hover:text-aera-900 transition-colors font-medium">
-              View All Operations History
+            <button className="w-full py-3 border border-dashed border-cream-deeper rounded-xl text-xs text-[#7A9589] hover:bg-cream-dark hover:text-forest transition-colors font-semibold">
+              Gesamten Verlauf anzeigen
             </button>
           </div>
         </div>

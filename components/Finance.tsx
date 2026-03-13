@@ -32,23 +32,24 @@ const Finance: React.FC = () => {
     return (
         <div className="space-y-6 animate-in fade-in duration-300">
             <div>
-                <h1 className="text-2xl font-bold text-slate-900 flex items-center gap-2">
-                    <Wallet className="w-6 h-6 text-aera-600" />
+                <h1 style={{ fontFamily: '"Cormorant Garamond", serif' }} className="text-3xl font-bold text-[#1A2E25] flex items-center gap-3">
+                    <Wallet className="w-6 h-6 text-gold" />
                     Finanzen
                 </h1>
-                <p className="text-slate-500 mt-1">Portfolio-weite Finanzübersicht</p>
+                <p className="text-[#7A9589] mt-1 text-sm">Portfolio-weite Finanzübersicht</p>
             </div>
 
             {/* Tab Nav */}
-            <div className="flex space-x-1 bg-slate-100 p-1 rounded-lg w-fit">
+            <div className="flex space-x-1 bg-cream-dark p-1 rounded-xl w-fit">
                 {tabs.map(tab => (
                     <button
                         key={tab.id}
                         onClick={() => setActiveTab(tab.id)}
-                        className={`flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-md transition-all ${activeTab === tab.id
-                            ? 'bg-white text-aera-900 shadow-sm'
-                            : 'text-slate-500 hover:text-slate-700'
-                            }`}
+                        className={`flex items-center gap-1.5 px-4 py-2 text-sm font-semibold rounded-lg transition-all ${
+                            activeTab === tab.id
+                            ? 'bg-forest text-white shadow-soft'
+                            : 'text-[#7A9589] hover:text-[#1A2E25]'
+                        }`}
                     >
                         <tab.icon className="w-4 h-4" />
                         {tab.label}
@@ -59,22 +60,18 @@ const Finance: React.FC = () => {
             {/* Content */}
             {activeTab === 'overview' && (
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
-                        <p className="text-xs font-medium text-slate-500 uppercase tracking-wide mb-2">Fakturiert (Monat)</p>
-                        <p className="text-2xl font-bold text-slate-900">€{totalInvoiced.toLocaleString()}</p>
-                    </div>
-                    <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
-                        <p className="text-xs font-medium text-slate-500 uppercase tracking-wide mb-2">Eingezogen</p>
-                        <p className="text-2xl font-bold text-emerald-600">€{totalCollected.toLocaleString()}</p>
-                    </div>
-                    <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
-                        <p className="text-xs font-medium text-slate-500 uppercase tracking-wide mb-2">Ausstehend</p>
-                        <p className="text-2xl font-bold text-amber-600">€{totalOutstanding.toLocaleString()}</p>
-                    </div>
-                    <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
-                        <p className="text-xs font-medium text-slate-500 uppercase tracking-wide mb-2">Überfällig</p>
-                        <p className="text-2xl font-bold text-red-600">{overdueCount}</p>
-                    </div>
+                    {[
+                      { label: 'Fakturiert (Monat)', value: `€${totalInvoiced.toLocaleString()}`, color: 'text-[#1A2E25]' },
+                      { label: 'Eingezogen',          value: `€${totalCollected.toLocaleString()}`, color: 'text-[#3D7A5A]' },
+                      { label: 'Ausstehend',          value: `€${totalOutstanding.toLocaleString()}`, color: 'text-[#C9883A]' },
+                      { label: 'Überfällig',          value: String(overdueCount), color: 'text-[#C94A3A]' },
+                    ].map(card => (
+                      <div key={card.label} className="bg-white rounded-2xl border border-cream-deeper p-5 shadow-soft hover:shadow-medium hover:-translate-y-0.5 transition-all duration-200 relative overflow-hidden">
+                        <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-gold to-transparent" />
+                        <p className="text-xs font-semibold text-[#7A9589] uppercase tracking-wider mb-2">{card.label}</p>
+                        <p className={`text-2xl font-bold ${card.color}`} style={{ fontFamily: '"JetBrains Mono", monospace', letterSpacing: '-0.02em' }}>{card.value}</p>
+                      </div>
+                    ))}
                 </div>
             )}
 

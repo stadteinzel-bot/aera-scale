@@ -176,40 +176,40 @@ const Settings: React.FC = () => {
     return (
         <div className="max-w-4xl mx-auto animate-in fade-in duration-500 pb-10">
             <div className="mb-6">
-                <h1 className="text-2xl font-bold text-aera-900">{t('settings.title')}</h1>
-                <p className="text-slate-500 mt-1">{t('settings.subtitle')}</p>
+                <h1 style={{ fontFamily: '"Cormorant Garamond", serif' }} className="text-3xl font-bold text-[#1A2E25]">{t('settings.title')}</h1>
+                <p className="text-[#7A9589] mt-1 text-sm">{t('settings.subtitle')}</p>
             </div>
 
             {/* Tab Navigation */}
-            <div className="flex items-center gap-1 mb-6 bg-slate-100 rounded-xl p-1">
+            <div className="flex items-center gap-1 mb-6 bg-cream-dark rounded-2xl p-1">
                 <button
                     onClick={() => setSettingsTab('general')}
-                    className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${settingsTab === 'general'
-                        ? 'bg-white text-aera-900 shadow-sm'
-                        : 'text-slate-500 hover:text-slate-700'
+                    className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all ${settingsTab === 'general'
+                        ? 'bg-forest text-white shadow-soft'
+                        : 'text-[#7A9589] hover:text-[#1A2E25]'
                         }`}
                 >
                     <SettingsIcon className="w-4 h-4" /> Allgemein
                 </button>
                 <button
                     onClick={() => setSettingsTab('org')}
-                    className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${settingsTab === 'org'
-                        ? 'bg-white text-aera-900 shadow-sm'
-                        : 'text-slate-500 hover:text-slate-700'
+                    className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all ${settingsTab === 'org'
+                        ? 'bg-forest text-white shadow-soft'
+                        : 'text-[#7A9589] hover:text-[#1A2E25]'
                         }`}
                 >
-                    <Users className="w-4 h-4" /> Organisation & Benutzer
+                    <Users className="w-4 h-4" /> Organisation &amp; Benutzer
                 </button>
                 <button
                     onClick={() => setSettingsTab('bank')}
-                    className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${settingsTab === 'bank'
-                        ? 'bg-white text-aera-900 shadow-sm'
-                        : 'text-slate-500 hover:text-slate-700'
+                    className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all ${settingsTab === 'bank'
+                        ? 'bg-forest text-white shadow-soft'
+                        : 'text-[#7A9589] hover:text-[#1A2E25]'
                         }`}
                 >
                     <Landmark className="w-4 h-4" /> Open Banking
                     {bankConnections.some(c => c.status === 'linked') && (
-                        <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                        <span className="w-2 h-2 rounded-full bg-[#3D7A5A]" />
                     )}
                 </button>
             </div>
@@ -232,15 +232,15 @@ const Settings: React.FC = () => {
                 <div className="space-y-6">
 
                     {/* LANGUAGE SECTION */}
-                    <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-                        <div className="p-6 border-b border-slate-100 bg-gradient-to-r from-indigo-900 to-indigo-800 text-white">
+                    <div className="bg-white rounded-2xl border border-cream-deeper shadow-soft overflow-hidden">
+                        <div className="p-6 border-b border-cream-deeper geo-pattern">
                             <div className="flex items-center space-x-3">
-                                <div className="p-2 bg-white/10 rounded-lg backdrop-blur-sm">
-                                    <Globe className="w-5 h-5 text-indigo-200" />
+                                <div className="p-2 bg-white/10 rounded-xl backdrop-blur-sm">
+                                    <Globe className="w-5 h-5 text-gold" />
                                 </div>
                                 <div>
-                                    <h2 className="text-lg font-bold">{t('settings.language')}</h2>
-                                    <p className="text-sm text-indigo-200">{t('settings.languageDesc')}</p>
+                                    <h2 style={{ fontFamily: '"Cormorant Garamond", serif' }} className="text-xl font-bold text-white">{t('settings.language')}</h2>
+                                    <p className="text-sm text-white/60">{t('settings.languageDesc')}</p>
                                 </div>
                             </div>
                         </div>
@@ -270,15 +270,15 @@ const Settings: React.FC = () => {
                     </div>
 
                     {/* BANKING SECTION */}
-                    <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-                        <div className="p-6 border-b border-slate-100 bg-aera-900 text-white">
+                    <div className="bg-white rounded-2xl border border-cream-deeper shadow-soft overflow-hidden">
+                        <div className="p-6 border-b border-cream-deeper geo-pattern">
                             <div className="flex items-center space-x-3">
-                                <div className="p-2 bg-white/10 rounded-lg backdrop-blur-sm">
-                                    <Landmark className="w-5 h-5 text-aera-100" />
+                                <div className="p-2 bg-white/10 rounded-xl backdrop-blur-sm">
+                                    <Landmark className="w-5 h-5 text-gold" />
                                 </div>
                                 <div>
-                                    <h2 className="text-lg font-bold">{t('settings.banking')}</h2>
-                                    <p className="text-sm text-aera-200">{t('settings.bankingDesc')}</p>
+                                    <h2 style={{ fontFamily: '"Cormorant Garamond", serif' }} className="text-xl font-bold text-white">{t('settings.banking')}</h2>
+                                    <p className="text-sm text-white/60">{t('settings.bankingDesc')}</p>
                                 </div>
                             </div>
                         </div>
@@ -577,8 +577,8 @@ const Settings: React.FC = () => {
 
                     <div className="px-8 py-4 bg-transparent flex justify-between">
                         <button
-                            onClick={() => window.location.hash = '#health'} // Simple hack or use prop if available. Better: parent should handle view change.
-                            className="text-xs text-slate-400 hover:text-aera-600 underline"
+                            onClick={() => window.location.hash = '#health'}
+                            className="text-xs text-[#7A9589] hover:text-forest underline"
                         >
                             System Diagnostics
                         </button>
@@ -586,17 +586,18 @@ const Settings: React.FC = () => {
                         <div className="flex justify-end">
                             <button
                                 onClick={handleSave}
-                                className="flex items-center space-x-2 bg-aera-900 hover:bg-aera-800 text-white px-6 py-2.5 rounded-lg font-medium transition-colors shadow-sm border border-transparent hover:border-aera-600"
+                                className="btn-gold flex items-center gap-2 px-6 py-2.5 text-sm font-semibold shadow-soft"
+                                style={{ width: 'auto', borderRadius: '10px' }}
                             >
                                 {isSaved ? (
                                     <>
-                                        <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                                        <span>Saved Successfully</span>
+                                        <CheckCircle2 className="w-4 h-4" />
+                                        <span>Gespeichert</span>
                                     </>
                                 ) : (
                                     <>
                                         <Save className="w-4 h-4" />
-                                        <span>Save Configuration</span>
+                                        <span>Konfiguration speichern</span>
                                     </>
                                 )}
                             </button>

@@ -50,9 +50,9 @@ const AssetOverview: React.FC<AssetOverviewProps> = ({ property }) => {
     }, [data, property]);
 
     const statusConfig = {
-        Occupied: { label: 'Vermietet', bg: 'bg-emerald-500', text: 'text-white', dot: 'bg-emerald-300' },
-        Vacant: { label: 'Leerstand', bg: 'bg-amber-500', text: 'text-white', dot: 'bg-amber-300' },
-        'Under Maintenance': { label: 'In Sanierung', bg: 'bg-red-500', text: 'text-white', dot: 'bg-red-300' },
+        Occupied: { label: 'Vermietet', bg: 'bg-[#3D7A5A]', text: 'text-white', dot: 'bg-[#8BC9A0]' },
+        Vacant: { label: 'Leerstand', bg: 'bg-[#C9883A]', text: 'text-white', dot: 'bg-[#E2C47A]' },
+        'Under Maintenance': { label: 'In Sanierung', bg: 'bg-[#C94A3A]', text: 'text-white', dot: 'bg-red-300' },
     };
     const status = statusConfig[property.status as keyof typeof statusConfig] || statusConfig['Occupied'];
 
@@ -62,9 +62,9 @@ const AssetOverview: React.FC<AssetOverviewProps> = ({ property }) => {
             value: `${kpis.occupancyRate}%`,
             sub: `${kpis.occupiedUnits} / ${kpis.totalUnits} Einheiten belegt`,
             icon: Home,
-            accent: 'from-emerald-500 to-teal-500',
-            light: 'bg-emerald-50',
-            iconColor: 'text-emerald-600',
+            accent: 'from-forest to-forest-light',
+            light: 'bg-cream-dark',
+            iconColor: 'text-forest',
             alert: false,
         },
         {
@@ -72,9 +72,9 @@ const AssetOverview: React.FC<AssetOverviewProps> = ({ property }) => {
             value: String(kpis.tenantCount),
             sub: kpis.leasesExpiring > 0 ? `${kpis.leasesExpiring} Verträge laufen bald aus` : 'Alle Verträge aktiv',
             icon: Users,
-            accent: 'from-blue-500 to-indigo-500',
-            light: 'bg-blue-50',
-            iconColor: 'text-blue-600',
+            accent: 'from-forest-light to-forest',
+            light: 'bg-cream-dark',
+            iconColor: 'text-forest',
             alert: kpis.leasesExpiring > 0,
         },
         {
@@ -82,9 +82,9 @@ const AssetOverview: React.FC<AssetOverviewProps> = ({ property }) => {
             value: `€${kpis.sollMiete.toLocaleString('de-DE')}`,
             sub: `Ist: €${kpis.collected.toLocaleString('de-DE')} eingegangen`,
             icon: TrendingUp,
-            accent: 'from-aera-500 to-cyan-500',
-            light: 'bg-aera-50',
-            iconColor: 'text-aera-600',
+            accent: 'from-gold to-gold-light',
+            light: 'bg-cream-dark',
+            iconColor: 'text-gold-dark',
             alert: false,
         },
         {
@@ -92,9 +92,9 @@ const AssetOverview: React.FC<AssetOverviewProps> = ({ property }) => {
             value: String(kpis.openTickets),
             sub: kpis.criticalTickets > 0 ? `${kpis.criticalTickets} kritisch` : 'Keine dringenden Fälle',
             icon: Wrench,
-            accent: kpis.criticalTickets > 0 ? 'from-red-500 to-rose-500' : 'from-slate-400 to-slate-500',
-            light: kpis.criticalTickets > 0 ? 'bg-red-50' : 'bg-slate-50',
-            iconColor: kpis.criticalTickets > 0 ? 'text-red-600' : 'text-slate-500',
+            accent: kpis.criticalTickets > 0 ? 'from-[#C94A3A] to-red-400' : 'from-cream-deeper to-cream-dark',
+            light: kpis.criticalTickets > 0 ? 'bg-red-50' : 'bg-cream-dark',
+            iconColor: kpis.criticalTickets > 0 ? 'text-[#C94A3A]' : 'text-[#7A9589]',
             alert: kpis.criticalTickets > 0,
         },
         {
@@ -102,9 +102,9 @@ const AssetOverview: React.FC<AssetOverviewProps> = ({ property }) => {
             value: `€${kpis.invoiced.toLocaleString('de-DE')}`,
             sub: kpis.overdue > 0 ? `${kpis.overdue} überfällig` : 'Alles im grünen Bereich',
             icon: Receipt,
-            accent: 'from-violet-500 to-purple-500',
-            light: 'bg-violet-50',
-            iconColor: 'text-violet-600',
+            accent: 'from-gold-dark to-gold',
+            light: 'bg-cream-dark',
+            iconColor: 'text-gold-dark',
             alert: kpis.overdue > 0,
         },
     ];
@@ -162,22 +162,21 @@ const AssetOverview: React.FC<AssetOverviewProps> = ({ property }) => {
                         initial={{ opacity: 0, y: 12 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.3, delay: i * 0.06, ease: 'easeOut' }}
-                        className="bg-white rounded-xl border border-slate-200 p-4 shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 relative overflow-hidden"
+                        className="bg-white rounded-2xl border border-cream-deeper p-4 shadow-soft hover:shadow-medium transition-all duration-200 hover:-translate-y-0.5 relative overflow-hidden"
                     >
-                        {/* Subtle gradient top bar */}
                         <div className={`absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r ${card.accent}`} />
 
                         <div className="flex items-start justify-between mb-3">
-                            <div className={`p-2 rounded-lg ${card.light}`}>
+                            <div className={`p-2 rounded-xl ${card.light}`}>
                                 <card.icon className={`w-4 h-4 ${card.iconColor}`} />
                             </div>
                             {card.alert && (
-                                <AlertTriangle className="w-3.5 h-3.5 text-amber-500 mt-0.5" />
+                                <AlertTriangle className="w-3.5 h-3.5 text-[#C9883A] mt-0.5" />
                             )}
                         </div>
-                        <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">{card.label}</p>
-                        <div className="text-2xl font-bold text-slate-900 leading-none">{card.value}</div>
-                        <p className="text-xs text-slate-400 mt-1.5 leading-snug">{card.sub}</p>
+                        <p className="text-xs font-semibold text-[#7A9589] uppercase tracking-wider mb-1">{card.label}</p>
+                        <div className="text-2xl font-bold text-[#1A2E25] leading-none" style={{ fontFamily: '"JetBrains Mono", monospace', letterSpacing: '-0.02em' }}>{card.value}</div>
+                        <p className="text-xs text-[#7A9589] mt-1.5 leading-snug">{card.sub}</p>
                     </motion.div>
                 ))}
             </div>
@@ -185,36 +184,36 @@ const AssetOverview: React.FC<AssetOverviewProps> = ({ property }) => {
             {/* ── Description + Landlord side by side ── */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 {property.description && (
-                    <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
-                        <h3 className="text-sm font-bold text-slate-800 mb-2 flex items-center gap-2">
-                            <Building2 className="w-4 h-4 text-aera-600" />
+                    <div className="bg-white rounded-2xl border border-cream-deeper p-5 shadow-soft">
+                        <h3 className="text-sm font-bold text-[#1A2E25] mb-2 flex items-center gap-2">
+                            <Building2 className="w-4 h-4 text-forest" />
                             Objektbeschreibung
                         </h3>
-                        <p className="text-sm text-slate-600 leading-relaxed">{property.description}</p>
+                        <p className="text-sm text-[#4A6358] leading-relaxed">{property.description}</p>
                     </div>
                 )}
 
                 {property.landlord?.name && (
-                    <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
-                        <h3 className="text-sm font-bold text-slate-800 mb-3 flex items-center gap-2">
-                            <Users className="w-4 h-4 text-aera-600" />
+                    <div className="bg-white rounded-2xl border border-cream-deeper p-5 shadow-soft">
+                        <h3 className="text-sm font-bold text-[#1A2E25] mb-3 flex items-center gap-2">
+                            <Users className="w-4 h-4 text-forest" />
                             Vermieter / Eigentümer
                         </h3>
                         <div className="space-y-2 text-sm">
                             <div className="flex justify-between">
-                                <span className="text-slate-400">Name</span>
-                                <span className="font-medium text-slate-900">{property.landlord.name}</span>
+                                <span className="text-[#7A9589]">Name</span>
+                                <span className="font-semibold text-[#1A2E25]">{property.landlord.name}</span>
                             </div>
                             {property.landlord.address && (
                                 <div className="flex justify-between">
-                                    <span className="text-slate-400">Adresse</span>
-                                    <span className="text-slate-700 text-right">{property.landlord.address}, {property.landlord.zipCode} {property.landlord.city}</span>
+                                    <span className="text-[#7A9589]">Adresse</span>
+                                    <span className="text-[#4A6358] text-right">{property.landlord.address}, {property.landlord.zipCode} {property.landlord.city}</span>
                                 </div>
                             )}
                             {property.landlord.email && (
                                 <div className="flex justify-between items-center">
-                                    <span className="text-slate-400">E-Mail</span>
-                                    <a href={`mailto:${property.landlord.email}`} className="text-aera-600 hover:underline flex items-center gap-1">
+                                    <span className="text-[#7A9589]">E-Mail</span>
+                                    <a href={`mailto:${property.landlord.email}`} className="text-forest hover:text-forest-dark underline decoration-dotted flex items-center gap-1">
                                         {property.landlord.email}
                                         <ArrowUpRight className="w-3 h-3" />
                                     </a>
@@ -222,8 +221,8 @@ const AssetOverview: React.FC<AssetOverviewProps> = ({ property }) => {
                             )}
                             {property.landlord.iban && (
                                 <div className="flex justify-between">
-                                    <span className="text-slate-400">IBAN</span>
-                                    <span className="font-mono text-xs text-slate-700 bg-slate-50 px-2 py-0.5 rounded">{property.landlord.iban}</span>
+                                    <span className="text-[#7A9589]">IBAN</span>
+                                    <span className="text-xs text-[#1A2E25] bg-cream-dark px-2 py-0.5 rounded-lg" style={{ fontFamily: '"JetBrains Mono", monospace' }}>{property.landlord.iban}</span>
                                 </div>
                             )}
                         </div>
@@ -233,14 +232,14 @@ const AssetOverview: React.FC<AssetOverviewProps> = ({ property }) => {
 
             {/* ── Amenities ── */}
             {property.amenities && property.amenities.length > 0 && (
-                <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
-                    <h3 className="text-sm font-bold text-slate-800 mb-3 flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+                <div className="bg-white rounded-2xl border border-cream-deeper p-5 shadow-soft">
+                    <h3 className="text-sm font-bold text-[#1A2E25] mb-3 flex items-center gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-[#3D7A5A]" />
                         Ausstattungsmerkmale
                     </h3>
                     <div className="flex flex-wrap gap-2">
                         {property.amenities.map((a, i) => (
-                            <span key={i} className="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-xs font-medium hover:bg-aera-50 hover:text-aera-700 transition-colors">
+                            <span key={i} className="px-3 py-1 bg-cream-dark text-[#4A6358] rounded-full text-xs font-semibold hover:bg-gold/10 hover:text-gold-dark transition-colors border border-cream-deeper">
                                 {a}
                             </span>
                         ))}
