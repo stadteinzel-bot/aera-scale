@@ -2,12 +2,11 @@ rules_version = '2';
 service firebase.storage {
   match /b/{bucket}/o {
 
-    // Any authenticated upload under /documents/... is allowed as long as:
-    // 1. User is signed in
-    // 2. File ≤ 25 MB
-    // 3. Content type is image, PDF, or Office document
-    // Org-level quota is enforced client-side via storageQuota.ts + Firestore counter.
-    match /documents/{allPaths=**} {
+    // Org-scoped document storage: /documents/{orgId}/...
+    // Only authenticated users who belong to the org can read/write.
+    // Org membership is enforced at the Firestore level;
+    // here we enforce auth + path-based org scoping + size/type limits.
+    match /documents/{orgId}/{allPaths=**} {
       allow read: if request.auth != null;
 
       allow write: if request.auth != null

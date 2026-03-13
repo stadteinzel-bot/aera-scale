@@ -1,6 +1,11 @@
 
 import { Property, Tenant, MaintenanceTicket, RevenueData, Message, NotificationSettings } from './types';
 
+// ===== Cross-Domain URLs =====
+// Two-domain architecture: Homepage on GitHub Pages, App on Cloud Run
+export const HOMEPAGE_BASE = 'https://stadteinzel-bot.github.io/aera-scale/homepage';
+export const APP_BASE = 'https://aera-scale-983360724436.europe-west1.run.app';
+
 // ===== PRODUCTION: Mock data removed =====
 // The app now reads all data from Firestore.
 // These empty arrays are kept for type-safety in fallback paths.

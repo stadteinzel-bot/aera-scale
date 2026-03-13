@@ -9,8 +9,13 @@ import corsLib from 'cors';
 const REGION = 'europe-west1';
 const httpsRegion = functions.region(REGION).https;
 
-// CORS middleware
-const _cors = corsLib({ origin: true, methods: ['GET', 'POST', 'OPTIONS'] });
+// CORS middleware — restricted to AERA SCALE domains
+const ALLOWED_ORIGINS = [
+    'https://aera-scale-983360724436.europe-west1.run.app',
+    'http://localhost:5173',
+    'http://localhost:4173',
+];
+const _cors = corsLib({ origin: ALLOWED_ORIGINS, methods: ['GET', 'POST', 'OPTIONS'] });
 function withCors(
     handler: (req: functions.https.Request, res: functions.Response) => Promise<void>
 ) {

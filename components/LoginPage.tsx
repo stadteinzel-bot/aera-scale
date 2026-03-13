@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../services/AuthContext';
+import { HOMEPAGE_BASE } from '../constants';
 import { AlertCircle } from 'lucide-react';
 
-const HOMEPAGE_URL = 'https://stadteinzel-bot.github.io/aera-scale/homepage/';
+const HOMEPAGE_URL = `${HOMEPAGE_BASE}/`;
 
 /* ── Inline CSS injected once ─────────────────────────────────────── */
 const STYLES = `
@@ -582,9 +583,9 @@ const LoginPage: React.FC = () => {
               {isRegister && (
                 <p className="anim-fade anim-d4" style={{ fontSize: '12px', color: '#7A9589', lineHeight: 1.6 }}>
                   Mit der Registrierung stimmen Sie unseren{' '}
-                  <a href="/homepage/agb.html" style={{ color: '#C9A84C', textDecoration: 'none' }}>AGB</a>
+                  <a href={`${HOMEPAGE_BASE}/agb.html`} target="_blank" rel="noopener" style={{ color: '#C9A84C', textDecoration: 'none' }}>AGB</a>
                   {' '}und der{' '}
-                  <a href="/homepage/datenschutz.html" style={{ color: '#C9A84C', textDecoration: 'none' }}>Datenschutzerklärung</a>
+                  <a href={`${HOMEPAGE_BASE}/datenschutz.html`} target="_blank" rel="noopener" style={{ color: '#C9A84C', textDecoration: 'none' }}>Datenschutzerklärung</a>
                   {' '}zu.
                 </p>
               )}
@@ -638,15 +639,15 @@ const LoginPage: React.FC = () => {
             {/* Footer links */}
             <div className="anim-fade anim-d6" style={{ marginTop: '32px', paddingTop: '18px', borderTop: '1px solid #D4CFC6', textAlign: 'center' }}>
               <p style={{ fontSize: '12px', color: '#7A9589' }}>
-                <a href="/homepage/datenschutz.html" style={{ color: '#7A9589', textDecoration: 'none' }}
+                <a href={`${HOMEPAGE_BASE}/datenschutz.html`} target="_blank" rel="noopener" style={{ color: '#7A9589', textDecoration: 'none' }}
                    onMouseOver={e => (e.currentTarget.style.color = '#C9A84C')}
                    onMouseOut={e  => (e.currentTarget.style.color = '#7A9589')}>Datenschutz</a>
                 {' · '}
-                <a href="/homepage/agb.html" style={{ color: '#7A9589', textDecoration: 'none' }}
+                <a href={`${HOMEPAGE_BASE}/agb.html`} target="_blank" rel="noopener" style={{ color: '#7A9589', textDecoration: 'none' }}
                    onMouseOver={e => (e.currentTarget.style.color = '#C9A84C')}
                    onMouseOut={e  => (e.currentTarget.style.color = '#7A9589')}>AGB</a>
                 {' · '}
-                <a href="/homepage/impressum.html" style={{ color: '#7A9589', textDecoration: 'none' }}
+                <a href={`${HOMEPAGE_BASE}/impressum.html`} target="_blank" rel="noopener" style={{ color: '#7A9589', textDecoration: 'none' }}
                    onMouseOver={e => (e.currentTarget.style.color = '#C9A84C')}
                    onMouseOut={e  => (e.currentTarget.style.color = '#7A9589')}>Impressum</a>
               </p>
