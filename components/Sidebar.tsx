@@ -164,8 +164,8 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, onChangeView, hasActiveA
           />
         ))}
 
-        {/* Divider */}
-        <div style={{ width: 32, height: 1, background: 'rgba(255,255,255,0.08)', margin: '8px 0' }} />
+
+
 
         <NavBtn
           label="Mieter-Portal"
