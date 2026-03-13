@@ -10,7 +10,7 @@
 
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 
 const BASE_URL = 'https://bankaccountdata.gocardless.com/api/v2';
 const REGION = 'europe-west1';
@@ -71,7 +71,7 @@ function gcHeaders(token: string) {
 }
 
 function handleGcError(error: unknown, res: functions.Response): void {
-    if (error instanceof AxiosError) {
+    if (axios.isAxiosError(error)) {
         console.error('[GoCardless] API error:', error.response?.data);
         res.status(error.response?.status ?? 502).json({ error: error.response?.data ?? error.message });
     } else if (error instanceof functions.https.HttpsError) {
