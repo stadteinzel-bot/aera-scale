@@ -3,7 +3,7 @@ name: Deploy AERA SCALE
 on:
   push:
     branches:
-      - main
+      - master
   workflow_dispatch:   # allow manual trigger from GitHub UI
 
 env:
