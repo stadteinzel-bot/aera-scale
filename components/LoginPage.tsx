@@ -621,28 +621,16 @@ const LoginPage: React.FC = () => {
 
               {/* SSO buttons */}
               <div className="anim-fade anim-d5" style={{ display: 'flex', gap: '10px' }}>
-                {/* Google */}
+                {/* Google — full width until Apple is configured */}
                 <button
                   type="button"
                   className="btn-sso"
                   disabled={!!ssoLoading}
                   onClick={() => handleSSO('google')}
-                  style={{ opacity: ssoLoading && ssoLoading !== 'google' ? 0.5 : 1 }}
+                  style={{ flex: 1 }}
                 >
                   {ssoLoading === 'google' ? <Spinner color="#4285F4" /> : <GoogleIcon />}
                   <span>{ssoLoading === 'google' ? 'Laden…' : `Mit Google ${isRegister ? 'registrieren' : 'anmelden'}`}</span>
-                </button>
-
-                {/* Apple */}
-                <button
-                  type="button"
-                  className="btn-sso btn-sso-apple"
-                  disabled={!!ssoLoading}
-                  onClick={() => handleSSO('apple')}
-                  style={{ opacity: ssoLoading && ssoLoading !== 'apple' ? 0.5 : 1 }}
-                >
-                  {ssoLoading === 'apple' ? <Spinner color="white" /> : <AppleIcon />}
-                  <span>{ssoLoading === 'apple' ? 'Laden…' : `Mit Apple ${isRegister ? 'registrieren' : 'anmelden'}`}</span>
                 </button>
               </div>
             </form>
