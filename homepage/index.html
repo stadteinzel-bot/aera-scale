@@ -13,18 +13,29 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://stadteinzel-bot.github.io/aera-scale/homepage/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ══ 01 NAVIGATION ══════════════════════════════════════════════ -->
 <nav id="navbar">
   <a href="#" class="nav-brand">
-    <div class="nav-logo"></div>
+    <svg class="nav-logo-svg" width="36" height="36" viewBox="0 0 64 64" fill="none">
+      <rect x="8"  y="24" width="20" height="32" rx="2" fill="#2D4A3E" opacity="0.9"/>
+      <rect x="16" y="12" width="32" height="44" rx="2" fill="#2D4A3E" opacity="0.5"/>
+      <rect x="36" y="20" width="20" height="36" rx="2" fill="#2D4A3E" opacity="0.8"/>
+      <rect x="26" y="22" width="5" height="5" rx="1" fill="#C9A84C"/>
+      <rect x="26" y="33" width="5" height="5" rx="1" fill="#C9A84C"/>
+      <rect x="26" y="44" width="5" height="5" rx="1" fill="#C9A84C"/>
+      <rect x="14" y="30" width="5" height="5" rx="1" fill="#C9A84C"/>
+      <rect x="14" y="41" width="5" height="5" rx="1" fill="#C9A84C"/>
+      <rect x="43" y="28" width="5" height="5" rx="1" fill="#C9A84C"/>
+      <rect x="43" y="39" width="5" height="5" rx="1" fill="#C9A84C"/>
+    </svg>
     <div class="nav-wordmark">
-      <span>AERA SCALE</span>
-      <span>Property Operating System</span>
+      <span class="nav-name">AERA SCALE</span>
+      <span class="nav-sub">Property Operating System</span>
     </div>
   </a>
   <ul class="nav-links">
@@ -36,25 +47,26 @@
   </ul>
   <div class="nav-actions">
     <a href="https://aera-scale-983360724436.europe-west1.run.app/?mode=login" class="btn-login">Anmelden</a>
-    <a href="https://aera-scale-983360724436.europe-west1.run.app/?mode=register" class="btn-cta">Kostenlos starten</a>
+    <a href="https://aera-scale-983360724436.europe-west1.run.app/?mode=register" class="btn-cta-nav">Kostenlos starten</a>
   </div>
   <button class="nav-ham" id="hamburger" aria-label="Menü öffnen">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
-<!-- MOBILE MENU -->
+<!-- Mobile Menu -->
 <div class="mob-menu" id="mobileMenu">
   <a href="#features">Funktionen</a>
   <a href="#fuerwen">Für wen</a>
   <a href="#pricing">Preise</a>
   <a href="#faq">FAQ</a>
   <a href="#about">Über uns</a>
-  <a href="https://aera-scale-983360724436.europe-west1.run.app/?mode=register">Kostenlos starten</a>
+  <a href="https://aera-scale-983360724436.europe-west1.run.app/?mode=register" class="mob-cta">Kostenlos starten</a>
 </div>
 
-<!-- HERO -->
-<section class="hero">
+<!-- ══ 02 HERO ════════════════════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="hero-dot-grid"></div>
   <div class="hero-l">
     <div class="hero-eyebrow">
       <div class="hero-eyebrow-line"></div>
@@ -64,27 +76,50 @@
       Jede Einheit<br><em>intelligent</em><br>verwalten.
     </h1>
     <p class="hero-sub">
-      Von einer einzelnen Wohnung bis zum gesamten Gewerbepark — AERA SCALE ist das
-      Property Operating System für Eigentümer, Vermieter und Betreiber.
-      Einheiten, Mieter, Verträge, Dokumente und Finanzen in einem skalierbaren System.
-      Ein Hausverwalter kostet <strong>€ 110 pro Einheit</strong>.
+      Von einer einzelnen Wohnung bis zum gesamten Gewerbepark —
+      AERA SCALE automatisiert Ihre Verwaltung.
+      Ein Hausverwalter kostet <strong>€ 110/Einheit</strong>.
       AERA SCALE kostet ab <strong>€ 20.</strong>
     </p>
     <div class="hero-btns">
-      <a href="https://aera-scale-983360724436.europe-west1.run.app/?mode=register" class="btn-p">Kostenlos starten</a>
-      <a href="#features" class="btn-s">Funktionen entdecken</a>
+      <a href="https://aera-scale-983360724436.europe-west1.run.app/?mode=register" class="btn-gold-lg">Kostenlos starten</a>
+      <a href="#features" class="btn-outline-lg">Funktionen entdecken ↓</a>
     </div>
     <div class="hero-trust">
-      <div class="hero-trust-item"><span>🔒</span> DSGVO-konform</div>
-      <div class="hero-trust-item"><span>🏦</span> Open Banking (PSD2)</div>
-      <div class="hero-trust-item"><span>🇩🇪</span> Server in Deutschland</div>
+      <div class="hero-trust-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        DSGVO-konform
+      </div>
+      <div class="hero-trust-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        Open Banking PSD2
+      </div>
+      <div class="hero-trust-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        Server in Deutschland
+      </div>
     </div>
   </div>
-  <div class="hero-r">
-    <div class="dash-wrap">
+
+  <div class="hero-r" id="heroR">
+    <div class="hero-stats-row">
+      <div class="hero-stat">
+        <div class="hero-stat-val" data-count="1240">0</div>
+        <div class="hero-stat-label">Verwaltete Einheiten</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-val" data-prefix="€ " data-count="24" data-suffix="M">0</div>
+        <div class="hero-stat-label">Portfolio-Gesamtwert</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-val" data-count="98" data-suffix="%">0</div>
+        <div class="hero-stat-label">Kundenzufriedenheit</div>
+      </div>
+    </div>
+    <div class="dash-wrap" id="dashWrap">
       <div class="dash-chrome">
         <div class="dash-topbar">
-          <div class="dash-dots"><div class="dash-dot"></div><div class="dash-dot"></div><div class="dash-dot"></div></div>
+          <div class="dash-dots"><div class="dash-dot r"></div><div class="dash-dot y"></div><div class="dash-dot g"></div></div>
           <div class="dash-title-bar">AERA SCALE DASHBOARD</div>
         </div>
         <div class="dash-body">
@@ -115,300 +150,464 @@
   </div>
 </section>
 
-<!-- TRUST BAR -->
+<!-- ══ TRUST BAR ═════════════════════════════════════════════════ -->
 <div class="trust-bar">
   <div class="trust-bar-item"><strong>Ab € 20</strong> / Einheit / Monat</div>
+  <div class="trust-bar-sep"></div>
   <div class="trust-bar-item"><strong>Open Banking</strong> PSD2-zertifiziert</div>
+  <div class="trust-bar-sep"></div>
   <div class="trust-bar-item"><strong>KI-Analyse</strong> Google Gemini</div>
-  <div class="trust-bar-item"><strong>DSGVO</strong> 100 % konform</div>
-  <div class="trust-bar-item"><strong>Made in Germany</strong> Entwickelt in Berlin</div>
+  <div class="trust-bar-sep"></div>
+  <div class="trust-bar-item"><strong>DSGVO</strong> 100% konform</div>
+  <div class="trust-bar-sep"></div>
+  <div class="trust-bar-item"><strong>Made in Germany</strong> · Berlin</div>
 </div>
 
-<!-- PROBLEM / SOLUTION -->
-<section class="sec" id="problem">
-  <div class="eyebrow reveal"><div class="eyebrow-line"></div><span>Das Problem</span></div>
-  <h2 class="sec-title reveal">Immobilienverwaltung ist <em>komplex</em> — ohne das richtige System</h2>
-  <div class="prob-grid">
-    <div class="prob-list reveal">
-      <div class="prob-item"><div class="prob-icon">📁</div><div><h4>Verstreute Verträge</h4><p>Mietverträge liegen in Ordnern, auf dem Desktop, beim Steuerberater. Nichts ist zentral abrufbar.</p></div></div>
-      <div class="prob-item"><div class="prob-icon">👤</div><div><h4>Fehlende Mieterübersicht</h4><p>Wer zahlt? Wer hat gekündigt? Welcher Vertrag läuft ab? — Antworten kosten jedes Mal Suchzeit.</p></div></div>
-      <div class="prob-item"><div class="prob-icon">📊</div><div><h4>Unklare Finanzen</h4><p>Kontoauszüge manuell mit Mietern abgleichen. Teilzahlungen, fehlende Verwendungszwecke — fehleranfällig.</p></div></div>
-      <div class="prob-item"><div class="prob-icon">📈</div><div><h4>Wachsende Komplexität</h4><p>Jede neue Einheit erhöht den Verwaltungsaufwand exponentiell. Excel-Tabellen skalieren nicht.</p></div></div>
-      <div class="prob-item"><div class="prob-icon">💰</div><div><h4>Teure Hausverwaltung</h4><p>Ein professioneller Hausverwalter kostet durchschnittlich € 110 pro Einheit pro Monat — für manuelle Arbeit.</p></div></div>
+<!-- ══ 03 PROBLEM → LÖSUNG ════════════════════════════════════════ -->
+<section class="sec prob-sec reveal-section" id="problem">
+  <div class="sec-eyebrow">
+    <div class="eyebrow-line"></div><span>Das Problem</span>
+  </div>
+  <h2 class="sec-h2">Warum nicht mehr <em>manuell</em>?</h2>
+  <div class="prob-split">
+    <div class="prob-col reveal">
+      <div class="prob-col-label">Bisher</div>
+      <div class="prob-item prob-bad">
+        <div class="prob-x">✕</div>
+        <div>
+          <strong>Hausverwalter: € 110 / Einheit</strong>
+          <p>10 Einheiten = € 1.100 / Monat für manuelle Arbeit</p>
+        </div>
+      </div>
+      <div class="prob-item prob-bad">
+        <div class="prob-x">✕</div>
+        <div><strong>Excel-Chaos</strong><p>Verstreute Tabellen, keine Übersicht, Fehleranfällig</p></div>
+      </div>
+      <div class="prob-item prob-bad">
+        <div class="prob-x">✕</div>
+        <div><strong>Kein Live-Dashboard</strong><p>Wer hat gezahlt? Kein 24/7-Zugriff</p></div>
+      </div>
+      <div class="prob-item prob-bad">
+        <div class="prob-x">✕</div>
+        <div><strong>Papier-Verträge</strong><p>Fristen verpassen, keine automatischen Erinnerungen</p></div>
+      </div>
+      <div class="prob-item prob-bad">
+        <div class="prob-x">✕</div>
+        <div><strong>Manuelle NK-Abrechnung</strong><p>Tage Arbeit — fehleranfällig und zeitaufwändig</p></div>
+      </div>
     </div>
-    <div class="sol-box reveal">
-      <h3>AERA SCALE <em>zentralisiert</em> alles in einem System</h3>
-      <p>Statt verstreuter Werkzeuge vereint AERA SCALE alle Aspekte Ihrer Immobilienverwaltung — von der ersten Wohnung bis zum gesamten Gewerbepark.</p>
-      <div class="sol-list">
-        <div class="sol-item">Einheiten, Mieter und Verträge strukturiert verwalten</div>
-        <div class="sol-item">KI-gestützter Zahlungsabgleich via Open Banking</div>
-        <div class="sol-item">Automatische Mietrechnungen und Nebenkostenabrechnung</div>
-        <div class="sol-item">KI-Vertragsanalyse liest Klauseln, Fristen und Risiken</div>
-        <div class="sol-item">Alle Dokumente digital und DSGVO-sicher archiviert</div>
-        <div class="sol-item">Ab € 20 pro Einheit — statt € 110 beim Hausverwalter</div>
+
+    <div class="prob-arrow reveal">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5">
+        <line x1="5" y1="12" x2="19" y2="12"/>
+        <polyline points="12 5 19 12 12 19"/>
+      </svg>
+    </div>
+
+    <div class="prob-col sol-col reveal">
+      <div class="prob-col-label sol-label">Mit AERA SCALE</div>
+      <div class="prob-item prob-good">
+        <div class="prob-check">✓</div>
+        <div><strong>Ab € 20 / Einheit</strong><p>10 Einheiten = € 200 / Monat — € 900 gespart</p></div>
+      </div>
+      <div class="prob-item prob-good">
+        <div class="prob-check">✓</div>
+        <div><strong>Alles digital</strong><p>Ein System für Einheiten, Mieter, Finanzen, Dokumente</p></div>
+      </div>
+      <div class="prob-item prob-good">
+        <div class="prob-check">✓</div>
+        <div><strong>Live-Dashboard 24/7</strong><p>Status aller Mieter und Zahlungen in Echtzeit</p></div>
+      </div>
+      <div class="prob-item prob-good">
+        <div class="prob-check">✓</div>
+        <div><strong>KI-Vertragsanalyse</strong><p>Google Gemini liest Klauseln und Fristen in Sekunden</p></div>
+      </div>
+      <div class="prob-item prob-good">
+        <div class="prob-check">✓</div>
+        <div><strong>KI-Abrechnung auf Knopfdruck</strong><p>Rechtskonforme NK-Abrechnung vollautomatisch</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="savings-banner reveal">
+    <span class="savings-label">Ersparnis bei 10 Einheiten:</span>
+    <span class="savings-val">€ 900 / Monat</span>
+    <span class="savings-sub">= <strong>€ 10.800 / Jahr</strong></span>
+  </div>
+</section>
+
+<!-- ══ 04 FEATURES BENTO GRID ════════════════════════════════════ -->
+<section class="sec bento-sec reveal-section" id="features" style="background:var(--crd)">
+  <div class="sec-eyebrow"><div class="eyebrow-line"></div><span>Plattform</span></div>
+  <h2 class="sec-h2">Alles in einem <em>System</em>.</h2>
+  <p class="sec-lead">Von der ersten Einheit bis zum professionellen Portfolio — AERA SCALE automatisiert Ihren Verwaltungsalltag.</p>
+  <div class="bento-grid">
+    <div class="bento-card bento-large reveal" style="--d:0ms">
+      <div class="bento-icon-circle">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <h3 class="bento-title">Einheiten & Mieter</h3>
+      <p class="bento-text">Jede Einheit mit Mieterstammdaten, IBAN, KPI-Dashboard und Dokumenten. Wohnungen, Büros, Gewerbe — unbegrenzt skalierbar.</p>
+      <ul class="bento-list">
+        <li>Alle Einheitentypen (Wohnung, Büro, Gewerbe, Lager)</li>
+        <li>Mieterstammdaten mit IBAN-Hinterlegung</li>
+        <li>Rendite-KPIs und Leerstandsquote live</li>
+      </ul>
+      <div class="bento-mini-dash">
+        <div class="bmi-row"><span class="bmi-dot green"></span><span>WE 01 · M. Schmidt</span><span class="bmi-tag paid">Bezahlt</span></div>
+        <div class="bmi-row"><span class="bmi-dot green"></span><span>WE 02 · K. Weber</span><span class="bmi-tag paid">Bezahlt</span></div>
+        <div class="bmi-row"><span class="bmi-dot orange"></span><span>GE 03 · L. Bauer</span><span class="bmi-tag open">Offen</span></div>
+      </div>
+    </div>
+
+    <div class="bento-card reveal" style="--d:100ms">
+      <div class="bento-icon-circle">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+      </div>
+      <h3 class="bento-title">Open Banking</h3>
+      <p class="bento-text">Konto via Tink (PSD2) verbinden. Eingehende Zahlungen werden automatisch dem richtigen Mieter zugeordnet.</p>
+      <div class="bento-bank-icons">
+        <div class="bank-chip">ING</div>
+        <div class="bank-chip">DKB</div>
+        <div class="bank-chip">Sparkasse</div>
+        <div class="bank-chip">Volksbank</div>
+      </div>
+    </div>
+
+    <div class="bento-card reveal" style="--d:200ms">
+      <div class="bento-icon-circle">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+      </div>
+      <h3 class="bento-title">KI-Zahlungsabgleich</h3>
+      <p class="bento-text">Google Gemini erkennt Zahlungen anhand IBAN & Verwendungszweck. Sofortige Markierung: bezahlt / offen / Verzug.</p>
+    </div>
+
+    <div class="bento-card reveal" style="--d:300ms">
+      <div class="bento-icon-circle">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      </div>
+      <h3 class="bento-title">Dokumente & PDFs</h3>
+      <p class="bento-text">Verträge, Rechnungen, Protokolle — digital, durchsuchbar, DSGVO-sicher. 50 GB Speicher, Volltextsuche, 10 Jahre Archiv.</p>
+    </div>
+
+    <div class="bento-card bento-wide reveal" style="--d:400ms">
+      <div class="bento-icon-circle">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      </div>
+      <h3 class="bento-title">Finanzen & NK-Abrechnung</h3>
+      <p class="bento-text">Mietrechnungen automatisch am 1. jeden Monats. Betriebskostenabrechnung nach §2 BetrKV auf Knopfdruck — rechtssicher, DSGVO-konform.</p>
+      <div class="bento-finance-bar">
+        <div class="fin-bar-item"><span class="fin-bar-label">Mieteinnahmen</span><span class="fin-bar-val">€ 18.240</span></div>
+        <div class="fin-bar-item"><span class="fin-bar-label">Offen</span><span class="fin-bar-val open">€ 840</span></div>
+        <div class="fin-bar-item"><span class="fin-bar-label">Rendite</span><span class="fin-bar-val green">5,8%</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- UNIT-BASED MANAGEMENT -->
-<section class="unit-sec" id="units">
-  <div class="eyebrow reveal"><div class="eyebrow-line"></div><span>Das Konzept</span></div>
-  <h2 class="sec-title reveal">Gebaut rund um <em>Einheiten</em></h2>
-  <p class="sec-lead reveal">AERA SCALE denkt in Einheiten — nicht in Gebäuden. Jede Einheit kann eine Wohnung, ein Büro, ein Lager oder eine Gewerbefläche sein. Starten Sie mit einer Einheit und wachsen Sie ohne Systemwechsel.</p>
-  <div class="unit-grid">
-    <div class="unit-card reveal"><div class="unit-card-num">01</div><div class="unit-card-icon">🏠</div><h3>Wohnung</h3><p>Mietwohnung, Eigentumswohnung oder WG-Einheit. Verwalten Sie Mieter, Vertrag und Nebenkosten an einem Ort.</p></div>
-    <div class="unit-card reveal"><div class="unit-card-num">02</div><div class="unit-card-icon">🏢</div><h3>Büro</h3><p>Büroflächen von 20 bis 500 qm. Gewerbliche Mietverträge, Staffelmiete und individuelle Abrechnungsmodelle.</p></div>
-    <div class="unit-card reveal"><div class="unit-card-num">03</div><div class="unit-card-icon">🏪</div><h3>Einzelhandel</h3><p>Ladenflächen, Gastronomieflächen und Showrooms. Umsatzbeteiligung und Sondervereinbarungen abbilden.</p></div>
-    <div class="unit-card reveal"><div class="unit-card-num">04</div><div class="unit-card-icon">📦</div><h3>Lager & Logistik</h3><p>Lagerflächen, Kühlräume und Logistikparzellen. Einfache Verwaltung auch ohne klassische Mieter.</p></div>
-    <div class="unit-card reveal"><div class="unit-card-num">05</div><div class="unit-card-icon">🏗️</div><h3>Gewerbe</h3><p>Werkstätten, Produktionshallen und Mixed-Use. Flexible Vertragslaufzeiten und Sonderkündigungsrechte.</p></div>
-    <div class="unit-card reveal"><div class="unit-card-num">06</div><div class="unit-card-icon">🏙️</div><h3>Gewerbepark</h3><p>Ganze Parkstrukturen mit 20–100+ Einheiten. Mandantenübergreifend, multi-user, skalierbar.</p></div>
+<!-- ══ 05 PREISE (INTERACTIVE SLIDER) ════════════════════════════ -->
+<section class="sec pricing-sec reveal-section" id="pricing">
+  <div class="sec-eyebrow" style="justify-content:center"><div class="eyebrow-line"></div><span>Preise</span><div class="eyebrow-line"></div></div>
+  <h2 class="sec-h2 center">Transparent. Skalierbar. <em>Fair.</em></h2>
+  <p class="sec-lead center">Der Preis richtet sich nach Ihrer Einheitenanzahl — je mehr, desto günstiger.</p>
+
+  <div class="slider-wrap reveal">
+    <div class="slider-label-row">
+      <span class="slider-label">Anzahl Einheiten:</span>
+      <span class="slider-value" id="sliderVal">10</span>
+    </div>
+    <input type="range" min="1" max="200" value="10" class="price-slider" id="priceSlider">
+    <div class="slider-marks"><span>1</span><span>50</span><span>100</span><span>200+</span></div>
   </div>
+
+  <div class="pricing-cards reveal">
+    <div class="pricing-card">
+      <div class="pc-tier">Starter</div>
+      <div class="pc-price"><span class="pc-val" id="starterPrice">€ 200</span><span class="pc-per">/ Monat</span></div>
+      <div class="pc-per-unit" id="starterUnit">€ 20 / Einheit</div>
+      <ul class="pc-list">
+        <li>Einheiten & Mieterverwaltung</li>
+        <li>Mietrechnungen automatisch</li>
+        <li>Dokumente bis 10 GB</li>
+        <li>KI-Vertragsanalyse</li>
+        <li>E-Mail Support</li>
+      </ul>
+      <a href="https://aera-scale-983360724436.europe-west1.run.app/?mode=register" class="pc-cta">14 Tage kostenlos</a>
+    </div>
+
+    <div class="pricing-card pricing-featured">
+      <div class="pc-badge">Beliebteste Wahl</div>
+      <div class="pc-tier">Professional</div>
+      <div class="pc-price"><span class="pc-val" id="proPrice">€ 160</span><span class="pc-per">/ Monat</span></div>
+      <div class="pc-per-unit" id="proUnit">€ 16 / Einheit</div>
+      <ul class="pc-list">
+        <li>Alles aus Starter</li>
+        <li>Open Banking (PSD2)</li>
+        <li>KI-Zahlungsabgleich</li>
+        <li>NK-Abrechnung automatisch</li>
+        <li>Dokumente bis 50 GB</li>
+        <li>Priority Support</li>
+      </ul>
+      <a href="https://aera-scale-983360724436.europe-west1.run.app/?mode=register" class="pc-cta pc-cta-gold">Pro testen →</a>
+    </div>
+
+    <div class="pricing-card">
+      <div class="pc-tier">Enterprise</div>
+      <div class="pc-price"><span class="pc-val" id="entPrice">€ 120</span><span class="pc-per">/ Monat</span></div>
+      <div class="pc-per-unit" id="entUnit">€ 12 / Einheit</div>
+      <ul class="pc-list">
+        <li>Alles aus Professional</li>
+        <li>DATEV-Export</li>
+        <li>Multi-Mandanten</li>
+        <li>API-Zugang</li>
+        <li>SLA 99,5% Uptime</li>
+        <li>Dedicated Support</li>
+      </ul>
+      <a href="https://aera-scale-983360724436.europe-west1.run.app/?mode=register" class="pc-cta">Enterprise anfragen</a>
+    </div>
+  </div>
+  <p class="pricing-note reveal">✓ Keine Kreditkarte · ✓ Jederzeit kündbar · ✓ DSGVO-konform</p>
 </section>
 
-<!-- FOR WHOM -->
-<section class="sec" id="fuerwen">
-  <div class="eyebrow reveal"><div class="eyebrow-line"></div><span>Für wen ist AERA SCALE?</span></div>
-  <h2 class="sec-title reveal">Die smarte Wahl für <em>jeden</em> Eigentümer</h2>
-  <p class="sec-lead reveal">Ob Sie eine einzelne Wohnung oder einen gesamten Gewerbepark verwalten — AERA SCALE passt sich Ihrem Portfolio an.</p>
+<!-- ══ 06 FÜR WEN ════════════════════════════════════════════════ -->
+<section class="sec persona-sec reveal-section" id="fuerwen" style="background:var(--crd)">
+  <div class="sec-eyebrow"><div class="eyebrow-line"></div><span>Für wen?</span></div>
+  <h2 class="sec-h2">Die smarte Wahl für <em>jeden</em> Eigentümer</h2>
   <div class="persona-grid">
-    <div class="p-card reveal">
-      <div class="p-icon">🏠</div>
+    <div class="p-card reveal" style="--d:0ms">
+      <div class="p-icon-wrap">🏠</div>
       <div class="p-tag">1–10 Einheiten</div>
       <div class="p-title">Der private Eigentümer</div>
-      <p class="p-desc">Sie verwalten 1–10 Wohnungen nebenbei — neben Job und Familie. Excel-Tabellen und Papierkram kosten Sie Stunden, die Sie nicht haben. Ein Hausverwalter wäre zu teuer.</p>
+      <p class="p-desc">Sie verwalten 1–10 Wohnungen nebenbei. Excel-Tabellen kosten Stunden. Ein Hausverwalter wäre zu teuer.</p>
       <ul class="p-list">
-        <li>Automatischer Zahlungsabgleich via Open Banking</li>
-        <li>KI liest Mietverträge aus — in Sekunden</li>
-        <li>Mietrechnungen werden am 1. automatisch versandt</li>
-        <li>Alle Dokumente digital und DSGVO-sicher</li>
+        <li>Automatischer Zahlungsabgleich</li>
+        <li>KI liest Mietverträge in Sekunden</li>
+        <li>Mietrechnungen am 1. automatisch</li>
+        <li>Alle Dokumente digital & DSGVO-sicher</li>
       </ul>
-      <div class="p-price">Starter: <strong>ab € 20 / Einheit / Monat</strong></div>
-      <a href="https://aera-scale-983360724436.europe-west1.run.app/?mode=register" class="p-cta">14 Tage kostenlos testen</a>
+      <div class="p-price">Starter: <strong>ab € 20 / Einheit</strong></div>
+      <a href="https://aera-scale-983360724436.europe-west1.run.app/?mode=register" class="p-cta">14 Tage kostenlos</a>
     </div>
-    <div class="p-card reveal">
-      <div class="p-icon">🏢</div>
+    <div class="p-card p-card-featured reveal" style="--d:100ms">
+      <div class="p-icon-wrap">🏢</div>
       <div class="p-tag">11–50 Einheiten</div>
       <div class="p-title">Der wachsende Vermieter</div>
-      <p class="p-desc">Ihr Portfolio wächst — aber die Tools nicht. Hausverwaltungen kosten bis zu € 110 pro Einheit. Sie wollen die Kontrolle behalten, ohne den Verwaltungsaufwand.</p>
+      <p class="p-desc">Ihr Portfolio wächst — aber die Tools nicht. Sie wollen die Kontrolle behalten, ohne den Aufwand.</p>
       <ul class="p-list">
-        <li>Open Banking: Bank direkt mit Mietern verknüpft</li>
-        <li>Automatische Mahnungen bei Zahlungsverzug</li>
-        <li>Multi-Immobilien-Dashboard mit KPIs</li>
-        <li>Betriebskostenabrechnung nach §2 BetrKV</li>
+        <li>Open Banking: Bank direkt verknüpft</li>
+        <li>Automatische Mahnungen</li>
+        <li>Multi-Immobilien Dashboard</li>
+        <li>Betriebskostenabrechnung §2 BetrKV</li>
       </ul>
-      <div class="p-price">Pro: <strong>ab € 16 / Einheit / Monat</strong></div>
-      <a href="https://aera-scale-983360724436.europe-west1.run.app/?mode=register" class="p-cta">Pro 14 Tage testen</a>
+      <div class="p-price">Pro: <strong>ab € 16 / Einheit</strong></div>
+      <a href="https://aera-scale-983360724436.europe-west1.run.app/?mode=register" class="p-cta p-cta-gold">Pro 14 Tage testen</a>
     </div>
-    <div class="p-card reveal">
-      <div class="p-icon">🏙️</div>
+    <div class="p-card reveal" style="--d:200ms">
+      <div class="p-icon-wrap">🏙️</div>
       <div class="p-tag">50+ Einheiten</div>
-      <div class="p-title">Betreiber &amp; Gewerbeparks</div>
-      <p class="p-desc">Sie verwalten große Bestände, Gewerbeparks oder Mixed-Use-Portfolios. Sie brauchen DATEV-Export, API-Zugang und garantierte Verfügbarkeit.</p>
+      <div class="p-title">Betreiber & Gewerbeparks</div>
+      <p class="p-desc">Sie verwalten große Bestände oder Mixed-Use-Portfolios. Sie brauchen DATEV-Export und API-Zugang.</p>
       <ul class="p-list">
-        <li>Dedizierter Support &amp; SLA (99,5 % Uptime)</li>
-        <li>DATEV-Export für Ihre Buchhaltung</li>
+        <li>Dedizierter Support & SLA</li>
+        <li>DATEV-Export</li>
         <li>Multi-Mandanten für mehrere Portfolios</li>
-        <li>API-Zugang für individuelle Integrationen</li>
+        <li>API-Zugang für Integrationen</li>
       </ul>
-      <div class="p-price">Enterprise: <strong>ab € 12 / Einheit / Monat</strong></div>
+      <div class="p-price">Enterprise: <strong>ab € 12 / Einheit</strong></div>
       <a href="https://aera-scale-983360724436.europe-west1.run.app/?mode=register" class="p-cta">Enterprise anfragen</a>
     </div>
   </div>
 </section>
 
-<!-- FEATURES -->
-<section class="sec" id="features" style="background:var(--crd)">
-  <div class="eyebrow reveal"><div class="eyebrow-line"></div><span>Plattform</span></div>
-  <h2 class="sec-title reveal">Alles was Sie <em>brauchen</em></h2>
-  <p class="sec-lead reveal">Von der ersten Einheit bis zum professionellen Portfolio — AERA SCALE automatisiert Ihren Verwaltungsalltag.</p>
-  <div class="feat-grid">
-    <div class="feat-card reveal" data-n="01"><div class="feat-ico">🏠</div><div class="feat-title">Einheiten-Management</div><p class="feat-text">Erstellen Sie Immobilien mit unbegrenzt vielen Einheiten. Wohnungen, Büros, Gewerbe — alles strukturiert und sofort abrufbar.</p><ul class="feat-list"><li>Alle Einheitentypen (Wohnung, Büro, Gewerbe, Lager)</li><li>Mieterstammdaten mit IBAN-Hinterlegung</li><li>KPI-Dashboard pro Objekt (Rendite, Leerstand)</li></ul></div>
-    <div class="feat-card reveal" data-n="02"><div class="feat-ico">📋</div><div class="feat-title">Vertragsverwaltung</div><p class="feat-text">Laden Sie Mietverträge als PDF hoch — die KI (Google Gemini) liest Laufzeiten, Miethöhe, Indexklauseln und Sonderkündigungsrechte automatisch aus.</p><ul class="feat-list"><li>KI-Extraktion aller Kernklauseln</li><li>Erkennung von Risiken und Fristen</li><li>Automatische Ablaufdatum-Erinnerungen</li></ul></div>
-    <div class="feat-card reveal" data-n="03"><div class="feat-ico">🏦</div><div class="feat-title">Open Banking &amp; KI-Abgleich</div><p class="feat-text">Verbinden Sie Ihr Konto via Tink (PSD2). Eingehende Zahlungen werden automatisch dem richtigen Mieter zugeordnet.</p><ul class="feat-list"><li>Konto verbinden in 2 Min. (OAuth, keine Passwörter)</li><li>KI erkennt Zahlungen anhand IBAN &amp; Verwendungszweck</li><li>Sofortige Markierung: bezahlt / offen / Verzug</li></ul></div>
-    <div class="feat-card reveal" data-n="04"><div class="feat-ico">📄</div><div class="feat-title">Automatische Mietrechnungen</div><p class="feat-text">Am 1. jeden Monats generiert AERA SCALE alle Mietrechnungen vollautomatisch — inklusive NK-Vorauszahlung und USt.</p><ul class="feat-list"><li>Automatischer E-Mail-Versand an alle Mieter</li><li>Indexbasierte Mietanpassung</li><li>PDF-Export für Steuerberater</li></ul></div>
-    <div class="feat-card reveal" data-n="05"><div class="feat-ico">📊</div><div class="feat-title">Betriebskostenabrechnung</div><p class="feat-text">Betriebskosten erfassen, Verteilerschlüssel zuweisen, rechtskonforme NK-Abrechnung auf Knopfdruck erstellen.</p><ul class="feat-list"><li>Kostenpositionen nach §2 BetrKV</li><li>Verteilung nach qm, Personenzahl, individuell</li><li>DSGVO-konforme Archivierung (10 Jahre)</li></ul></div>
-    <div class="feat-card reveal" data-n="06"><div class="feat-ico">📁</div><div class="feat-title">Dokumentenverwaltung</div><p class="feat-text">Verträge, Rechnungen, Protokolle und Bescheide — alles digital gespeichert, durchsuchbar und DSGVO-sicher archiviert.</p><ul class="feat-list"><li>Bis zu 50 GB Speicher pro Account</li><li>Sofortige Volltextsuche</li><li>Versionierung und Änderungshistorie</li></ul></div>
-  </div>
-</section>
-
-<!-- COST COMPARISON -->
-<section class="cost-sec" id="pricing">
-  <div class="eyebrow reveal" style="justify-content:center"><div class="eyebrow-line"></div><span>Der Preisvergleich</span><div class="eyebrow-line"></div></div>
-  <h2 class="sec-title reveal" style="text-align:center">Warum noch einen <em>Hausverwalter</em> beauftragen?</h2>
-  <p class="sec-lead wide reveal" style="text-align:center;margin:12px auto 0">Ein professioneller Hausverwalter kostet in Deutschland durchschnittlich <strong>€ 110 pro Einheit pro Monat</strong> — bei 10 Einheiten sind das <strong>€ 1.100 monatlich</strong>, die Sie für manuelle Arbeit zahlen, die Software in Sekunden erledigt.</p>
-  <div class="cost-inner">
-    <div class="cost-side">
-      <div class="cost-ey">Traditioneller Hausverwalter</div>
-      <div class="cost-amt">€ 110</div>
-      <div class="cost-u">pro Einheit / Monat</div>
-      <div class="cost-lbl"><strong>10 Einheiten = € 1.100 / Monat</strong>Persönliche Verwaltung, manuelle Prozesse, begrenzte Transparenz. Kein 24/7-Zugriff, keine KI.</div>
-    </div>
-    <div class="cost-vs">vs.</div>
-    <div class="cost-side hl">
-      <div class="cost-ey">AERA SCALE Starter</div>
-      <div class="cost-amt">€ 20</div>
-      <div class="cost-u">pro Einheit / Monat</div>
-      <div class="cost-lbl"><strong>10 Einheiten = € 200 / Monat</strong>Vollautomatische KI-Verwaltung · Open Banking · Mietrechnungen · NK-Abrechnung · 24/7 Dashboard.</div>
-    </div>
-  </div>
-  <p class="cost-note reveal">→ Bei 10 Einheiten sparen Sie <strong>€ 900 pro Monat</strong> — das sind <strong>€ 10.800 pro Jahr.</strong></p>
-</section>
-
-<!-- SCALABILITY -->
-<section class="scale-sec" id="scale">
-  <div class="eyebrow reveal" style="text-align:center;justify-content:center"><div class="eyebrow-line"></div><span>Skalierbarkeit</span><div class="eyebrow-line"></div></div>
-  <h2 class="sec-title reveal" style="text-align:center">Starten Sie mit einer Einheit. <em>Wachsen</em> Sie ohne Grenzen.</h2>
-  <p class="sec-lead wide reveal" style="text-align:center;margin:12px auto 0">AERA SCALE wächst mit Ihrem Portfolio — ohne Systemwechsel, Datenmigration oder neue Tools.</p>
-  <div class="scale-path reveal">
-    <div class="scale-step"><div class="scale-dot"><div class="scale-dot-icon">🏠</div></div><div class="scale-num">1</div><div class="scale-label">Einheit</div><div class="scale-desc">Ihre erste Eigentumswohnung oder Mietwohnung. Alles digital vom ersten Tag.</div></div>
-    <div class="scale-step"><div class="scale-dot"><div class="scale-dot-icon">🏘️</div></div><div class="scale-num">10</div><div class="scale-label">Einheiten</div><div class="scale-desc">Mehrere Wohnungen. Automatischer Zahlungsabgleich und KI-Vertragsanalyse sparen Stunden.</div></div>
-    <div class="scale-step"><div class="scale-dot"><div class="scale-dot-icon">🏢</div></div><div class="scale-num">40</div><div class="scale-label">Einheiten</div><div class="scale-desc">Mixed-Use oder reines Gewerbe. Multi-Objekt-Dashboard mit Portfolio-KPIs.</div></div>
-    <div class="scale-step"><div class="scale-dot"><div class="scale-dot-icon">🏙️</div></div><div class="scale-num">100+</div><div class="scale-label">Einheiten</div><div class="scale-desc">Gewerbeparks und institutionelle Portfolios. DATEV, API, SLA und Multi-Mandanten.</div></div>
-  </div>
-</section>
-
-<!-- WHY AERA SCALE -->
-<section class="why-sec" id="why">
-  <div class="why-grid">
-    <div class="why-l reveal">
-      <div class="eyebrow"><div class="eyebrow-line"></div><span>Warum AERA SCALE?</span></div>
-      <h2>Das Property Operating System für <em>skalierbare</em> Verwaltung</h2>
-      <p>AERA SCALE wurde für Eigentümer gebaut, die wachsen wollen — ohne die Komplexität einer klassischen Hausverwaltung. Alles, was Sie brauchen, in einem System.</p>
-      <div class="why-stats">
-        <div class="why-stat"><div class="why-stat-v">10h+</div><div class="why-stat-l">gespart pro Monat</div></div>
-        <div class="why-stat"><div class="why-stat-v">100%</div><div class="why-stat-l">DSGVO-konform</div></div>
-        <div class="why-stat"><div class="why-stat-v">24/7</div><div class="why-stat-l">Automatisierung</div></div>
-        <div class="why-stat"><div class="why-stat-v">EU</div><div class="why-stat-l">Server Frankfurt</div></div>
+<!-- ══ 07 TESTIMONIALS MARQUEE ═══════════════════════════════════ -->
+<section class="testi-sec reveal-section" id="testimonials">
+  <div class="sec-eyebrow" style="justify-content:center"><div class="eyebrow-line"></div><span>Erfahrungsberichte</span><div class="eyebrow-line"></div></div>
+  <h2 class="sec-h2 center">Was <em>Eigentümer</em> sagen</h2>
+  <div class="marquee-wrapper">
+    <div class="marquee-fade-l"></div>
+    <div class="marquee-fade-r"></div>
+    <div class="marquee-track" id="marqueeTrack">
+      <div class="t-card">
+        <div class="t-stars">★★★★★</div>
+        <div class="t-quote">„Ich habe jahrelang einen Hausverwalter für meine 8 Wohnungen bezahlt — über 800 Euro im Monat. Seit AERA SCALE läuft alles automatisch."</div>
+        <div class="t-author"><div class="t-avatar">TK</div><div class="t-meta"><strong>Thomas K.</strong><span>8 Einheiten · München</span></div></div>
+      </div>
+      <div class="t-card">
+        <div class="t-stars">★★★★★</div>
+        <div class="t-quote">„Die Nebenkostenabrechnung war früher ein mehrtägiger Albtraum. Mit AERA SCALE klicke ich auf einen Knopf — fertig."</div>
+        <div class="t-author"><div class="t-avatar">SM</div><div class="t-meta"><strong>Sandra M.</strong><span>28 Einheiten · Berlin</span></div></div>
+      </div>
+      <div class="t-card">
+        <div class="t-stars">★★★★★</div>
+        <div class="t-quote">„Die KI-Vertragsanalyse hat mir in 30 Sekunden erklärt, was ich in einem 40-seitigen Mietvertrag nicht selbst gefunden hätte."</div>
+        <div class="t-author"><div class="t-avatar">AW</div><div class="t-meta"><strong>Dr. Andreas W.</strong><span>6 Einheiten · Hamburg</span></div></div>
+      </div>
+      <div class="t-card">
+        <div class="t-stars">★★★★★</div>
+        <div class="t-quote">„Endlich kann ich von überall auf alle Mieterdaten zugreifen — auch vom Smartphone. Das hat meinen Alltag komplett verändert."</div>
+        <div class="t-author"><div class="t-avatar">JL</div><div class="t-meta"><strong>Julia L.</strong><span>15 Einheiten · Frankfurt</span></div></div>
+      </div>
+      <div class="t-card">
+        <div class="t-stars">★★★★★</div>
+        <div class="t-quote">„Der Open Banking Abgleich spart mir 3 Stunden pro Monat. Die Bankumsätze werden automatisch den richtigen Mietern zugeordnet."</div>
+        <div class="t-author"><div class="t-avatar">MR</div><div class="t-meta"><strong>Markus R.</strong><span>42 Einheiten · Düsseldorf</span></div></div>
+      </div>
+      <!-- Duplicate for seamless loop -->
+      <div class="t-card">
+        <div class="t-stars">★★★★★</div>
+        <div class="t-quote">„Ich habe jahrelang einen Hausverwalter für meine 8 Wohnungen bezahlt — über 800 Euro im Monat. Seit AERA SCALE läuft alles automatisch."</div>
+        <div class="t-author"><div class="t-avatar">TK</div><div class="t-meta"><strong>Thomas K.</strong><span>8 Einheiten · München</span></div></div>
+      </div>
+      <div class="t-card">
+        <div class="t-stars">★★★★★</div>
+        <div class="t-quote">„Die Nebenkostenabrechnung war früher ein mehrtägiger Albtraum. Mit AERA SCALE klicke ich auf einen Knopf — fertig."</div>
+        <div class="t-author"><div class="t-avatar">SM</div><div class="t-meta"><strong>Sandra M.</strong><span>28 Einheiten · Berlin</span></div></div>
+      </div>
+      <div class="t-card">
+        <div class="t-stars">★★★★★</div>
+        <div class="t-quote">„Die KI-Vertragsanalyse hat mir in 30 Sekunden erklärt, was ich in einem 40-seitigen Mietvertrag nicht selbst gefunden hätte."</div>
+        <div class="t-author"><div class="t-avatar">AW</div><div class="t-meta"><strong>Dr. Andreas W.</strong><span>6 Einheiten · Hamburg</span></div></div>
       </div>
     </div>
-    <div class="why-r reveal">
-      <div class="why-item"><div class="why-item-ico">🚀</div><div class="why-item-txt"><strong>Klein starten</strong><p>Beginnen Sie mit einer Einheit. Keine Mindestgröße, keine Einrichtungsgebühr.</p></div></div>
-      <div class="why-item"><div class="why-item-ico">📈</div><div class="why-item-txt"><strong>Einfach skalieren</strong><p>Fügen Sie Einheiten hinzu, ohne das System zu wechseln. Der Preis pro Einheit sinkt automatisch.</p></div></div>
-      <div class="why-item"><div class="why-item-ico">🔐</div><div class="why-item-txt"><strong>Sicher speichern</strong><p>Alle Daten verschlüsselt auf EU-Servern. Keine Datenweitergabe, keine Drittanbieter-Tracker.</p></div></div>
-      <div class="why-item"><div class="why-item-ico">☁️</div><div class="why-item-txt"><strong>Cloud-basiert</strong><p>Zugriff von überall. Desktop, Tablet, Smartphone — kein Download, keine Installation.</p></div></div>
-      <div class="why-item"><div class="why-item-ico">🤖</div><div class="why-item-txt"><strong>KI-gestützt</strong><p>Google Gemini analysiert Verträge. Tink gleicht Zahlungen ab. Alles vollautomatisch.</p></div></div>
-    </div>
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
-<section class="testi-sec" id="testimonials">
-  <div class="eyebrow reveal"><div class="eyebrow-line"></div><span>Erfahrungsberichte</span></div>
-  <h2 class="sec-title reveal">Was <em>Eigentümer</em> über AERA SCALE sagen</h2>
-  <div class="testi-grid">
-    <div class="t-card reveal">
-      <div class="t-stars">★★★★★</div>
-      <div class="t-quote">Ich habe jahrelang einen Hausverwalter für meine 8 Wohnungen bezahlt — über 800 Euro im Monat. Seit AERA SCALE läuft alles automatisch. Die Mietzahlungen werden erkannt, Rechnungen gehen selbst raus. Ich spare nicht nur Geld, sondern auch stundenlange Telefonate.</div>
-      <div class="t-author"><div class="t-avatar">TK</div><div class="t-meta"><strong>Thomas K.</strong><span>8 Einheiten · München</span></div></div>
-    </div>
-    <div class="t-card reveal">
-      <div class="t-stars">★★★★★</div>
-      <div class="t-quote">Die Nebenkostenabrechnung war früher ein mehrtägiger Albtraum. Belege sammeln, Verteilerschlüssel berechnen, PDF erstellen. Mit AERA SCALE klicke ich auf einen Knopf und es ist fertig. Rechtssicher, DSGVO-konform, direkt versandt.</div>
-      <div class="t-author"><div class="t-avatar">SM</div><div class="t-meta"><strong>Sandra M.</strong><span>28 Einheiten · Berlin</span></div></div>
-    </div>
-    <div class="t-card reveal">
-      <div class="t-stars">★★★★★</div>
-      <div class="t-quote">Die KI-Vertragsanalyse hat mir in 30 Sekunden erklärt, was ich selbst in einem 40-seitigen Mietvertrag nicht gefunden hätte — inklusive einer kritischen Indexierungsklausel. Das alleine ist den Preis wert.</div>
-      <div class="t-author"><div class="t-avatar">AW</div><div class="t-meta"><strong>Dr. Andreas W.</strong><span>6 Einheiten · Hamburg</span></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section class="faq-sec" id="faq">
-  <div class="eyebrow reveal"><div class="eyebrow-line"></div><span>FAQ</span></div>
-  <h2 class="sec-title reveal">Häufige <em>Fragen</em></h2>
+<!-- ══ 08 FAQ ══════════════════════════════════════════════════════ -->
+<section class="faq-sec reveal-section" id="faq" style="background:var(--crd)">
+  <div class="sec-eyebrow" style="justify-content:center"><div class="eyebrow-line"></div><span>FAQ</span><div class="eyebrow-line"></div></div>
+  <h2 class="sec-h2 center">Häufige <em>Fragen</em></h2>
   <div class="faq-list">
-    <div class="faq-item"><button class="faq-q">Was ist AERA SCALE?<span class="faq-ico">+</span></button><div class="faq-a"><p>AERA SCALE ist ein Property Operating System — eine Cloud-Plattform, mit der Sie Einheiten, Mieter, Verträge, Dokumente und Finanzen an einem Ort verwalten. Von einer Wohnung bis zum Gewerbepark.</p></div></div>
-    <div class="faq-item"><button class="faq-q">Für wen ist AERA SCALE geeignet?<span class="faq-ico">+</span></button><div class="faq-a"><p>Für alle, die Immobilien verwalten: private Eigentümer mit einer Wohnung, Vermieter mit mehreren Einheiten, Gewerbe­betreiber und Gewerbepark-Betreiber mit 50+ Einheiten.</p></div></div>
-    <div class="faq-item"><button class="faq-q">Was kostet AERA SCALE?<span class="faq-ico">+</span></button><div class="faq-a"><p>Ab € 20 pro Einheit pro Monat (Starter). Pro: € 16, Enterprise: € 12. Kein Fixpreis, keine Setup-Gebühr, 14 Tage kostenlos. Ein Hausverwalter kostet im Vergleich durchschnittlich € 110 pro Einheit.</p></div></div>
-    <div class="faq-item"><button class="faq-q">Ist mein Online-Banking sicher?<span class="faq-ico">+</span></button><div class="faq-a"><p>Ja. AERA SCALE nutzt Tink, einen PSD2-zertifizierten Open-Banking-Dienstleister. Die Verbindung erfolgt per OAuth direkt bei Ihrer Bank. Wir speichern keine Zugangsdaten.</p></div></div>
-    <div class="faq-item"><button class="faq-q">Wie funktioniert die KI-Vertragsanalyse?<span class="faq-ico">+</span></button><div class="faq-a"><p>Laden Sie einen Mietvertrag als PDF hoch. Google Gemini extrahiert automatisch Laufzeiten, Miethöhe, Indexklauseln und Sonderkündigungsrechte. Das Ergebnis erhalten Sie in Sekunden.</p></div></div>
-    <div class="faq-item"><button class="faq-q">Kann ich AERA SCALE auch für Gewerbe nutzen?<span class="faq-ico">+</span></button><div class="faq-a"><p>Ja. AERA SCALE ist einheitenbasiert — jede Einheit kann eine Wohnung, ein Büro, ein Laden, ein Lager oder eine Gewerbefläche sein. Auch Gewerbeparks mit 40+ Einheiten sind problemlos abbildbar.</p></div></div>
-    <div class="faq-item"><button class="faq-q">Wie lange dauert die Einrichtung?<span class="faq-ico">+</span></button><div class="faq-a"><p>Registrierung in 2 Minuten, erste Immobilie in 5 Minuten, Bankverbindung in 2 Minuten. Sie können am selben Tag produktiv arbeiten.</p></div></div>
-    <div class="faq-item"><button class="faq-q">Was passiert bei Kündigung?<span class="faq-ico">+</span></button><div class="faq-a"><p>Kein Mindestvertrag. Monatlich kündbar. Bei Kündigung können Sie alle Daten als CSV und PDF exportieren. Ihre Daten werden nach 30 Tagen gelöscht.</p></div></div>
+    <div class="faq-item">
+      <button class="faq-q">Was ist AERA SCALE?<span class="faq-ico">+</span></button>
+      <div class="faq-a"><p>AERA SCALE ist ein Property Operating System — eine Cloud-Plattform, mit der Sie Einheiten, Mieter, Verträge, Dokumente und Finanzen an einem Ort verwalten. Von einer Wohnung bis zum Gewerbepark.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Was kostet AERA SCALE?<span class="faq-ico">+</span></button>
+      <div class="faq-a"><p>Ab € 20 pro Einheit pro Monat (Starter). Pro: € 16, Enterprise: € 12. Kein Fixpreis, keine Setup-Gebühr, 14 Tage kostenlos. Ein Hausverwalter kostet im Vergleich durchschnittlich € 110 pro Einheit.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Ist mein Online-Banking sicher?<span class="faq-ico">+</span></button>
+      <div class="faq-a"><p>Ja. AERA SCALE nutzt Tink, einen PSD2-zertifizierten Open-Banking-Dienstleister. Die Verbindung erfolgt per OAuth direkt bei Ihrer Bank. Wir speichern keine Zugangsdaten.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Wie funktioniert die KI-Vertragsanalyse?<span class="faq-ico">+</span></button>
+      <div class="faq-a"><p>Laden Sie einen Mietvertrag als PDF hoch. Google Gemini extrahiert automatisch Laufzeiten, Miethöhe, Indexklauseln und Sonderkündigungsrechte. Das Ergebnis erhalten Sie in Sekunden.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Kann ich AERA SCALE auch für Gewerbe nutzen?<span class="faq-ico">+</span></button>
+      <div class="faq-a"><p>Ja. AERA SCALE ist einheitenbasiert — jede Einheit kann eine Wohnung, ein Büro, ein Laden, ein Lager oder eine Gewerbefläche sein. Auch Gewerbeparks mit 40+ Einheiten sind problemlos abbildbar.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Wie lange dauert die Einrichtung?<span class="faq-ico">+</span></button>
+      <div class="faq-a"><p>Registrierung in 2 Minuten, erste Immobilie in 5 Minuten, Bankverbindung in 2 Minuten. Sie können am selben Tag produktiv arbeiten.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Was passiert bei Kündigung?<span class="faq-ico">+</span></button>
+      <div class="faq-a"><p>Kein Mindestvertrag. Monatlich kündbar. Bei Kündigung können Sie alle Daten als CSV und PDF exportieren. Ihre Daten werden nach 30 Tagen gelöscht.</p></div>
+    </div>
   </div>
+  <p class="faq-contact reveal">Noch Fragen? <a href="mailto:info@aera-scale.de">Kontakt aufnehmen →</a></p>
 </section>
 
-<!-- ABOUT -->
-<section class="about-sec" id="about">
+<!-- ══ ÜBER UNS ═══════════════════════════════════════════════════ -->
+<section class="about-sec reveal-section" id="about">
   <div class="about-grid">
     <div class="about-l reveal">
-      <div class="eyebrow"><div class="eyebrow-line"></div><span>Über uns</span></div>
-      <h2>Wir haben AERA SCALE für <em>uns selbst</em> gebaut.</h2>
+      <div class="sec-eyebrow"><div class="eyebrow-line"></div><span>Über uns</span></div>
+      <h2 class="about-h2">Wir haben AERA SCALE für <em>uns selbst</em> gebaut.</h2>
       <p>Als selbst Immobilieneigentümer wissen wir, wie frustrierend die manuelle Verwaltung ist. Kontoauszüge abgleichen, Vertragslaufzeiten nachschlagen, Nebenkostenabrechnungen erstellen — alles manuell, alles fehleranfällig.</p>
       <p>Deshalb haben wir AERA SCALE entwickelt: ein Property Operating System, das mit jedem Portfolio mitwächst. Von Berlin aus entwickelt, auf deutschen Servern gehostet, DSGVO-konform designed.</p>
       <div class="about-stats">
-        <div class="a-stat"><div class="a-stat-v">10h+</div><div class="a-stat-l">gespart / Monat</div></div>
-        <div class="a-stat"><div class="a-stat-v">100%</div><div class="a-stat-l">DSGVO</div></div>
-        <div class="a-stat"><div class="a-stat-v">24/7</div><div class="a-stat-l">Automatisierung</div></div>
-        <div class="a-stat"><div class="a-stat-v">EU</div><div class="a-stat-l">Server Frankfurt</div></div>
+        <div class="a-stat"><div class="a-val">10h+</div><div class="a-lbl">gespart / Monat</div></div>
+        <div class="a-stat"><div class="a-val">100%</div><div class="a-lbl">DSGVO</div></div>
+        <div class="a-stat"><div class="a-val">24/7</div><div class="a-lbl">Automatisierung</div></div>
+        <div class="a-stat"><div class="a-val">EU</div><div class="a-lbl">Server Frankfurt</div></div>
       </div>
     </div>
     <div class="about-r reveal">
-      <div class="a-feat"><div class="a-feat-ico">🔐</div><div class="a-feat-txt"><strong>Security First</strong><p>TLS 1.3, verschlüsselte Speicherung, kein Zugriff durch Dritte.</p></div></div>
-      <div class="a-feat"><div class="a-feat-ico">🤖</div><div class="a-feat-txt"><strong>KI-gestützt</strong><p>Google Gemini für Vertragsanalyse, Tink für Zahlungsabgleich.</p></div></div>
-      <div class="a-feat"><div class="a-feat-ico">🏦</div><div class="a-feat-txt"><strong>Open Banking</strong><p>PSD2-lizenziert via Tink. Bankverbindung per OAuth.</p></div></div>
-      <div class="a-feat"><div class="a-feat-ico">📈</div><div class="a-feat-txt"><strong>Skalierbar</strong><p>Von 1 bis 1.000+ Einheiten. Kein Systemwechsel nötig.</p></div></div>
-      <div class="a-feat"><div class="a-feat-ico">🇩🇪</div><div class="a-feat-txt"><strong>Made in Germany</strong><p>Entwickelt in Berlin. Gehostet in Frankfurt (EU).</p></div></div>
+      <div class="a-feat"><div class="a-feat-ico">🔐</div><div><strong>Security First</strong><p>TLS 1.3, verschlüsselte Speicherung, kein Zugriff durch Dritte.</p></div></div>
+      <div class="a-feat"><div class="a-feat-ico">🤖</div><div><strong>KI-gestützt</strong><p>Google Gemini für Vertragsanalyse, Tink für Zahlungsabgleich.</p></div></div>
+      <div class="a-feat"><div class="a-feat-ico">🏦</div><div><strong>Open Banking</strong><p>PSD2-lizenziert via Tink. Bankverbindung per OAuth.</p></div></div>
+      <div class="a-feat"><div class="a-feat-ico">📈</div><div><strong>Skalierbar</strong><p>Von 1 bis 1.000+ Einheiten. Kein Systemwechsel nötig.</p></div></div>
+      <div class="a-feat"><div class="a-feat-ico">🇩🇪</div><div><strong>Made in Germany</strong><p>Entwickelt in Berlin. Gehostet in Frankfurt (EU).</p></div></div>
     </div>
   </div>
 </section>
 
-<!-- TRUST BADGES -->
-<section class="badges-sec">
-  <div class="badges-label">Sicherheit & Compliance</div>
-  <div class="badges">
-    <div class="badge"><div class="badge-ico">🇪🇺</div><div class="badge-txt"><strong>DSGVO</strong>EU-konform</div></div>
-    <div class="badge"><div class="badge-ico">🔒</div><div class="badge-txt"><strong>SSL / TLS 1.3</strong>Verschlüsselt</div></div>
-    <div class="badge"><div class="badge-ico">🏦</div><div class="badge-txt"><strong>PSD2</strong>Tink-zertifiziert</div></div>
-    <div class="badge"><div class="badge-ico">🤖</div><div class="badge-txt"><strong>KI by Google</strong>Gemini API</div></div>
-    <div class="badge"><div class="badge-ico">🇩🇪</div><div class="badge-txt"><strong>Made in Germany</strong>Berlin</div></div>
+<!-- ══ 09 CTA BANNER ══════════════════════════════════════════════ -->
+<section class="cta-banner reveal-section">
+  <div class="cta-inner">
+    <div class="cta-eyebrow">JETZT STARTEN</div>
+    <h2 class="cta-h2">Bereit für <em>intelligente</em> Verwaltung?</h2>
+    <p class="cta-sub">Von einer Wohnung bis zum Gewerbepark.</p>
+    <div class="cta-btns">
+      <a href="https://aera-scale-983360724436.europe-west1.run.app/?mode=register" class="btn-gold-lg">Kostenlos starten</a>
+      <a href="https://aera-scale-983360724436.europe-west1.run.app/?mode=login" class="btn-outline-lg">Anmelden</a>
+    </div>
+    <div class="cta-trust">
+      <span>✓ Keine Kreditkarte</span>
+      <span>✓ DSGVO-konform</span>
+      <span>✓ Jederzeit kündbar</span>
+    </div>
   </div>
 </section>
 
-<!-- CTA -->
-<section class="cta-strip">
-  <div class="cta-txt">Bereit, Ihr Portfolio <em>intelligent</em> zu verwalten?</div>
-  <div class="cta-acts">
-    <a href="https://aera-scale-983360724436.europe-west1.run.app/?mode=register" class="btn-p">Kostenlos starten</a>
-    <a href="https://aera-scale-983360724436.europe-west1.run.app/?mode=login" class="btn-s">Anmelden</a>
-  </div>
-</section>
-
-<!-- FOOTER -->
+<!-- ══ 10 FOOTER ══════════════════════════════════════════════════ -->
 <footer>
-  <div class="foot-top">
+  <div class="foot-gold-line"></div>
+  <div class="foot-grid">
     <div class="foot-brand">
-      <a href="#" class="nav-brand"><div class="nav-logo"></div><div class="nav-wordmark"><span>AERA SCALE</span><span>Property Operating System</span></div></a>
-      <p>AERA SCALE — das Property Operating System für Eigentümer, Vermieter und Betreiber. Von einer Wohnung bis zum Gewerbepark.</p>
+      <div class="foot-logo-row">
+        <svg width="32" height="32" viewBox="0 0 64 64" fill="none">
+          <rect x="8"  y="24" width="20" height="32" rx="2" fill="rgba(255,255,255,0.7)"/>
+          <rect x="16" y="12" width="32" height="44" rx="2" fill="rgba(255,255,255,0.35)"/>
+          <rect x="36" y="20" width="20" height="36" rx="2" fill="rgba(255,255,255,0.6)"/>
+          <rect x="26" y="22" width="5" height="5" rx="1" fill="#C9A84C"/>
+          <rect x="26" y="33" width="5" height="5" rx="1" fill="#C9A84C"/>
+          <rect x="26" y="44" width="5" height="5" rx="1" fill="#C9A84C"/>
+        </svg>
+        <div>
+          <div class="foot-brand-name">AERA SCALE</div>
+          <div class="foot-brand-sub">Property Operating System</div>
+        </div>
+      </div>
+      <p class="foot-brand-desc">Das Property Operating System für Eigentümer, Vermieter und Betreiber. Von einer Wohnung bis zum Gewerbepark.</p>
+      <div class="foot-socials">
+        <a href="#" class="foot-social" aria-label="LinkedIn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="#" class="foot-social" aria-label="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+      </div>
     </div>
+
     <div class="foot-col">
-      <h4>Plattform</h4>
+      <h4 class="foot-col-title">Produkt</h4>
       <ul>
         <li><a href="#features">Funktionen</a></li>
         <li><a href="#pricing">Preise</a></li>
-        <li><a href="#scale">Skalierung</a></li>
+        <li><a href="#fuerwen">Für wen</a></li>
         <li><a href="https://aera-scale-983360724436.europe-west1.run.app/?mode=login">App öffnen</a></li>
       </ul>
     </div>
+
     <div class="foot-col">
-      <h4>Unternehmen</h4>
-      <ul>
-        <li><a href="#about">Über uns</a></li>
-        <li><a href="#faq">FAQ</a></li>
-        <li><a href="#fuerwen">Für wen</a></li>
-      </ul>
-    </div>
-    <div class="foot-col">
-      <h4>Rechtliches</h4>
+      <h4 class="foot-col-title">Rechtliches</h4>
       <ul>
         <li><a href="./impressum.html">Impressum</a></li>
         <li><a href="./datenschutz.html">Datenschutz</a></li>
         <li><a href="./agb.html">AGB</a></li>
         <li><a href="./cookie-richtlinie.html">Cookie-Richtlinie</a></li>
       </ul>
+    </div>
+
+    <div class="foot-col">
+      <h4 class="foot-col-title">Newsletter</h4>
+      <p class="foot-nl-desc">Bleiben Sie auf dem Laufenden über neue Features und Updates.</p>
+      <form class="foot-nl-form" onsubmit="return false">
+        <input type="email" placeholder="Ihre E-Mail" class="foot-nl-input">
+        <button class="foot-nl-btn">Anmelden</button>
+      </form>
     </div>
   </div>
   <div class="foot-bot">
@@ -422,18 +621,123 @@
 </footer>
 
 <script>
-const nb=document.getElementById('navbar');
-window.addEventListener('scroll',()=>nb.classList.toggle('scrolled',scrollY>20));
+// ── Nav scroll ──────────────────────────────────────────────────────
+const nb = document.getElementById('navbar');
+window.addEventListener('scroll', () => nb.classList.toggle('scrolled', scrollY > 20));
 
-const ob=new IntersectionObserver(e=>{e.forEach(n=>{if(n.isIntersecting){n.target.classList.add('vis');ob.unobserve(n.target)}})},{threshold:.1});
-document.querySelectorAll('.reveal').forEach(e=>ob.observe(e));
+// ── Smooth scroll ───────────────────────────────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
 
-document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}})});
+// ── Mobile menu ─────────────────────────────────────────────────────
+const hm = document.getElementById('hamburger'), mm = document.getElementById('mobileMenu');
+if (hm && mm) {
+  hm.addEventListener('click', () => {
+    const o = mm.classList.toggle('open');
+    hm.classList.toggle('open', o);
+    document.body.style.overflow = o ? 'hidden' : '';
+  });
+  mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mm.classList.remove('open'); hm.classList.remove('open'); document.body.style.overflow = '';
+  }));
+}
 
-const hm=document.getElementById('hamburger'),mm=document.getElementById('mobileMenu');
-if(hm&&mm){hm.addEventListener('click',()=>{const o=mm.classList.toggle('open');hm.classList.toggle('open',o);document.body.style.overflow=o?'hidden':''});mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mm.classList.remove('open');hm.classList.remove('open');document.body.style.overflow=''}))}
+// ── Reveal on scroll ────────────────────────────────────────────────
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('vis');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-document.querySelectorAll('.faq-q').forEach(b=>{b.addEventListener('click',()=>{const i=b.parentElement,o=i.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(e=>e.classList.remove('open'));if(!o)i.classList.add('open')})});
+// ── Count-up animation ──────────────────────────────────────────────
+function countUp(el, target, duration, prefix, suffix) {
+  let start = 0, step = target / (duration / 16);
+  const timer = setInterval(() => {
+    start += step;
+    if (start >= target) { start = target; clearInterval(timer); }
+    el.textContent = (prefix || '') + Math.floor(start).toLocaleString('de-DE') + (suffix || '');
+  }, 16);
+}
+const counters = document.querySelectorAll('.hero-stat-val[data-count]');
+const counterObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const el = e.target;
+      countUp(el, +el.dataset.count, 1200, el.dataset.prefix || '', el.dataset.suffix || '');
+      counterObs.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+counters.forEach(c => counterObs.observe(c));
+
+// ── Parallax hero dashboard ─────────────────────────────────────────
+const dw = document.getElementById('dashWrap');
+if (dw) {
+  document.addEventListener('mousemove', e => {
+    const mx = (e.clientX / window.innerWidth - 0.5) * 12;
+    const my = (e.clientY / window.innerHeight - 0.5) * 8;
+    dw.style.transform = `perspective(800px) rotateY(${mx}deg) rotateX(${-my}deg) translateY(-4px)`;
+  });
+}
+
+// ── Interactive Pricing Slider ──────────────────────────────────────
+const slider = document.getElementById('priceSlider');
+const sliderVal = document.getElementById('sliderVal');
+function updatePrices(n) {
+  let starter = 20, pro = 16, ent = 12;
+  if (n > 50)  { starter = 18; pro = 14; ent = 10; }
+  if (n > 100) { starter = 16; pro = 12; ent = 9; }
+  document.getElementById('starterPrice').textContent = '€ ' + (n * starter).toLocaleString('de-DE');
+  document.getElementById('starterUnit').textContent = '€ ' + starter + ' / Einheit';
+  document.getElementById('proPrice').textContent = '€ ' + (n * pro).toLocaleString('de-DE');
+  document.getElementById('proUnit').textContent = '€ ' + pro + ' / Einheit';
+  document.getElementById('entPrice').textContent = '€ ' + (n * ent).toLocaleString('de-DE');
+  document.getElementById('entUnit').textContent = '€ ' + ent + ' / Einheit';
+}
+if (slider) {
+  slider.addEventListener('input', () => {
+    const n = +slider.value;
+    sliderVal.textContent = n >= 200 ? '200+' : n;
+    updatePrices(n);
+  });
+  updatePrices(10);
+}
+
+// ── Testimonials Marquee ────────────────────────────────────────────
+const track = document.getElementById('marqueeTrack');
+if (track) {
+  let pos = 0, paused = false;
+  track.addEventListener('mouseenter', () => paused = true);
+  track.addEventListener('mouseleave', () => paused = false);
+  function animateMarquee() {
+    if (!paused) {
+      pos -= 0.5;
+      const half = track.scrollWidth / 2;
+      if (Math.abs(pos) >= half) pos = 0;
+      track.style.transform = `translateX(${pos}px)`;
+    }
+    requestAnimationFrame(animateMarquee);
+  }
+  animateMarquee();
+}
+
+// ── FAQ Accordion ───────────────────────────────────────────────────
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const open = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+    if (!open) item.classList.add('open');
+  });
+});
 </script>
 </body>
 </html>
