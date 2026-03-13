@@ -9,44 +9,48 @@ export default {
     theme: {
         extend: {
             colors: {
-                // ── AERA SCALE Design System ──
-                // Forest Green (sidebar, buttons, primary)
-                aera: {
-                    50:  '#eef7f2',
-                    100: '#d4ecdd',
-                    200: '#a9d9bb',
-                    300: '#73bf93',
-                    400: '#4CAF7D',
-                    500: '#2d8a5e',
-                    600: '#1d6644',
-                    700: '#1A4A2E',
-                    800: '#133820',
-                    900: '#0D2818',  // PRIMARY: sidebar bg, buttons
-                    950: '#071610',
-                },
-                // Gold (accent, active states, CTA borders)
-                gold: {
-                    300: '#F0D98A',
-                    400: '#E8C97A',
-                    500: '#C9A84C',  // PRIMARY GOLD
-                    600: '#A8882C',
-                    700: '#7D6320',
-                },
-                // Cream (main content background)
+                // ── ANTIGRAVITY v2 — AERA SCALE Design Tokens ──
                 cream: {
-                    50:  '#FDFBF7',
-                    100: '#F5F0E8',  // PRIMARY BG
-                    200: '#EDE8DF',
-                    300: '#E0D8CC',
+                    DEFAULT: '#F5F0E8',   // Root Background
+                    dark:    '#EDE8DF',   // Hover States, Borders
+                    deeper:  '#E4DDD2',   // Cards on Cream
                 },
+                forest: {
+                    DEFAULT: '#2D4A3E',   // Primary Brand / Sidebar
+                    light:   '#3D6B59',   // Hover States, Links
+                    dark:    '#1E3329',   // Pressed States
+                },
+                gold: {
+                    DEFAULT: '#C9A84C',   // Accent / CTAs / Active Icons
+                    light:   '#E2C47A',   // Hover Highlights
+                    dark:    '#A6883A',   // Pressed Gold
+                },
+                // Semantic text colors
+                'text-primary':   '#1A2E25',
+                'text-secondary': '#4A6358',
+                'text-muted':     '#7A9589',
+                // Status
+                success: '#3D7A5A',
+                warning: '#C9883A',
+                danger:  '#C94A3A',
             },
             fontFamily: {
-                sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Helvetica Neue', 'Arial', 'sans-serif'],
+                display: ['"Cormorant Garamond"', 'serif'],
+                body:    ['"DM Sans"', 'sans-serif'],
+                mono:    ['"JetBrains Mono"', 'monospace'],
+                sans:    ['"DM Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
             },
             boxShadow: {
-                'card':    '0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.04)',
-                'card-md': '0 4px 12px 0 rgb(0 0 0 / 0.08)',
-                'gold':    '0 0 0 3px rgb(201 168 76 / 0.2)',
+                'soft':       '0 1px 3px rgba(45,74,62,0.08), 0 1px 2px rgba(45,74,62,0.04)',
+                'medium':     '0 4px 16px rgba(45,74,62,0.12), 0 2px 4px rgba(45,74,62,0.06)',
+                'strong':     '0 12px 40px rgba(45,74,62,0.16), 0 4px 8px rgba(45,74,62,0.08)',
+                'gold-focus': '0 0 0 3px rgba(201,168,76,0.3)',
+                'gold-glow':  '0 8px 28px rgba(201,168,76,0.35)',
+            },
+            borderRadius: {
+                'btn':  '12px',
+                'card': '16px',
+                'input':'8px',
             },
         },
     },

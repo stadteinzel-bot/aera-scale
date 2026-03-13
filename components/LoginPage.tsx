@@ -1,247 +1,401 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../services/AuthContext';
-import { Mail, Lock, Eye, EyeOff, Loader2, ArrowRight, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { AlertCircle } from 'lucide-react';
 
 const HOMEPAGE_URL = 'https://stadteinzel-bot.github.io/aera-scale/homepage/';
 
-const LogoMark: React.FC<{ size?: number }> = ({ size = 40 }) => (
+// ── SVG Logo Mark ──────────────────────────────────────────────────
+const LogoMark: React.FC<{ size?: number; dark?: boolean }> = ({ size = 40, dark = false }) => (
   <svg width={size} height={size} viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="64" height="64" rx="10" fill="rgba(255,255,255,0.12)"/>
-    <g transform="translate(4,4)">
-      <rect x="10" y="28" width="7" height="24" fill="#C9A84C"/>
-      <rect x="39" y="28" width="7" height="24" fill="#C9A84C"/>
-      <polygon points="13,28 28,8 31,8 31,14 16,32" fill="#C9A84C"/>
-      <polygon points="43,28 28,8 25,8 25,14 40,32" fill="#C9A84C"/>
-      <rect x="18" y="36" width="20" height="5" fill="#C9A84C"/>
-    </g>
+    {dark ? (
+      // Dark version for cream panel
+      <>
+        <rect x="8"  y="24" width="20" height="32" rx="2" fill="#2D4A3E" opacity="0.7"/>
+        <rect x="16" y="12" width="32" height="44" rx="2" fill="#2D4A3E" opacity="0.4"/>
+        <rect x="36" y="20" width="20" height="36" rx="2" fill="#2D4A3E" opacity="0.6"/>
+      </>
+    ) : (
+      // White version for forest panel
+      <>
+        <rect x="8"  y="24" width="20" height="32" rx="2" fill="rgba(255,255,255,0.9)"/>
+        <rect x="16" y="12" width="32" height="44" rx="2" fill="rgba(255,255,255,0.55)"/>
+        <rect x="36" y="20" width="20" height="36" rx="2" fill="rgba(255,255,255,0.8)"/>
+      </>
+    )}
+    <rect x="26" y="22" width="5" height="5" rx="1" fill="#C9A84C"/>
+    <rect x="26" y="33" width="5" height="5" rx="1" fill="#C9A84C"/>
+    <rect x="26" y="44" width="5" height="5" rx="1" fill="#C9A84C"/>
+    <rect x="14" y="30" width="5" height="5" rx="1" fill="#C9A84C"/>
+    <rect x="14" y="41" width="5" height="5" rx="1" fill="#C9A84C"/>
+    <rect x="43" y="28" width="5" height="5" rx="1" fill="#C9A84C"/>
+    <rect x="43" y="39" width="5" height="5" rx="1" fill="#C9A84C"/>
   </svg>
 );
 
-const FEATURES = [
-  { label: 'KI-Vertragsanalyse & Lease AI' },
-  { label: 'Open Banking — PSD2 Integration' },
-  { label: 'Ab € 20 / Einheit · Skalierbar bis 500+' },
-];
-
+// ── Login Page Component ───────────────────────────────────────────
 const LoginPage: React.FC = () => {
-    const { login, register } = useAuth();
-    const [isRegister, setIsRegister] = useState(false);
-    const [fromProtected, setFromProtected] = useState(false);
-    const [proPlan, setProPlan] = useState(false);
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [showPassword, setShowPassword] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
+  const { login, register } = useAuth();
+  const [isRegister, setIsRegister]           = useState(false);
+  const [fromProtected, setFromProtected]     = useState(false);
+  const [proPlan, setProPlan]                 = useState(false);
+  const [email, setEmail]                     = useState('');
+  const [password, setPassword]               = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword]       = useState(false);
+  const [rememberMe, setRememberMe]           = useState(false);
+  const [isLoading, setIsLoading]             = useState(false);
+  const [error, setError]                     = useState<string | null>(null);
+  const [shake, setShake]                     = useState(false);
 
-    useEffect(() => {
-        const params = new URLSearchParams(window.location.search);
-        const mode = params.get('mode');
-        const from = params.get('from');
-        const plan = params.get('plan');
-        if (mode === 'register') setIsRegister(true);
-        if (from === 'protected') setFromProtected(true);
-        if (plan === 'pro') { setIsRegister(true); setProPlan(true); }
-    }, []);
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('mode') === 'register') setIsRegister(true);
+    if (params.get('from') === 'protected') setFromProtected(true);
+    if (params.get('plan') === 'pro') { setIsRegister(true); setProPlan(true); }
+  }, []);
 
-    const switchTab = (toRegister: boolean) => {
-        setIsRegister(toRegister);
-        setError(null);
-        const params = new URLSearchParams(window.location.search);
-        params.set('mode', toRegister ? 'register' : 'login');
-        window.history.replaceState({}, '', `?${params.toString()}`);
-    };
+  const switchTab = (toRegister: boolean) => {
+    setIsRegister(toRegister);
+    setError(null);
+    const params = new URLSearchParams(window.location.search);
+    params.set('mode', toRegister ? 'register' : 'login');
+    window.history.replaceState({}, '', `?${params.toString()}`);
+  };
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setError(null);
-        if (!email.trim() || !password.trim()) { setError('Bitte E-Mail und Passwort eingeben.'); return; }
-        if (isRegister && password !== confirmPassword) { setError('Passwörter stimmen nicht überein.'); return; }
-        if (password.length < 6) { setError('Passwort muss mindestens 6 Zeichen lang sein.'); return; }
-        setIsLoading(true);
-        try {
-            if (isRegister) {
-                await register(email, password);
-            } else {
-                await login(email, password);
-            }
-        } catch (err: any) {
-            const code = err?.code || '';
-            if (code === 'auth/user-not-found' || code === 'auth/invalid-credential') {
-                setError('Ungültige Anmeldedaten. Bitte versuchen Sie es erneut.');
-            } else if (code === 'auth/wrong-password') {
-                setError('Falsches Passwort.');
-            } else if (code === 'auth/email-already-in-use') {
-                setError('Diese E-Mail wird bereits verwendet.');
-            } else if (code === 'auth/invalid-email') {
-                setError('Ungültige E-Mail-Adresse.');
-            } else if (code === 'auth/too-many-requests') {
-                setError('Zu viele Versuche. Bitte warten Sie einen Moment.');
-            } else {
-                setError(err.message || 'Ein Fehler ist aufgetreten.');
-            }
-        } finally {
-            setIsLoading(false);
-        }
-    };
+  const triggerShake = (msg: string) => {
+    setError(msg);
+    setShake(true);
+    setTimeout(() => setShake(false), 400);
+  };
 
-    return (
-        <div className="min-h-screen flex">
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    if (!email.trim() || !password.trim()) { triggerShake('Bitte E-Mail und Passwort eingeben.'); return; }
+    if (isRegister && password !== confirmPassword) { triggerShake('Passwörter stimmen nicht überein.'); return; }
+    if (password.length < 6) { triggerShake('Passwort muss mindestens 6 Zeichen lang sein.'); return; }
+    setIsLoading(true);
+    try {
+      if (isRegister) await register(email, password);
+      else            await login(email, password);
+    } catch (err: any) {
+      const code = err?.code || '';
+      if (['auth/user-not-found', 'auth/invalid-credential'].includes(code))
+        triggerShake('Ungültige Anmeldedaten.');
+      else if (code === 'auth/wrong-password')       triggerShake('Falsches Passwort.');
+      else if (code === 'auth/email-already-in-use') triggerShake('E-Mail wird bereits verwendet.');
+      else if (code === 'auth/invalid-email')        triggerShake('Ungültige E-Mail-Adresse.');
+      else if (code === 'auth/too-many-requests')    triggerShake('Zu viele Versuche. Bitte warten.');
+      else triggerShake(err.message || 'Ein Fehler ist aufgetreten.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-            {/* ── LEFT: Brand Panel ── */}
-            <div className="hidden lg:flex lg:w-1/2 bg-aera-900 flex-col justify-between p-12">
-                <div className="flex items-center gap-3">
-                    <LogoMark size={40} />
-                    <div>
-                        <div className="text-white font-bold text-lg tracking-widest leading-none">AERA SCALE</div>
-                        <div className="text-gold-500 text-[10px] tracking-[0.25em] font-medium uppercase mt-0.5">Property Operating System</div>
-                    </div>
-                </div>
+  return (
+    <div style={{ minHeight: '100vh', display: 'flex', fontFamily: '"DM Sans", sans-serif' }}>
 
-                <div>
-                    <h2 className="text-white text-4xl font-semibold leading-tight mb-8">
-                        Jede Einheit.<br />
-                        Intelligent<br />
-                        verwaltet.
-                    </h2>
-                    <div className="space-y-4">
-                        {FEATURES.map((f) => (
-                            <div key={f.label} className="flex items-center gap-3">
-                                <CheckCircle2 className="w-4 h-4 text-gold-500 shrink-0" />
-                                <span className="text-aera-200/80 text-sm font-medium">{f.label}</span>
-                            </div>
-                        ))}
-                        {proPlan && (
-                            <div className="mt-4 inline-flex items-center gap-2 px-3 py-1.5 bg-gold-500/10 border border-gold-500/30 rounded-lg">
-                                <span className="w-2 h-2 rounded-full bg-gold-500" />
-                                <span className="text-gold-400 text-xs font-semibold">Pro-Plan ausgewählt</span>
-                            </div>
-                        )}
-                    </div>
+      {/* ══ LEFT PANEL — Forest Green (55%) ══════════════════════ */}
+      <div
+        className="geo-pattern anim-fade"
+        style={{
+          width: '55%', minHeight: '100vh',
+          display: 'flex', flexDirection: 'column',
+          alignItems: 'center', justifyContent: 'center',
+          padding: '60px 48px', position: 'relative',
+        }}
+      >
+        {/* Top gold accent */}
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '3px', background: 'linear-gradient(90deg, #C9A84C, transparent)' }} />
 
-                    <div className="mt-12 grid grid-cols-3 gap-4">
-                        {[
-                            { value: '500+', label: 'Einheiten' },
-                            { value: '€ 20', label: 'ab / Einheit' },
-                            { value: '99.9%', label: 'Verfügbarkeit' },
-                        ].map((k) => (
-                            <div key={k.label} className="bg-aera-800/60 border border-aera-700/60 rounded-xl p-3 text-center">
-                                <div className="text-gold-400 font-bold text-lg leading-none">{k.value}</div>
-                                <div className="text-aera-400/70 text-[10px] mt-1 uppercase tracking-wider">{k.label}</div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-                <a href={HOMEPAGE_URL} className="text-aera-500 text-xs hover:text-aera-300 transition-colors">
-                    ← Zurück zur Website
-                </a>
-            </div>
-
-            {/* ── RIGHT: Auth Panel ── */}
-            <div className="w-full lg:w-1/2 flex items-center justify-center bg-white px-6 py-12">
-                <div className="w-full max-w-sm">
-
-                    {/* Mobile logo */}
-                    <div className="lg:hidden flex items-center gap-2 mb-8">
-                        <LogoMark size={32} />
-                        <span className="text-aera-900 font-bold text-base tracking-widest">AERA SCALE</span>
-                    </div>
-
-                    {fromProtected && (
-                        <div className="mb-6 flex items-start gap-2 bg-aera-50 border border-aera-200 rounded-xl p-3.5">
-                            <AlertCircle className="w-4 h-4 text-aera-600 shrink-0 mt-0.5" />
-                            <p className="text-sm text-aera-700">Bitte melden Sie sich an, um fortzufahren.</p>
-                        </div>
-                    )}
-
-                    <h1 className="text-2xl font-semibold text-aera-900 mb-1">
-                        {isRegister ? 'Konto erstellen' : 'Willkommen zurück'}
-                    </h1>
-                    <p className="text-slate-500 text-sm mb-8">
-                        {isRegister
-                            ? 'Erstellen Sie Ihr AERA SCALE Konto.'
-                            : 'Melden Sie sich bei Ihrem Konto an.'}
-                    </p>
-
-                    {/* Tab switcher */}
-                    <div className="flex border border-slate-200 rounded-xl p-1 mb-7 bg-slate-50">
-                        <button type="button" onClick={() => switchTab(false)}
-                            className={`flex-1 py-2 text-sm font-semibold rounded-lg transition-all ${!isRegister
-                                ? 'bg-white text-aera-900 shadow-sm border border-slate-200'
-                                : 'text-slate-400 hover:text-slate-600'}`}>
-                            Anmelden
-                        </button>
-                        <button type="button" onClick={() => switchTab(true)}
-                            className={`flex-1 py-2 text-sm font-semibold rounded-lg transition-all ${isRegister
-                                ? 'bg-white text-aera-900 shadow-sm border border-slate-200'
-                                : 'text-slate-400 hover:text-slate-600'}`}>
-                            Registrieren
-                        </button>
-                    </div>
-
-                    {error && (
-                        <div className="mb-5 flex items-start gap-2.5 bg-red-50 border border-red-200 rounded-xl p-3.5">
-                            <AlertCircle className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
-                            <p className="text-sm text-red-600">{error}</p>
-                        </div>
-                    )}
-
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                        <div>
-                            <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5">E-Mail</label>
-                            <div className="relative">
-                                <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}
-                                    placeholder="name@unternehmen.de"
-                                    className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl text-sm text-aera-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-gold-500/30 focus:border-gold-500 transition-all bg-white"
-                                    autoComplete="email" required />
-                            </div>
-                        </div>
-
-                        <div>
-                            <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5">Passwort</label>
-                            <div className="relative">
-                                <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                                <input type={showPassword ? 'text' : 'password'} value={password}
-                                    onChange={(e) => setPassword(e.target.value)} placeholder="••••••••"
-                                    className="w-full pl-10 pr-11 py-3 border border-slate-200 rounded-xl text-sm text-aera-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-gold-500/30 focus:border-gold-500 transition-all bg-white"
-                                    autoComplete={isRegister ? 'new-password' : 'current-password'} required />
-                                <button type="button" onClick={() => setShowPassword(!showPassword)}
-                                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors">
-                                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                                </button>
-                            </div>
-                        </div>
-
-                        {isRegister && (
-                            <div>
-                                <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5">Passwort bestätigen</label>
-                                <div className="relative">
-                                    <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                                    <input type={showPassword ? 'text' : 'password'} value={confirmPassword}
-                                        onChange={(e) => setConfirmPassword(e.target.value)} placeholder="••••••••"
-                                        className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl text-sm text-aera-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-gold-500/30 focus:border-gold-500 transition-all bg-white"
-                                        autoComplete="new-password" required />
-                                </div>
-                            </div>
-                        )}
-
-                        <button type="submit" disabled={isLoading}
-                            className="w-full py-3 bg-aera-900 text-white font-semibold rounded-xl hover:bg-aera-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2 group mt-2">
-                            {isLoading
-                                ? (<><Loader2 className="w-4 h-4 animate-spin" /><span>{isRegister ? 'Konto wird erstellt…' : 'Anmeldung…'}</span></>)
-                                : (<><span>{isRegister ? 'Konto erstellen' : 'Anmelden'}</span><ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" /></>)
-                            }
-                        </button>
-                    </form>
-
-                    <p className="text-center text-slate-400 text-xs mt-8">Powered by Firebase &amp; Vertex AI</p>
-                </div>
-            </div>
+        {/* Logo */}
+        <div className="anim-fade anim-d1" style={{ marginBottom: '40px', textAlign: 'center' }}>
+          <LogoMark size={64} dark={false} />
         </div>
-    );
+
+        {/* Headline */}
+        <div className="anim-fade anim-d2" style={{ textAlign: 'center', marginBottom: '56px' }}>
+          <h1 style={{
+            fontFamily: '"Cormorant Garamond", serif',
+            fontSize: 'clamp(40px, 5vw, 60px)',
+            fontWeight: 700, color: 'white',
+            lineHeight: 1.05, letterSpacing: '-0.02em',
+            marginBottom: '16px',
+          }}>
+            Immobilien.<br />Intelligent<br />verwaltet.
+          </h1>
+          <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '15px', lineHeight: 1.65, maxWidth: '300px' }}>
+            Die professionelle Lösung für modernes Immobilienmanagement.
+          </p>
+        </div>
+
+        {/* Stats */}
+        <div className="anim-fade anim-d3" style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '100%', maxWidth: '280px' }}>
+          {[
+            { value: '1.240', label: 'Verwaltete Objekte' },
+            { value: '€ 24M', label: 'Portfolio-Gesamtwert' },
+            { value: '98%',   label: 'Kundenzufriedenheit' },
+          ].map(s => (
+            <div key={s.label} className="stat-card">
+              <div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: '22px', fontWeight: 500, color: '#E2C47A', letterSpacing: '-0.02em' }}>
+                {s.value}
+              </div>
+              <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.55)', marginTop: '3px' }}>
+                {s.label}
+              </div>
+            </div>
+          ))}
+
+          {proPlan && (
+            <div style={{ marginTop: '8px', display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 14px', background: 'rgba(201,168,76,0.1)', border: '1px solid rgba(201,168,76,0.25)', borderRadius: '8px' }}>
+              <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#C9A84C', display: 'block' }} />
+              <span style={{ color: '#E2C47A', fontSize: '12px', fontWeight: 600 }}>Pro-Plan ausgewählt</span>
+            </div>
+          )}
+        </div>
+
+        {/* Back link */}
+        <a
+          href={HOMEPAGE_URL}
+          className="anim-fade anim-d4"
+          style={{ position: 'absolute', bottom: '28px', left: '48px', fontSize: '12px', color: 'rgba(255,255,255,0.3)', textDecoration: 'none' }}
+          onMouseOver={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.6)')}
+          onMouseOut={e  => (e.currentTarget.style.color = 'rgba(255,255,255,0.3)')}
+        >
+          ← Zurück zur Website
+        </a>
+      </div>
+
+      {/* ══ RIGHT PANEL — Cream (45%) ═════════════════════════════ */}
+      <div
+        className="anim-slide"
+        style={{
+          width: '45%', background: '#F5F0E8',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          padding: '48px 56px', position: 'relative',
+        }}
+      >
+        {/* Top gold accent */}
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '3px', background: 'linear-gradient(90deg, #C9A84C, transparent)' }} />
+
+        <div style={{ width: '100%', maxWidth: '380px' }}>
+
+          {/* Logo small */}
+          <div className="anim-fade anim-d1" style={{ marginBottom: '36px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <LogoMark size={32} dark />
+            <span style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: '20px', fontWeight: 700, color: '#1A2E25', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+              Aera Scale
+            </span>
+          </div>
+
+          {/* Auth-required notice */}
+          {fromProtected && (
+            <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'flex-start', gap: '8px', background: '#FFF8EC', border: '1px solid rgba(201,168,76,0.3)', borderRadius: '10px', padding: '12px 14px' }}>
+              <AlertCircle size={14} style={{ color: '#C9A84C', flexShrink: 0, marginTop: '2px' }} />
+              <p style={{ fontSize: '13px', color: '#4A6358', margin: 0 }}>Bitte melden Sie sich an, um fortzufahren.</p>
+            </div>
+          )}
+
+          {/* Headline */}
+          <div className="anim-fade anim-d2" style={{ marginBottom: '32px' }}>
+            <h2 style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: '38px', fontWeight: 700, color: '#1A2E25', marginBottom: '6px', lineHeight: 1.1 }}>
+              {isRegister ? 'Konto erstellen' : 'Willkommen zurück'}
+            </h2>
+            <p style={{ fontSize: '15px', color: '#7A9589' }}>
+              {isRegister ? 'Starten Sie Ihr Immobilienportfolio.' : 'Ihr Portfolio wartet auf Sie.'}
+            </p>
+          </div>
+
+          {/* Tab switcher */}
+          <div className="anim-fade anim-d2" style={{ display: 'flex', background: '#EDE8DF', borderRadius: '12px', padding: '4px', marginBottom: '28px' }}>
+            {(['Anmelden', 'Registrieren'] as const).map((tab, i) => {
+              const active = i === 0 ? !isRegister : isRegister;
+              return (
+                <button
+                  key={tab}
+                  type="button"
+                  onClick={() => switchTab(i === 1)}
+                  style={{
+                    flex: 1, padding: '8px', fontSize: '14px', fontWeight: 600,
+                    borderRadius: '10px', border: 'none', cursor: 'pointer',
+                    fontFamily: '"DM Sans", sans-serif',
+                    transition: 'all 200ms ease-out',
+                    background: active ? 'white' : 'transparent',
+                    color: active ? '#1A2E25' : '#7A9589',
+                    boxShadow: active ? '0 1px 3px rgba(45,74,62,0.1)' : 'none',
+                  }}
+                >
+                  {tab}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Error */}
+          {error && (
+            <div style={{ marginBottom: '16px', display: 'flex', alignItems: 'flex-start', gap: '8px', background: '#FEF2F0', border: '1px solid #FBBFB5', borderRadius: '8px', padding: '10px 14px' }}>
+              <AlertCircle size={14} style={{ color: '#C94A3A', flexShrink: 0, marginTop: '2px' }} />
+              <p style={{ fontSize: '13px', color: '#C94A3A', margin: 0 }}>{error}</p>
+            </div>
+          )}
+
+          {/* Form */}
+          <form
+            onSubmit={handleSubmit}
+            className={shake ? 'shake' : ''}
+            style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}
+          >
+            {/* Email */}
+            <div className="anim-fade anim-d3 input-group">
+              <input
+                type="email"
+                id="email-field"
+                className="input-field"
+                placeholder=" "
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                autoComplete="email"
+                required
+              />
+              <label htmlFor="email-field" className="input-label">E-Mail Adresse</label>
+            </div>
+
+            {/* Password */}
+            <div className="anim-fade anim-d3 input-group" style={{ position: 'relative' }}>
+              <input
+                type={showPassword ? 'text' : 'password'}
+                id="password-field"
+                className="input-field"
+                placeholder=" "
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                autoComplete={isRegister ? 'new-password' : 'current-password'}
+                style={{ paddingRight: '48px' }}
+                required
+              />
+              <label htmlFor="password-field" className="input-label">Passwort</label>
+              <button
+                type="button"
+                onClick={() => setShowPassword(v => !v)}
+                style={{ position: 'absolute', right: '14px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: '#7A9589', padding: '4px' }}
+              >
+                {showPassword ? (
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                    <line x1="1" y1="1" x2="23" y2="23"/>
+                  </svg>
+                ) : (
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                  </svg>
+                )}
+              </button>
+            </div>
+
+            {/* Confirm password */}
+            {isRegister && (
+              <div className="input-group">
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  id="confirm-field"
+                  className="input-field"
+                  placeholder=" "
+                  value={confirmPassword}
+                  onChange={e => setConfirmPassword(e.target.value)}
+                  autoComplete="new-password"
+                  required
+                />
+                <label htmlFor="confirm-field" className="input-label">Passwort bestätigen</label>
+              </div>
+            )}
+
+            {/* Remember me / Forgot */}
+            {!isRegister && (
+              <div className="anim-fade anim-d3" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '13px', color: '#4A6358' }}>
+                  <input
+                    type="checkbox"
+                    className="toggle"
+                    checked={rememberMe}
+                    onChange={e => setRememberMe(e.target.checked)}
+                  />
+                  Angemeldet bleiben
+                </label>
+                <a
+                  href="#"
+                  style={{ fontSize: '13px', color: '#C9A84C', textDecoration: 'none', fontWeight: 500 }}
+                  onMouseOver={e => (e.currentTarget.style.color = '#A6883A')}
+                  onMouseOut={e  => (e.currentTarget.style.color = '#C9A84C')}
+                >
+                  Passwort vergessen?
+                </a>
+              </div>
+            )}
+
+            {/* CTA */}
+            <div className="anim-fade anim-d4">
+              <button
+                type="submit"
+                className="btn-gold"
+                disabled={isLoading}
+                style={{ opacity: isLoading ? 0.7 : 1, cursor: isLoading ? 'not-allowed' : undefined }}
+              >
+                {isLoading
+                  ? (isRegister ? 'Konto wird erstellt…' : 'Anmeldung…')
+                  : (isRegister ? 'Konto erstellen →' : 'Jetzt anmelden →')}
+              </button>
+            </div>
+
+            {/* Divider */}
+            {!isRegister && (
+              <>
+                <div className="anim-fade anim-d4" style={{ display: 'flex', alignItems: 'center', gap: '12px', margin: '4px 0' }}>
+                  <div style={{ flex: 1, height: '1px', background: '#D4CFC6' }} />
+                  <span style={{ fontSize: '11px', color: '#7A9589', fontWeight: 600, letterSpacing: '0.05em' }}>ODER</span>
+                  <div style={{ flex: 1, height: '1px', background: '#D4CFC6' }} />
+                </div>
+
+                {/* SSO buttons */}
+                <div className="anim-fade anim-d5" style={{ display: 'flex', gap: '10px' }}>
+                  <button type="button" className="btn-sso">
+                    <svg width="16" height="16" viewBox="0 0 24 24">
+                      <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                      <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                      <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                      <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                    </svg>
+                    Google
+                  </button>
+                  <button type="button" className="btn-sso">
+                    <svg width="16" height="16" viewBox="0 0 21 21">
+                      <rect x="0"  y="0"  width="10" height="10" fill="#F25022"/>
+                      <rect x="11" y="0"  width="10" height="10" fill="#7FBA00"/>
+                      <rect x="0"  y="11" width="10" height="10" fill="#00A4EF"/>
+                      <rect x="11" y="11" width="10" height="10" fill="#FFB900"/>
+                    </svg>
+                    Microsoft
+                  </button>
+                </div>
+              </>
+            )}
+          </form>
+
+          {/* Footer links */}
+          <div className="anim-fade anim-d5" style={{ marginTop: '36px', paddingTop: '18px', borderTop: '1px solid #D4CFC6', textAlign: 'center' }}>
+            <p style={{ fontSize: '12px', color: '#7A9589' }}>
+              <a href="/homepage/datenschutz.html" style={{ color: '#7A9589', textDecoration: 'none' }}>Datenschutz</a>
+              {' · '}
+              <a href="/homepage/agb.html" style={{ color: '#7A9589', textDecoration: 'none' }}>AGB</a>
+              {' · '}
+              <a href="/homepage/impressum.html" style={{ color: '#7A9589', textDecoration: 'none' }}>Impressum</a>
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default LoginPage;

@@ -1,7 +1,10 @@
 
 import React from 'react';
-import { motion } from 'framer-motion';
-import { LayoutDashboard, Building2, Users, Settings, LogOut, UserCircle, Wallet } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  LayoutDashboard, Building2, Users, Wallet, Settings, LogOut,
+  UserCircle, FileText, Wrench, BarChart3
+} from 'lucide-react';
 import { AppView } from '../types';
 import { useAuth } from '../services/AuthContext';
 import { useOrg } from '../services/OrgContext';
@@ -12,137 +15,199 @@ interface SidebarProps {
   hasActiveAsset?: boolean;
 }
 
-// Inline SVG Logo Icon (hexagon A-mark)
-const LogoIcon: React.FC<{ size?: number }> = ({ size = 32 }) => (
+// ── AERA SCALE SVG Logo Mark ──────────────────────────────────────
+const LogoMark: React.FC<{ size?: number }> = ({ size = 36 }) => (
   <svg width={size} height={size} viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="64" height="64" rx="10" fill="#0D2818"/>
-    <g transform="translate(4,4)">
-      <rect x="10" y="28" width="7" height="24" fill="#C9A84C"/>
-      <rect x="39" y="28" width="7" height="24" fill="#C9A84C"/>
-      <polygon points="13,28 28,8 31,8 31,14 16,32" fill="#C9A84C"/>
-      <polygon points="43,28 28,8 25,8 25,14 40,32" fill="#C9A84C"/>
-      <rect x="18" y="36" width="20" height="5" fill="#C9A84C"/>
-    </g>
+    <rect x="8"  y="24" width="20" height="32" rx="2" fill="rgba(255,255,255,0.85)"/>
+    <rect x="16" y="12" width="32" height="44" rx="2" fill="rgba(255,255,255,0.50)"/>
+    <rect x="36" y="20" width="20" height="36" rx="2" fill="rgba(255,255,255,0.75)"/>
+    {/* Gold accent squares */}
+    <rect x="14" y="30" width="5" height="5" rx="1" fill="#C9A84C"/>
+    <rect x="14" y="41" width="5" height="5" rx="1" fill="#C9A84C"/>
+    <rect x="26" y="22" width="5" height="5" rx="1" fill="#C9A84C"/>
+    <rect x="26" y="33" width="5" height="5" rx="1" fill="#C9A84C"/>
+    <rect x="26" y="44" width="5" height="5" rx="1" fill="#C9A84C"/>
+    <rect x="43" y="28" width="5" height="5" rx="1" fill="#C9A84C"/>
+    <rect x="43" y="39" width="5" height="5" rx="1" fill="#C9A84C"/>
   </svg>
 );
 
+// ── Nav Button with Tooltip ───────────────────────────────────────
+interface NavBtnProps {
+  label: string;
+  icon: React.ElementType;
+  isActive: boolean;
+  danger?: boolean;
+  onClick: () => void;
+}
+
+const NavBtn: React.FC<NavBtnProps> = ({ label, icon: Icon, isActive, danger, onClick }) => (
+  <div className="relative group" style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+    <button
+      onClick={onClick}
+      title={label}
+      className="nav-icon"
+      style={{
+        color: isActive
+          ? '#C9A84C'
+          : danger
+            ? 'rgba(201,74,58,0.5)'
+            : '#7A9589',
+        background: isActive ? 'rgba(201,168,76,0.12)' : undefined,
+      }}
+    >
+      {isActive && (
+        <motion.div
+          layoutId="nav-active-bg"
+          className="absolute inset-0 rounded-xl"
+          style={{ background: 'rgba(201,168,76,0.12)' }}
+          transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+        />
+      )}
+      {isActive && (
+        <motion.div
+          layoutId="nav-active-bar"
+          style={{
+            position: 'absolute', left: '-16px', top: '50%',
+            transform: 'translateY(-50%)',
+            width: '2px', height: '24px',
+            background: '#C9A84C', borderRadius: '0 2px 2px 0',
+          }}
+          transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+        />
+      )}
+      <Icon
+        size={20}
+        style={{
+          position: 'relative', zIndex: 1,
+          color: isActive ? '#C9A84C' : danger ? 'rgba(201,74,58,0.55)' : '#7A9589',
+        }}
+      />
+    </button>
+
+    {/* Hover tooltip */}
+    <div style={{
+      position: 'absolute', left: '100%', marginLeft: '12px',
+      top: '50%', transform: 'translateY(-50%)',
+      pointerEvents: 'none', zIndex: 50,
+      opacity: 0, transition: 'opacity 150ms ease',
+    }}
+      className="group-hover:opacity-100"
+    >
+      <div style={{
+        background: '#1E3329', border: '1px solid rgba(45,74,62,0.8)',
+        color: 'white', fontSize: '12px', fontWeight: 500,
+        padding: '5px 10px', borderRadius: '8px',
+        whiteSpace: 'nowrap',
+        boxShadow: '0 4px 16px rgba(45,74,62,0.25)',
+      }}>
+        {label}
+      </div>
+    </div>
+  </div>
+);
+
+// ── Sidebar Component ─────────────────────────────────────────────
 const Sidebar: React.FC<SidebarProps> = ({ currentView, onChangeView, hasActiveAsset }) => {
   const { user, logout } = useAuth();
   const { role, org } = useOrg();
-  const userEmail = user?.email || 'User';
+  const userEmail   = user?.email || 'User';
   const userInitials = userEmail.substring(0, 2).toUpperCase();
 
-  const navItems = [
-    { id: AppView.DASHBOARD,   label: 'Dashboard',   icon: LayoutDashboard },
-    { id: AppView.PROPERTIES,  label: 'Immobilien',  icon: Building2 },
-    { id: AppView.TENANTS,     label: 'Mieter',      icon: Users },
-    { id: AppView.FINANCE,     label: 'Finanzen',    icon: Wallet },
+  const ROLE_LABELS: Record<string, string> = {
+    org_admin:       'Admin',
+    user:            'Benutzer',
+    finance:         'Finanzen',
+    property_manager:'Objektverwalter',
+  };
+
+  const mainNav = [
+    { id: AppView.DASHBOARD,  label: 'Dashboard',    icon: LayoutDashboard },
+    { id: AppView.PROPERTIES, label: 'Objekte',      icon: Building2 },
+    { id: AppView.TENANTS,    label: 'Mieter',       icon: Users },
+    { id: AppView.FINANCE,    label: 'Finanzen',     icon: Wallet },
   ];
 
-  const NavButton: React.FC<{
-    id: AppView | 'settings' | 'portal';
-    label: string;
-    icon: React.ElementType;
-    active?: boolean;
-    danger?: boolean;
-    onClick: () => void;
-  }> = ({ label, icon: Icon, active, danger, onClick }) => (
-    <div className="relative group">
-      <button
-        onClick={onClick}
-        title={label}
-        className={`
-          relative w-full flex items-center justify-center h-11 w-11 mx-auto rounded-xl transition-all duration-200
-          ${active
-            ? 'bg-gold-500/10 text-gold-500'
-            : danger
-              ? 'text-aera-400/50 hover:text-red-400 hover:bg-red-900/20'
-              : 'text-aera-400/50 hover:text-white hover:bg-aera-800'
-          }
-        `}
-      >
-        {active && (
-          <motion.div
-            layoutId="nav-active-bg"
-            className="absolute inset-0 bg-gold-500/10 rounded-xl"
-            transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-          />
-        )}
-        {active && (
-          <motion.div
-            layoutId="nav-active-bar"
-            className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 bg-gold-500 rounded-r-full"
-            transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-          />
-        )}
-        <Icon className="w-5 h-5 relative z-10" />
-      </button>
-      {/* Tooltip */}
-      <div className="absolute left-full ml-3 top-1/2 -translate-y-1/2 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-150 z-50">
-        <div className="bg-aera-900 border border-aera-700 text-white text-xs font-medium px-2.5 py-1.5 rounded-lg whitespace-nowrap shadow-xl">
-          {label}
-        </div>
-      </div>
-    </div>
-  );
-
   return (
-    <div className="w-[72px] bg-aera-900 flex flex-col h-full border-r border-aera-800/80 shrink-0">
+    <div style={{
+      width: '72px',
+      background: '#2D4A3E',   /* ANTIGRAVITY v2: forest #2D4A3E */
+      display: 'flex',
+      flexDirection: 'column',
+      height: '100%',
+      borderRight: '1px solid rgba(45,74,62,0.6)',
+      flexShrink: 0,
+    }}>
 
-      {/* Logo */}
-      <div className="flex items-center justify-center py-5 border-b border-aera-800/60">
-        <LogoIcon size={36} />
+      {/* ── Logo ── */}
+      <div style={{
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        padding: '20px 0 16px',
+        borderBottom: '1px solid rgba(255,255,255,0.07)',
+      }}>
+        <LogoMark size={36} />
       </div>
 
-      {/* Main Nav */}
-      <nav className="flex-1 flex flex-col items-center gap-1 py-4 px-1.5 overflow-y-auto">
-        {navItems.map((item) => {
-          const isActive = currentView === item.id && !hasActiveAsset;
-          return (
-            <NavButton
-              key={item.id}
-              id={item.id}
-              label={item.label}
-              icon={item.icon}
-              active={isActive}
-              onClick={() => onChangeView(item.id)}
-            />
-          );
-        })}
+      {/* ── Main Nav ── */}
+      <nav style={{
+        flex: 1, display: 'flex', flexDirection: 'column',
+        alignItems: 'center', gap: '4px',
+        padding: '16px 14px', overflowY: 'auto',
+      }}>
+        {mainNav.map(item => (
+          <NavBtn
+            key={item.id}
+            label={item.label}
+            icon={item.icon}
+            isActive={currentView === item.id && !hasActiveAsset}
+            onClick={() => onChangeView(item.id)}
+          />
+        ))}
 
         {/* Divider */}
-        <div className="w-8 h-px bg-aera-800/60 my-2" />
+        <div style={{ width: 32, height: 1, background: 'rgba(255,255,255,0.08)', margin: '8px 0' }} />
 
-        {/* Tenant Portal shortcut */}
-        <NavButton
-          id="portal"
+        <NavBtn
           label="Mieter-Portal"
           icon={UserCircle}
-          active={currentView === AppView.TENANT_PORTAL}
+          isActive={currentView === AppView.TENANT_PORTAL}
           onClick={() => onChangeView(AppView.TENANT_PORTAL)}
         />
       </nav>
 
-      {/* Bottom section */}
-      <div className="flex flex-col items-center gap-1 px-1.5 py-3 border-t border-aera-800/60">
-        <NavButton
-          id="settings"
+      {/* ── Bottom ── */}
+      <div style={{
+        display: 'flex', flexDirection: 'column', alignItems: 'center',
+        gap: '4px', padding: '12px 14px 16px',
+        borderTop: '1px solid rgba(255,255,255,0.07)',
+      }}>
+        <NavBtn
           label="Einstellungen"
           icon={Settings}
-          active={currentView === AppView.SETTINGS}
+          isActive={currentView === AppView.SETTINGS}
           onClick={() => onChangeView(AppView.SETTINGS)}
         />
-        <NavButton
-          id="settings"
+        <NavBtn
           label="Abmelden"
           icon={LogOut}
+          isActive={false}
           danger
           onClick={logout}
         />
-        {/* User Avatar */}
+
+        {/* User avatar */}
         <div
-          title={`${userEmail}\n${role} · ${org.name}`}
-          className="mt-2 w-9 h-9 rounded-full bg-gold-500/20 border border-gold-500/40 flex items-center justify-center text-gold-400 font-semibold text-xs cursor-default select-none"
+          title={`${userEmail}\n${ROLE_LABELS[role] || role} · ${org.name}`}
+          style={{
+            marginTop: '8px',
+            width: '32px', height: '32px', borderRadius: '50%',
+            background: 'rgba(201,168,76,0.15)',
+            border: '1.5px solid rgba(201,168,76,0.35)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontFamily: '"JetBrains Mono", monospace',
+            fontSize: '11px', fontWeight: 600, color: '#C9A84C',
+            cursor: 'default', userSelect: 'none',
+          }}
         >
           {userInitials}
         </div>
