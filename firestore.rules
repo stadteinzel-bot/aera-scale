@@ -160,37 +160,52 @@ service cloud.firestore {
 
     match /operatingCosts/{docId} {
       allow read: if isAuthenticated() && ownsResource();
-      allow create: if isAuthenticated() && ownsNewResource();
-      allow update: if isAuthenticated() && ownsResource() && orgIdUnchanged();
-      allow delete: if isAuthenticated() && ownsResource();
+      allow create: if isAuthenticated() && ownsNewResource()
+        && isAdminOrFinance(request.resource.data.orgId);
+      allow update: if isAuthenticated() && ownsResource() && orgIdUnchanged()
+        && isAdminOrFinance(resource.data.orgId);
+      allow delete: if isAuthenticated() && ownsResource()
+        && isAdminOrFinance(resource.data.orgId);
     }
 
     match /settlements/{docId} {
       allow read: if isAuthenticated() && ownsResource();
-      allow create: if isAuthenticated() && ownsNewResource();
-      allow update: if isAuthenticated() && ownsResource() && orgIdUnchanged();
-      allow delete: if isAuthenticated() && ownsResource();
+      allow create: if isAuthenticated() && ownsNewResource()
+        && isAdminOrFinance(request.resource.data.orgId);
+      allow update: if isAuthenticated() && ownsResource() && orgIdUnchanged()
+        && isAdminOrFinance(resource.data.orgId);
+      allow delete: if isAuthenticated() && ownsResource()
+        && isAdminOrFinance(resource.data.orgId);
     }
 
     match /rentInvoices/{docId} {
       allow read: if isAuthenticated() && ownsResource();
-      allow create: if isAuthenticated() && ownsNewResource();
-      allow update: if isAuthenticated() && ownsResource() && orgIdUnchanged();
-      allow delete: if isAuthenticated() && ownsResource();
+      allow create: if isAuthenticated() && ownsNewResource()
+        && isAdminOrFinance(request.resource.data.orgId);
+      allow update: if isAuthenticated() && ownsResource() && orgIdUnchanged()
+        && isAdminOrFinance(resource.data.orgId);
+      allow delete: if isAuthenticated() && ownsResource()
+        && isAdminOrFinance(resource.data.orgId);
     }
 
     match /payments/{docId} {
       allow read: if isAuthenticated() && ownsResource();
-      allow create: if isAuthenticated() && ownsNewResource();
-      allow update: if isAuthenticated() && ownsResource() && orgIdUnchanged();
-      allow delete: if isAuthenticated() && ownsResource();
+      allow create: if isAuthenticated() && ownsNewResource()
+        && isAdminOrFinance(request.resource.data.orgId);
+      allow update: if isAuthenticated() && ownsResource() && orgIdUnchanged()
+        && isAdminOrFinance(resource.data.orgId);
+      allow delete: if isAuthenticated() && ownsResource()
+        && isAdminOrFinance(resource.data.orgId);
     }
 
     match /contracts/{docId} {
       allow read: if isAuthenticated() && ownsResource();
-      allow create: if isAuthenticated() && ownsNewResource();
-      allow update: if isAuthenticated() && ownsResource() && orgIdUnchanged();
-      allow delete: if isAuthenticated() && ownsResource();
+      allow create: if isAuthenticated() && ownsNewResource()
+        && isAdminOrFinance(request.resource.data.orgId);
+      allow update: if isAuthenticated() && ownsResource() && orgIdUnchanged()
+        && isAdminOrFinance(resource.data.orgId);
+      allow delete: if isAuthenticated() && ownsResource()
+        && isAdminOrFinance(resource.data.orgId);
     }
 
     match /rentLineItems/{docId} {

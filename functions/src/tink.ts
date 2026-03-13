@@ -114,6 +114,39 @@ async function getUserToken(code: string): Promise<{ accessToken: string; refres
     return { accessToken: resp.data.access_token, refreshToken: resp.data.refresh_token };
 }
 
+/**
+ * Refresh an expired Tink user access token using the stored refresh token.
+ * Updates the bankConnection doc in Firestore with the new tokens.
+ */
+async function refreshUserToken(
+    orgId: string, connectionId: string, storedRefreshToken: string
+): Promise<string> {
+    const clientId = process.env.TINK_CLIENT_ID;
+    const clientSecret = process.env.TINK_CLIENT_SECRET;
+    const params = new URLSearchParams({
+        client_id: clientId!,
+        client_secret: clientSecret!,
+        grant_type: 'refresh_token',
+        refresh_token: storedRefreshToken,
+    });
+    const resp = await axios.post(`${TINK_API}/api/v1/oauth/token`, params.toString(), {
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    });
+    const newAccessToken = resp.data.access_token as string;
+    const newRefreshToken = resp.data.refresh_token as string | undefined;
+
+    // Persist new tokens
+    const updateData: Record<string, any> = { accessToken: newAccessToken };
+    if (newRefreshToken) updateData.refreshToken = newRefreshToken;
+    await admin.firestore()
+        .collection('organizations').doc(orgId)
+        .collection('bankConnections').doc(connectionId)
+        .update(updateData);
+
+    console.log('[Tink] Token refreshed for connection:', connectionId);
+    return newAccessToken;
+}
+
 
 // ---------------------------------------------------------------------------
 // 1. tinkCreateLink — generate Tink Link URL for bank connection
@@ -269,15 +302,33 @@ export const tinkSyncTransactions = httpsRegion.onRequest(withCors(async (req, r
             .collection('bankConnections').doc(connectionId).get();
         if (!connSnap.exists) throw new functions.https.HttpsError('not-found', 'Connection not found');
 
-        const { accessToken, propertyId: connPropertyId } = connSnap.data() as any;
+        const { accessToken, refreshToken: storedRefreshToken, propertyId: connPropertyId } = connSnap.data() as any;
 
-        // Fetch transactions (last 90 days)
+        // Fetch transactions with auto-refresh on 401
         const from = new Date(); from.setDate(from.getDate() - 90);
-        const txResp = await axios.get(`${TINK_API}/data/v2/transactions`, {
-            headers: { Authorization: `Bearer ${accessToken}` },
-            params: { bookedDateGte: from.toISOString().slice(0, 10), pageSize: 200 },
-        });
-        const transactions: any[] = txResp.data.transactions ?? [];
+        const txParams = { bookedDateGte: from.toISOString().slice(0, 10), pageSize: 200 };
+
+        let transactions: any[];
+        try {
+            const txResp = await axios.get(`${TINK_API}/data/v2/transactions`, {
+                headers: { Authorization: `Bearer ${accessToken}` },
+                params: txParams,
+            });
+            transactions = txResp.data.transactions ?? [];
+        } catch (tokenErr: any) {
+            // If 401 → token expired, try refresh
+            if (tokenErr?.response?.status === 401 && storedRefreshToken) {
+                console.log('[Tink] Access token expired, refreshing...');
+                const freshToken = await refreshUserToken(orgId, connectionId, storedRefreshToken);
+                const txResp = await axios.get(`${TINK_API}/data/v2/transactions`, {
+                    headers: { Authorization: `Bearer ${freshToken}` },
+                    params: txParams,
+                });
+                transactions = txResp.data.transactions ?? [];
+            } else {
+                throw tokenErr;
+            }
+        }
 
         // Fetch open invoices for reconciliation — scope to property if available
         let invoicesQuery = admin.firestore()
