@@ -692,15 +692,14 @@ if (dw) {
 const slider = document.getElementById('priceSlider');
 const sliderVal = document.getElementById('sliderVal');
 function updatePrices(n) {
-  let starter = 20, pro = 16, ent = 12;
-  if (n > 50)  { starter = 18; pro = 14; ent = 10; }
-  if (n > 100) { starter = 16; pro = 12; ent = 9; }
+  let starter = 20, pro = 16;
+  if (n > 50)  { starter = 18; pro = 14; }
+  if (n > 100) { starter = 16; pro = 12; }
   document.getElementById('starterPrice').textContent = '€ ' + (n * starter).toLocaleString('de-DE');
   document.getElementById('starterUnit').textContent = '€ ' + starter + ' / Einheit';
   document.getElementById('proPrice').textContent = '€ ' + (n * pro).toLocaleString('de-DE');
   document.getElementById('proUnit').textContent = '€ ' + pro + ' / Einheit';
-  document.getElementById('entPrice').textContent = '€ ' + (n * ent).toLocaleString('de-DE');
-  document.getElementById('entUnit').textContent = '€ ' + ent + ' / Einheit';
+  // Enterprise: always "Auf Anfrage" — no dynamic price
 }
 if (slider) {
   slider.addEventListener('input', () => {
