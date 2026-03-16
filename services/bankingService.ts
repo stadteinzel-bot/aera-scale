@@ -70,17 +70,42 @@ export async function syncTinkTransactions(
 /**
  * Permanently deletes the authenticated user's Firebase Auth account.
  * Uses Firebase Auth SDK directly (no Cloud Function — avoids CORS issues).
+ * Handles: googlemail.com alias, requires-recent-login re-auth.
  * @param confirmEmail  Must match the user's current email as a safety check
  */
 export async function deleteAccount(confirmEmail: string): Promise<void> {
+    const { deleteUser, reauthenticateWithRedirect, GoogleAuthProvider } = await import('firebase/auth');
+
     const user = auth.currentUser;
     if (!user) throw new Error('Nicht angemeldet.');
-    if (user.email?.toLowerCase() !== confirmEmail.toLowerCase()) {
+
+    // Normalize googlemail.com ↔ gmail.com (they're the same account)
+    const normalize = (email: string) =>
+        email.toLowerCase().replace('@googlemail.com', '@gmail.com');
+
+    const inputNorm = normalize(confirmEmail);
+    const userNorm = normalize(user.email ?? '');
+
+    if (userNorm !== inputNorm) {
         throw new Error('E-Mail-Adresse stimmt nicht überein.');
     }
-    // Firebase Auth: user can delete their own account directly
-    const { deleteUser } = await import('firebase/auth');
-    await deleteUser(user);
+
+    try {
+        await deleteUser(user);
+    } catch (err: any) {
+        if (err?.code === 'auth/requires-recent-login') {
+            // Re-authenticate via Google redirect, then deletion happens on return
+            const isGoogle = user.providerData.some(p => p.providerId === 'google.com');
+            if (isGoogle) {
+                // Store intent, then redirect to re-auth
+                sessionStorage.setItem('aera-pending-delete', '1');
+                await reauthenticateWithRedirect(user, new GoogleAuthProvider());
+                return; // page will redirect
+            }
+            throw new Error('Sitzung abgelaufen. Bitte melden Sie sich erneut an und versuchen Sie es nochmals.');
+        }
+        throw err;
+    }
 }
 
 // ---------------------------------------------------------------------------
