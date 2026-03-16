@@ -68,12 +68,19 @@ export async function syncTinkTransactions(
 // ---------------------------------------------------------------------------
 
 /**
- * Permanently deletes the authenticated user's Firebase Auth account
- * and deactivates their org membership. Org data is retained per DSGVO.
+ * Permanently deletes the authenticated user's Firebase Auth account.
+ * Uses Firebase Auth SDK directly (no Cloud Function — avoids CORS issues).
  * @param confirmEmail  Must match the user's current email as a safety check
  */
 export async function deleteAccount(confirmEmail: string): Promise<void> {
-    await cfPost('deleteAccount', { confirmEmail });
+    const user = auth.currentUser;
+    if (!user) throw new Error('Nicht angemeldet.');
+    if (user.email?.toLowerCase() !== confirmEmail.toLowerCase()) {
+        throw new Error('E-Mail-Adresse stimmt nicht überein.');
+    }
+    // Firebase Auth: user can delete their own account directly
+    const { deleteUser } = await import('firebase/auth');
+    await deleteUser(user);
 }
 
 // ---------------------------------------------------------------------------
