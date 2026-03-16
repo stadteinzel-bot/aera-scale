@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 
 import { Property, PropertyUnit, RentPayment, Tenant, Landlord } from '../types';
 import { MapPin, Maximize, Euro, Plus, X, Search, ExternalLink, Building, Sparkles, Loader2, Info, CheckCircle2, ArrowLeft, ArrowRight, Edit2, Trash2, Save, History, Receipt, Download, UserPlus, UserMinus, User, Phone, Mail, Calendar, ChevronDown } from 'lucide-react';
@@ -401,26 +401,69 @@ const Properties: React.FC<PropertiesProps> = ({ onSelectAsset }) => {
                     <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-aera-900"></div>
                 </div>
             ) : filteredProperties.length === 0 ? (
-                <div className="flex flex-col items-center justify-center py-20 bg-slate-50 border-2 border-dashed border-slate-200 rounded-xl">
-                    <Building className="w-16 h-16 text-slate-300 mb-4" />
-                    <h3 className="text-lg font-medium text-slate-900">No properties found</h3>
-                    <p className="text-slate-500 mt-2 mb-6 max-w-sm text-center">
-                        It looks like your portfolio is empty. Get started by adding a property or seeding sample data.
+                /* ═══ RICH EMPTY STATE ═══ */
+                <div className="flex flex-col items-center justify-center py-16 px-4">
+                    {/* Illustration */}
+                    <div className="relative mb-8">
+                        <div className="w-32 h-32 rounded-3xl bg-gradient-to-br from-[#1A2E25] to-[#2D4A3E] flex items-center justify-center shadow-2xl shadow-[#1A2E25]/30">
+                            <svg width="56" height="56" viewBox="0 0 64 64" fill="none">
+                                <rect x="8" y="24" width="20" height="32" rx="2" fill="rgba(255,255,255,0.85)"/>
+                                <rect x="16" y="12" width="32" height="44" rx="2" fill="rgba(255,255,255,0.50)"/>
+                                <rect x="36" y="20" width="20" height="36" rx="2" fill="rgba(255,255,255,0.75)"/>
+                                <rect x="14" y="30" width="5" height="5" rx="1" fill="#C9A84C"/>
+                                <rect x="14" y="41" width="5" height="5" rx="1" fill="#C9A84C"/>
+                                <rect x="26" y="22" width="5" height="5" rx="1" fill="#C9A84C"/>
+                                <rect x="26" y="33" width="5" height="5" rx="1" fill="#C9A84C"/>
+                                <rect x="26" y="44" width="5" height="5" rx="1" fill="#C9A84C"/>
+                                <rect x="43" y="28" width="5" height="5" rx="1" fill="#C9A84C"/>
+                                <rect x="43" y="39" width="5" height="5" rx="1" fill="#C9A84C"/>
+                            </svg>
+                        </div>
+                        {/* Floating accent dot */}
+                        <div className="absolute -top-2 -right-2 w-6 h-6 bg-[#C9A84C] rounded-full flex items-center justify-center shadow-lg">
+                            <Plus className="w-3.5 h-3.5 text-[#1A2E25]" />
+                        </div>
+                    </div>
+
+                    <h2 className="text-2xl font-bold text-[#1A2E25] mb-2">Erste Immobilie anlegen</h2>
+                    <p className="text-slate-500 text-center max-w-sm mb-8 leading-relaxed">
+                        Ihr Portfolio ist noch leer. Fügen Sie jetzt Ihr erstes Objekt hinzu —
+                        in weniger als 2 Minuten.
                     </p>
-                    <div className="flex gap-4">
+
+                    {/* Steps hint */}
+                    <div className="flex items-center gap-3 mb-8 text-xs text-slate-400">
+                        <span className="flex items-center gap-1.5">
+                            <span className="w-5 h-5 rounded-full bg-[#1A2E25] text-white flex items-center justify-center font-bold text-[10px]">1</span>
+                            Adresse eingeben
+                        </span>
+                        <ArrowRight className="w-3 h-3 text-slate-300" />
+                        <span className="flex items-center gap-1.5">
+                            <span className="w-5 h-5 rounded-full bg-[#1A2E25] text-white flex items-center justify-center font-bold text-[10px]">2</span>
+                            Einheiten anlegen
+                        </span>
+                        <ArrowRight className="w-3 h-3 text-slate-300" />
+                        <span className="flex items-center gap-1.5">
+                            <span className="w-5 h-5 rounded-full bg-[#1A2E25] text-white flex items-center justify-center font-bold text-[10px]">3</span>
+                            Mieter zuweisen
+                        </span>
+                    </div>
+
+                    {/* CTAs */}
+                    <div className="flex flex-col sm:flex-row gap-3">
                         <button
                             onClick={() => setIsModalOpen(true)}
-                            className="bg-aera-600 hover:bg-aera-500 text-white px-4 py-2 rounded-lg text-sm font-medium shadow-sm transition-colors flex items-center"
+                            className="flex items-center justify-center gap-2 px-6 py-3 bg-[#1A2E25] text-white rounded-xl font-semibold text-sm hover:bg-[#2D4A3E] transition-colors shadow-lg shadow-[#1A2E25]/20"
                         >
-                            <Plus className="w-4 h-4 mr-2" />
-                            Add Property
+                            <Plus className="w-4 h-4" />
+                            Erste Immobilie hinzufügen
                         </button>
                         <button
                             onClick={handleSeedData}
-                            className="bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 px-4 py-2 rounded-lg text-sm font-medium shadow-sm transition-colors flex items-center"
+                            className="flex items-center justify-center gap-2 px-6 py-3 bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 rounded-xl text-sm font-medium transition-colors shadow-sm"
                         >
-                            <Sparkles className="w-4 h-4 mr-2 text-amber-500" />
-                            Seed Sample Data
+                            <Sparkles className="w-4 h-4 text-[#C9A84C]" />
+                            Demo-Daten laden
                         </button>
                     </div>
                 </div>

@@ -10,6 +10,7 @@ import { useDataCore } from '../core/DataCoreProvider';
 import { computePropertyRisk, computeTenantRisk, computePortfolioRisk } from '../core/riskEngine';
 import { generateCashflowForecast, summarizeForecast } from '../core/cashflowEngine';
 import { useTranslation } from '../core/i18nProvider';
+import GettingStartedBanner from './GettingStartedBanner';
 
 interface FeedItem {
   id: string;
@@ -21,7 +22,7 @@ interface FeedItem {
   status?: string;
 }
 
-const Dashboard: React.FC<{ onSelectAsset?: (propertyId: string) => void }> = ({ onSelectAsset }) => {
+const Dashboard: React.FC<{ onSelectAsset?: (propertyId: string) => void; onChangeView?: (view: string) => void }> = ({ onSelectAsset, onChangeView }) => {
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [briefingCache, setBriefingCache] = useState<Record<string, string>>({});
   const [loadingId, setLoadingId] = useState<string | null>(null);
@@ -206,6 +207,10 @@ const Dashboard: React.FC<{ onSelectAsset?: (propertyId: string) => void }> = ({
           </a>
         </div>
       )}
+
+      {/* GETTING STARTED CHECKLIST */}
+      <GettingStartedBanner onNavigate={onChangeView} />
+
       <div className="flex justify-between items-end">
         <div>
           <h1 style={{ fontFamily: '"Cormorant Garamond", serif' }} className="text-3xl font-bold text-[#1A2E25]">{tr('dashboard.title')}</h1>

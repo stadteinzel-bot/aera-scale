@@ -165,7 +165,7 @@ const AppInner: React.FC = () => {
     const view = (() => {
       switch (currentView) {
         case AppView.DASHBOARD:
-          return <Dashboard onSelectAsset={handleSelectAsset} />;
+          return <Dashboard onSelectAsset={handleSelectAsset} onChangeView={handleChangeView} />;
         case AppView.PROPERTIES:
           return <Properties onSelectAsset={handleSelectAsset} />;
         case AppView.TENANTS:
