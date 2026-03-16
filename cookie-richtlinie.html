@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cookie-Richtlinie — AERA SCALE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.legal{max-width:800px;margin:0 auto;padding:120px 40px 80px}
+.legal h1{font-family:'Playfair Display',serif;font-size:2rem;color:var(--g);margin-bottom:8px}
+.legal .date{font-size:12px;color:var(--tl);margin-bottom:40px;display:block}
+.legal h2{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--g);margin:32px 0 12px}
+.legal h3{font-size:14px;font-weight:500;color:var(--td);margin:20px 0 8px}
+.legal p,.legal li{font-size:14px;line-height:1.8;color:var(--tm);margin-bottom:12px}
+.legal ul{padding-left:20px}
+.legal table{width:100%;border-collapse:collapse;margin:16px 0 24px}
+.legal th,.legal td{border:1px solid var(--bdr);padding:10px 14px;font-size:13px;text-align:left}
+.legal th{background:var(--crd);font-weight:500;color:var(--g);font-size:12px;letter-spacing:.04em}
+.back{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:var(--gold);text-decoration:none;margin-bottom:24px;letter-spacing:.08em}
+.back:hover{color:var(--gol)}
+</style>
+</head>
+<body>
+<nav id="navbar">
+  <a href="./index.html" class="nav-brand"><div class="nav-logo"></div><div class="nav-wordmark"><span>AERA SCALE</span><span>Property Operating System</span></div></a>
+  <div class="nav-actions"><a href="./index.html" class="btn-login">← Zurück</a></div>
+</nav>
+<div class="legal">
+<a href="./index.html" class="back">← Zurück zur Startseite</a>
+<h1>Cookie-Richtlinie</h1>
+<span class="date">Stand: März 2026</span>
+
+<h2>1. Was sind Cookies?</h2>
+<p>Cookies sind kleine Textdateien, die von Websites auf Ihrem Endgerät gespeichert werden. Sie dienen dazu, bestimmte Funktionen zu ermöglichen, die Nutzung der Website zu analysieren oder Einstellungen zu speichern.</p>
+
+<h2>2. Welche Cookies verwenden wir?</h2>
+
+<h3>2.1 Technisch notwendige Cookies</h3>
+<p>Diese Cookies sind für die Grundfunktionen der Website erforderlich und können nicht deaktiviert werden.</p>
+<table>
+<tr><th>Cookie</th><th>Zweck</th><th>Dauer</th></tr>
+<tr><td>session_id</td><td>Sitzungsverwaltung und Authentifizierung</td><td>Sitzung</td></tr>
+<tr><td>csrf_token</td><td>Schutz vor Cross-Site-Request-Forgery</td><td>Sitzung</td></tr>
+<tr><td>cookie_consent</td><td>Speicherung Ihrer Cookie-Präferenzen</td><td>1 Jahr</td></tr>
+</table>
+
+<h3>2.2 Funktionale Cookies</h3>
+<p>Diese Cookies ermöglichen erweiterte Funktionen und Personalisierung, z.B. bevorzugte Spracheinstellungen.</p>
+
+<h3>2.3 Analyse-Cookies</h3>
+<p>Derzeit setzen wir keine Analyse- oder Tracking-Cookies ein. Sollte sich dies ändern, werden wir diese Richtlinie aktualisieren und Ihre Einwilligung einholen.</p>
+
+<h2>3. Rechtsgrundlage</h2>
+<p>Technisch notwendige Cookies werden auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse) gesetzt. Für alle weiteren Cookies holen wir Ihre Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO ein.</p>
+
+<h2>4. Cookie-Einstellungen ändern</h2>
+<p>Sie können Cookies jederzeit über die Einstellungen Ihres Browsers verwalten oder löschen. Bitte beachten Sie, dass das Deaktivieren bestimmter Cookies die Funktionalität der Website einschränken kann.</p>
+
+<h2>5. Drittanbieter-Cookies</h2>
+<p>Für die Schriftarten-Darstellung nutzen wir Google Fonts. Dabei wird beim Laden der Seite eine Verbindung zu Google-Servern aufgebaut. Weitere Informationen: <a href="https://policies.google.com/privacy" style="color:var(--gold)">Google Datenschutzerklärung</a>.</p>
+
+<h2>6. Kontakt</h2>
+<p>Bei Fragen zu unserer Cookie-Richtlinie wenden Sie sich an:<br>
+E-Mail: datenschutz@aera-scale.de</p>
+</div>
+<script>
+const nb=document.getElementById('navbar');
+window.addEventListener('scroll',()=>nb.classList.toggle('scrolled',scrollY>20));
+</script>
+</body>
+</html>
