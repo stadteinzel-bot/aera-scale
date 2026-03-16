@@ -24,4 +24,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./homepage
           publish_branch: gh-pages
+          cname: aera-scale.com
           force_orphan: true
