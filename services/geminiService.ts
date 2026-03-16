@@ -34,7 +34,7 @@ export interface ScenarioResult {
 
 // Helper to get GenAI Model
 // Uses Firebase Vertex AI instance directly
-export const getModel = (modelName: string = 'gemini-1.5-pro') => {
+export const getModel = (modelName: string = 'gemini-2.0-flash') => {
   if (!ai) {
     throw new Error("Vertex AI Client Not Initialized. Check 'firebaseConfig.ts' and ensure 'VITE_FIREBASE_PROJECT_ID' is set.");
   }
