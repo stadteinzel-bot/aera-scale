@@ -4,7 +4,8 @@ import {
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
     sendEmailVerification,
-    signInWithPopup,
+    signInWithRedirect,
+    getRedirectResult,
     GoogleAuthProvider,
     OAuthProvider,
     signOut,
@@ -48,6 +49,16 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
             setUser(firebaseUser);
             setLoading(false);
+        });
+
+        // Handle redirect result from Google/Apple OAuth
+        getRedirectResult(auth).then(async (result) => {
+            if (result?.user) {
+                const { uid, email, displayName } = result.user;
+                await ensureOrgForSSOUser(uid, email ?? '', displayName ?? '');
+            }
+        }).catch(err => {
+            console.warn('Redirect result error:', err);
         });
 
         return () => unsubscribe();
@@ -97,9 +108,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         const provider = new GoogleAuthProvider();
         provider.addScope('email');
         provider.addScope('profile');
-        const result = await signInWithPopup(auth, provider);
-        const { uid, email, displayName } = result.user;
-        await ensureOrgForSSOUser(uid, email ?? '', displayName ?? '');
+        // Use redirect instead of popup — works reliably on Cloud Run / custom domains
+        await signInWithRedirect(auth, provider);
     };
 
     const loginWithApple = async () => {
@@ -107,9 +117,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         const provider = new OAuthProvider('apple.com');
         provider.addScope('email');
         provider.addScope('name');
-        const result = await signInWithPopup(auth, provider);
-        const { uid, email, displayName } = result.user;
-        await ensureOrgForSSOUser(uid, email ?? '', displayName ?? '');
+        await signInWithRedirect(auth, provider);
     };
 
     const register = async (email: string, password: string, orgName?: string) => {
