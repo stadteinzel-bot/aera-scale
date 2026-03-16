@@ -1,0 +1,27 @@
+name: Deploy Homepage to GitHub Pages
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'homepage/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  deploy-homepage:
+    name: Deploy Homepage → GitHub Pages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy homepage/ to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./homepage
+          publish_branch: gh-pages
+          force_orphan: true
