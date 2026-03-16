@@ -3,7 +3,7 @@ import { useAuth } from '../services/AuthContext';
 import { HOMEPAGE_BASE } from '../constants';
 import { AlertCircle } from 'lucide-react';
 
-const HOMEPAGE_URL = `${HOMEPAGE_BASE}/`;
+const HOMEPAGE_URL = `https://stadteinzel-bot.github.io/aera-scale/homepage/`;
 
 /* ── Inline CSS injected once ─────────────────────────────────────── */
 const STYLES = `
