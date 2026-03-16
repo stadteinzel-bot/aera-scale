@@ -51,12 +51,27 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
             setLoading(false);
         });
 
-        // Handle redirect result from Google/Apple OAuth
+        // Handle redirect result from Google/Apple OAuth (login OR re-auth for account deletion)
         getRedirectResult(auth).then(async (result) => {
-            if (result?.user) {
-                const { uid, email, displayName } = result.user;
-                await ensureOrgForSSOUser(uid, email ?? '', displayName ?? '');
+            if (!result?.user) return;
+
+            const pendingDelete = sessionStorage.getItem('aera-pending-delete');
+            if (pendingDelete === '1') {
+                // User just re-authenticated in order to delete their account
+                sessionStorage.removeItem('aera-pending-delete');
+                try {
+                    const { deleteUser } = await import('firebase/auth');
+                    await deleteUser(result.user);
+                    await signOut(auth); // clear local session
+                } catch (err) {
+                    console.error('Post-reauth deleteUser failed:', err);
+                }
+                return;
             }
+
+            // Normal SSO login — ensure org exists
+            const { uid, email, displayName } = result.user;
+            await ensureOrgForSSOUser(uid, email ?? '', displayName ?? '');
         }).catch(err => {
             console.warn('Redirect result error:', err);
         });
