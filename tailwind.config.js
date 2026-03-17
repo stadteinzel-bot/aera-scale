@@ -9,7 +9,20 @@ export default {
     theme: {
         extend: {
             colors: {
-                // ── ANTIGRAVITY v2 — AERA SCALE Design Tokens ──
+                aera: {
+                    DEFAULT: '#2D4A3E',
+                    50:  '#F0F5F2',
+                    100: '#D9EAE0',
+                    200: '#B2D4C1',
+                    300: '#7FB8A0',
+                    400: '#4E9A7E',
+                    500: '#2D7D62',
+                    600: '#2D4A3E',   // primary brand — matches forest.DEFAULT
+                    700: '#1E3A31',
+                    800: '#162D26',
+                    900: '#0F1F1A',
+                    950: '#081410',
+                },
                 cream: {
                     DEFAULT: '#F5F0E8',   // Root Background
                     dark:    '#EDE8DF',   // Hover States, Borders
